@@ -1,4 +1,14 @@
 {
-  "helloWorld": "Salut le Monde!",
-  "somethingWentWrong": "Une erreur est survenue"
+  "title": "Galette de ble",
+  "@title": {
+    "description": "The title of the application"
+  },
+  "somethingWentWrong": "Une erreur est survenue",
+  "@somethingWentWrong": {
+    "description": "Something went wrong"
+  },
+  "toCounter": "Aller a la page counter",
+  "@toCounter": {
+    "description": "Navigate to counter page"
+  }
 }

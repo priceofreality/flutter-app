@@ -1,0 +1,12 @@
+{
+	"0" : { "Choice" : "Payer loyer directement", "Budget" : -900},
+	"1" : { "Choice" : "Remettre à plus tard", "Budget" : 0},
+	"2" : { "Choice" : "Courses hebdomadaires de base", "Budget" : -90},
+	"3" : { "Choice" : "Négocier sept jours de délais", "Budget" : 0},
+	"4" : { "Choice" : "Payer factures directement", "Budget" : -100},
+	"5" : { "Choice" : "Payer directement le montant plus les intérêts", "Budget" : -990},
+	"6" : { "Choice" : "Payer directement", "Budget" : -107.50},
+	"7" : { "Choice" : "Payer directement le loyer avec les intérêts de la société de recouvrement", "Budget" : -990},
+	"8" : { "Choice" : "Percevoir salaire", "Budget" : 1330.74},
+	"9" : { "Choice" : "Visite des Huissiers de Justice", "Budget" : 0}
+}
