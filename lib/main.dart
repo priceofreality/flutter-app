@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projet4/constants/routes.dart';
+import 'package:projet4/presentation/pages/choice.dart';
 import 'package:projet4/presentation/pages/counter.dart';
 import 'package:projet4/presentation/pages/error.dart';
 import 'package:projet4/presentation/pages/home.dart';
@@ -52,9 +53,9 @@ class MyApp extends StatelessWidget {
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        accentColor: Colors.blue,
+        accentColor: Colors.indigo,
       ),
-      home: HomePage(),
+      home: ChoicePage(),
     );
   }
 }
