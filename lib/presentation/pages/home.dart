@@ -7,17 +7,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-<<<<<<< HEAD
-        child: Center(
-          child: FlatButton(
-            onPressed: () => Navigator.of(context).pushNamed(COUNTER_PAGE),
-            child: Text(AppLocalizations.of(context).toCounter),
-            color: Theme.of(context).accentColor,
-          ),
-        ),
-=======
         child: Text('TODO'),
->>>>>>> develop
       ),
     );
   }
