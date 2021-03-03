@@ -22,7 +22,13 @@ class ActionRepository {
     Map<int, Suggestion> suggestions = new Map();
     Map<int, Choice> choices = new Map();
     suggestionsMap.then((value) => putToSuggestions(value, suggestions));
-    actionsMap.then((value) => null);
+    choicesMap.then((value) => putToChoices(value, choices));
+    actionsMap
+        .then((value) => putToActions(value, suggestions, choices, actions));
+  }
+
+  List<ActionChoice> getActions(int day) {
+    return this.actions[day];
   }
 
   void putToSuggestions(
