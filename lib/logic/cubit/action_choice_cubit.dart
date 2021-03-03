@@ -7,7 +7,7 @@ import 'package:projet4/data/repositories/action.dart';
 part 'action_choice_state.dart';
 
 class ActionChoiceCubit extends Cubit<ActionChoiceState> {
-  final ActionRepository actionRepository;
+  ActionRepository actionRepository = ActionRepository();
 
   ActionChoiceCubit({@required this.actionRepository})
       : super(ActionChoiceState(

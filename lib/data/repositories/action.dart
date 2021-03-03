@@ -2,39 +2,61 @@ import 'package:projet4/data/data_provider/dataProvider.dart';
 import 'package:projet4/data/models/action_choice.dart';
 import 'package:projet4/data/models/choice.dart';
 import 'package:projet4/data/models/suggestion.dart';
+import 'dart:developer';
 
 class ActionRepository {
   // Map day / list of the actions of the day
   Map<int, List<ActionChoice>> actions;
 
-  ActionRepository() {
-    this.actions = new Map();
+  static final ActionRepository _actionRepository =
+      ActionRepository._internal();
+
+  factory ActionRepository() {
+    return _actionRepository;
+  }
+  ActionRepository._internal() {
+    actions = new Map();
     _init();
   }
 
   void _init() async {
-    Future<Map<String, dynamic>> suggestionsMap = DataProvider.getSuggestions();
-    Future<Map<String, dynamic>> choicesMap = DataProvider.getChoices();
-    Future<Map<String, dynamic>> actionsMap = DataProvider.getActions();
+    List<dynamic> suggestionsList = await DataProvider.getSuggestions();
+    List<dynamic> choicesList = await DataProvider.getChoices();
+    List<dynamic> actionsList = await DataProvider.getActions();
 
-    Map<int, Suggestion> suggestions = new Map();
-    Map<int, Choice> choices = new Map();
-    await suggestionsMap.then((value) => _putToSuggestions(value, suggestions));
-    await choicesMap.then((value) => _putToChoices(value, choices));
-    actionsMap
-        .then((value) => _putToActions(value, suggestions, choices, actions));
+    List<Suggestion> suggestions = suggestionsList
+        .asMap()
+        .map((index, value) {
+          return MapEntry(index, Suggestion(id: index, entitled: value));
+        })
+        .values
+        .toList();
+
+    List<Choice> choices = choicesList
+        .asMap()
+        .map((index, value) {
+          return MapEntry(
+              index,
+              Choice(
+                  id: index, choice: value["Choice"], budget: value["Budget"]));
+        })
+        .values
+        .toList();
+    /*_putToSuggestions(suggestionsMap, suggestions);
+    _putToChoices(choicesMap, choices);*/
+    _putToActions(actionsList, suggestions, choices, actions);
   }
 
   List<ActionChoice> getActions(int day) {
-    return this.actions[day];
+    return actions[day];
   }
 
-  void _putToSuggestions(
+  /*void _putToSuggestions(
       Map<String, dynamic> value, Map<int, Suggestion> suggestions) {
     for (String key in value.keys) {
       String entitled = value[key];
       int id = int.tryParse(key);
-      Suggestion suggestion = Suggestion(id: key, entitled: entitled);
+      Suggestion suggestion = Suggestion(id: id, entitled: entitled);
       suggestions[id] = suggestion;
     }
   }
@@ -45,28 +67,26 @@ class ActionRepository {
       int id = int.tryParse(key);
       String choiceString = choiceMap["Choice"];
       double budget = choiceMap["Budget"];
-      Choice choice = Choice(id: key, choice: choiceString, budget: budget);
+      Choice choice = Choice(id: id, choice: choiceString, budget: budget);
       choices[id] = choice;
     }
-  }
+  }*/
 
-  void _putToActions(
-      Map<String, dynamic> value,
-      Map<int, Suggestion> suggestions,
-      Map<int, Choice> choices,
-      Map<int, List<ActionChoice>> actionChoices) {
-    for (String key in value.keys) {
-      Map<String, dynamic> actionChoiceMap = value[key];
-      List<Choice> choices = [];
-      for (int choiceId in actionChoiceMap["Choices"]) {
-        choices.add(choices[choiceId]);
-      }
-
-      int day = actionChoiceMap["Day"];
-      int suggestionId = actionChoiceMap["Suggestion"];
+  void _putToActions(List<dynamic> value, List<Suggestion> suggestions,
+      List<Choice> choices, Map<int, List<ActionChoice>> actionChoices) {
+    for (dynamic key in value) {
+      int day = key["Day"];
+      int suggestionId = key["Suggestion"];
       Suggestion suggestion = suggestions[suggestionId];
+      List<Choice> actionsChoices = List();
+      for (int val in key["Choices"]) {
+        actionsChoices.add(choices[val]);
+      }
       ActionChoice actionChoice = ActionChoice(
-          choices: choices, day: day, id: key, suggestion: suggestion);
+          choices: actionsChoices,
+          day: day,
+          id: "${day}",
+          suggestion: suggestion);
       actionChoices.putIfAbsent(day, () => []);
       actionChoices[day].add(actionChoice);
     }

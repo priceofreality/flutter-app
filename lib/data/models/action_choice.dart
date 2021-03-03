@@ -16,5 +16,11 @@ class ActionChoice extends Equatable {
       @required this.choices});
 
   @override
+  String toString() {
+    // TODO: implement toString
+    return "${this.id} : ${this.day} , ${this.suggestion} => ${this.choices}";
+  }
+
+  @override
   List<Object> get props => [id];
 }
