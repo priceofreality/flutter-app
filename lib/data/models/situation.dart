@@ -10,5 +10,5 @@ class Situation extends Equatable {
       {@required this.id, @required this.entitled, @required this.budget});
 
   @override
-  List<Object> get props => [id, entitled, budget];
+  List<Object> get props => [id];
 }

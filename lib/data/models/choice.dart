@@ -10,5 +10,5 @@ class Choice extends Equatable {
       {@required this.id, @required this.choice, @required this.budget});
 
   @override
-  List<Object> get props => [id, choice, budget];
+  List<Object> get props => [id];
 }

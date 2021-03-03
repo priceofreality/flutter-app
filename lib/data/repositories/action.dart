@@ -1,37 +1,35 @@
-import 'dart:html';
-
-import 'package:flutter/cupertino.dart';
 import 'package:projet4/data/data_provider/dataProvider.dart';
 import 'package:projet4/data/models/ActionChoice.dart';
 import 'package:projet4/data/models/choice.dart';
 import 'package:projet4/data/models/suggestion.dart';
 
 class ActionRepository {
+  // Map day / list of the actions of the day
   Map<int, List<ActionChoice>> actions;
 
   ActionRepository() {
     this.actions = new Map();
-    init();
+    _init();
   }
 
-  void init() {
+  void _init() async {
     Future<Map<String, dynamic>> suggestionsMap = DataProvider.getSuggestions();
     Future<Map<String, dynamic>> choicesMap = DataProvider.getChoices();
     Future<Map<String, dynamic>> actionsMap = DataProvider.getActions();
 
     Map<int, Suggestion> suggestions = new Map();
     Map<int, Choice> choices = new Map();
-    suggestionsMap.then((value) => putToSuggestions(value, suggestions));
-    choicesMap.then((value) => putToChoices(value, choices));
+    await suggestionsMap.then((value) => _putToSuggestions(value, suggestions));
+    await choicesMap.then((value) => _putToChoices(value, choices));
     actionsMap
-        .then((value) => putToActions(value, suggestions, choices, actions));
+        .then((value) => _putToActions(value, suggestions, choices, actions));
   }
 
   List<ActionChoice> getActions(int day) {
     return this.actions[day];
   }
 
-  void putToSuggestions(
+  void _putToSuggestions(
       Map<String, dynamic> value, Map<int, Suggestion> suggestions) {
     for (String key in value.keys) {
       String entitled = value[key];
@@ -41,7 +39,7 @@ class ActionRepository {
     }
   }
 
-  void putToChoices(Map<String, dynamic> value, Map<int, Choice> choices) {
+  void _putToChoices(Map<String, dynamic> value, Map<int, Choice> choices) {
     for (String key in value.keys) {
       Map<String, dynamic> choiceMap = value[key];
       int id = int.tryParse(key);
@@ -52,14 +50,13 @@ class ActionRepository {
     }
   }
 
-  void putToActions(
+  void _putToActions(
       Map<String, dynamic> value,
       Map<int, Suggestion> suggestions,
       Map<int, Choice> choices,
       Map<int, List<ActionChoice>> actionChoices) {
     for (String key in value.keys) {
       Map<String, dynamic> actionChoiceMap = value[key];
-      List<int> choicesIds;
       List<Choice> choices = [];
       for (int choiceId in actionChoiceMap["Choices"]) {
         choices.add(choices[choiceId]);

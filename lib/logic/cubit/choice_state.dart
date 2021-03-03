@@ -1,9 +1,9 @@
 part of 'choice_cubit.dart';
 
 class ChoiceState extends Equatable {
-  List<MockObject> all;
+  List<Choice> all;
 
-  MockObject current;
+  Choice current;
 
   ChoiceState(this.all, this.current);
 

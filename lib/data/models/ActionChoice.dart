@@ -16,5 +16,5 @@ class ActionChoice extends Equatable {
       @required this.choices});
 
   @override
-  List<Object> get props => [id, day, suggestion, choices];
+  List<Object> get props => [id];
 }

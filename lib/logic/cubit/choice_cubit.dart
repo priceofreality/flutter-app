@@ -1,18 +1,18 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:projet4/data/models/mock.dart';
+import 'package:flutter/material.dart';
+import 'package:projet4/data/models/choice.dart';
+import 'package:projet4/logic/cubit/action_choice_cubit.dart';
 
 part 'choice_state.dart';
 
 class ChoiceCubit extends Cubit<ChoiceState> {
-  static List<MockObject> _testChoices = [
-    MockObject(answer: 'Payer directement', value: '-600'),
-    MockObject(answer: 'Remettre a plus tard'),
-    MockObject(answer: 'taper le proprio')
-  ];
+  final ActionChoiceCubit actionChoiceCubit;
 
-  ChoiceCubit() : super(ChoiceState(_testChoices, _testChoices[0]));
+  ChoiceCubit({@required this.actionChoiceCubit})
+      : super(ChoiceState(actionChoiceCubit.state.current.choices,
+            actionChoiceCubit.state.current.choices[0]));
 
-  void emitSelectAnswer(MockObject newValue) =>
+  void emitSelectAnswer(Choice newValue) =>
       emit(ChoiceState(state.all, newValue));
 }

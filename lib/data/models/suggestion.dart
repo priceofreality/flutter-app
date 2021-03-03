@@ -8,5 +8,5 @@ class Suggestion extends Equatable {
   const Suggestion({@required this.id, @required this.entitled});
 
   @override
-  List<Object> get props => [id, entitled];
+  List<Object> get props => [id];
 }
