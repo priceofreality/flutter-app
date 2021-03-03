@@ -1,5 +1,5 @@
 import 'package:projet4/data/data_provider/dataProvider.dart';
-import 'package:projet4/data/models/ActionChoice.dart';
+import 'package:projet4/data/models/action_choice.dart';
 import 'package:projet4/data/models/choice.dart';
 import 'package:projet4/data/models/suggestion.dart';
 

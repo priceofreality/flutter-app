@@ -19,13 +19,6 @@ class DataProvider {
     return _parseJsonFromAssets('lib/data/db/action.json');
   }
 
-  static Future<Map<String, dynamic>> _parseJsonFromAssets(
-      String assetsPath) async {
-    print('--- Parse json from: $assetsPath');
-    Future<Map<String, dynamic>> map = rootBundle
-        .loadString(assetsPath)
-        .then((jsonStr) => jsonDecode(jsonStr));
-    print('Map = $map');
-    return map;
-  }
+  static Future<Map<String, dynamic>> _parseJsonFromAssets(String assetsPath) =>
+      rootBundle.loadString(assetsPath).then((jsonStr) => jsonDecode(jsonStr));
 }

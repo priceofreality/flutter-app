@@ -8,12 +8,20 @@ import 'package:projet4/logic/cubit/choice_cubit.dart';
 class ChoicePage extends StatelessWidget {
   final ActionChoiceCubit actionChoiceCubit =
       ActionChoiceCubit(actionRepository: ActionRepository());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocProvider(
-          create: (_) => ChoiceCubit(actionChoiceCubit: actionChoiceCubit),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => actionChoiceCubit,
+            ),
+            BlocProvider(
+              create: (_) => ChoiceCubit(actionChoiceCubit: actionChoiceCubit),
+            ),
+          ],
           child: Container(
             width: double.infinity,
             padding: EdgeInsets.all(14.0),
@@ -21,22 +29,9 @@ class ChoicePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Suggestion(),
                 Answers(),
-                Container(
-                  margin: EdgeInsets.only(bottom: 9.0),
-                  alignment: Alignment.bottomCenter,
-                  child: RaisedButton(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 15.0, horizontal: 70.0),
-                    shape: StadiumBorder(),
-                    color: Theme.of(context).accentColor,
-                    onPressed: () {},
-                    child: Text(
-                      'NEXT'.toUpperCase(),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
+                ChoiceNextButton(),
               ],
             ),
           ),
@@ -106,6 +101,26 @@ class Answers extends StatelessWidget {
               .toList(),
         );
       },
+    );
+  }
+}
+
+class ChoiceNextButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 9.0),
+      alignment: Alignment.bottomCenter,
+      child: RaisedButton(
+        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 70.0),
+        shape: StadiumBorder(),
+        color: Theme.of(context).accentColor,
+        onPressed: () {},
+        child: Text(
+          'NEXT'.toUpperCase(),
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:projet4/data/models/ActionChoice.dart';
+import 'package:projet4/data/models/action_choice.dart';
 import 'package:projet4/data/repositories/action.dart';
 
 part 'action_choice_state.dart';
