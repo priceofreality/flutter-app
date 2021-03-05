@@ -5,7 +5,7 @@ class Suggestion extends Equatable {
   final int id;
   final String entitled;
 
-  const Suggestion({@required this.id, @required this.entitled});
+  const Suggestion({required this.id, required this.entitled});
 
   @override
   String toString() {

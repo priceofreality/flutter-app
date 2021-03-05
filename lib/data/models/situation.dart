@@ -7,7 +7,7 @@ class Situation extends Equatable {
   final double budget;
 
   const Situation(
-      {@required this.id, @required this.entitled, @required this.budget});
+      {required this.id, required this.entitled, required this.budget});
 
   @override
   List<Object> get props => [id];

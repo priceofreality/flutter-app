@@ -9,7 +9,7 @@ part 'choice_state.dart';
 class ChoiceCubit extends Cubit<ChoiceState> {
   final ActionChoiceCubit actionChoiceCubit;
 
-  ChoiceCubit({@required this.actionChoiceCubit})
+  ChoiceCubit({required this.actionChoiceCubit})
       : super(ChoiceState(actionChoiceCubit.state.current.choices,
             actionChoiceCubit.state.current.choices[0]));
 

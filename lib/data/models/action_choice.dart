@@ -10,10 +10,10 @@ class ActionChoice extends Equatable {
   final List<Choice> choices;
 
   const ActionChoice(
-      {@required this.id,
-      @required this.day,
-      @required this.suggestion,
-      @required this.choices});
+      {required this.id,
+      required this.day,
+      required this.suggestion,
+      required this.choices});
 
   @override
   String toString() {

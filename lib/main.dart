@@ -14,7 +14,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final AppRouter _appRouter = AppRouter();
 
-  MyApp({Key key}) : super(key: key) {
+  MyApp({Key? key}) : super(key: key) {
     _appRouter.define(HOME_PAGE, (_) => HomePage());
     _appRouter.define(ERROR_PAGE, (String arg) => ErrorPage(message: arg));
   }

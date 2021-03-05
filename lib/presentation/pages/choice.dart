@@ -12,7 +12,8 @@ class ChoicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+        body:
+            Container() /*SafeArea(
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -36,8 +37,8 @@ class ChoicePage extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      ),*/
+        );
   }
 }
 
@@ -85,16 +86,16 @@ class Answers extends StatelessWidget {
                       width: 2,
                       color: choice == state.current
                           ? Theme.of(context).accentColor
-                          : Colors.blue[100],
+                          : Colors.blue[100]!,
                     ),
                   ),
                   child: RadioListTile<Choice>(
                     title: Text(choice.choice),
-                    secondary: Text(choice.budget ?? ''),
+                    secondary: Text(choice.budget as String? ?? ''),
                     value: choice,
                     groupValue: state.current,
                     onChanged: (newValue) =>
-                        context.read<ChoiceCubit>().emitSelectAnswer(newValue),
+                        context.read<ChoiceCubit>().emitSelectAnswer(newValue!),
                   ),
                 ),
               )

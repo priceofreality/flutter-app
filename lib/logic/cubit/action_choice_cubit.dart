@@ -9,7 +9,7 @@ part 'action_choice_state.dart';
 class ActionChoiceCubit extends Cubit<ActionChoiceState> {
   ActionRepository actionRepository = ActionRepository();
 
-  ActionChoiceCubit({@required this.actionRepository})
+  ActionChoiceCubit({required this.actionRepository})
       : super(ActionChoiceState(
             actionRepository.getActions(0), actionRepository.getActions(0)[0]));
 

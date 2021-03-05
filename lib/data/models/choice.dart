@@ -7,7 +7,7 @@ class Choice extends Equatable {
   final double budget;
 
   const Choice(
-      {@required this.id, @required this.choice, @required this.budget});
+      {required this.id, required this.choice, required this.budget});
 
   @override
   String toString() {

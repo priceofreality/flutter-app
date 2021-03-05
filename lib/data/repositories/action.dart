@@ -6,7 +6,7 @@ import 'dart:developer';
 
 class ActionRepository {
   // Map day / list of the actions of the day
-  Map<int, List<ActionChoice>> actions;
+  Map<int, List<ActionChoice>> actions = {};
 
   static final ActionRepository _actionRepository =
       ActionRepository._internal();
@@ -15,14 +15,13 @@ class ActionRepository {
     return _actionRepository;
   }
   ActionRepository._internal() {
-    actions = new Map();
     _init();
   }
 
   void _init() async {
-    List<dynamic> suggestionsList = await DataProvider.getSuggestions();
-    List<dynamic> choicesList = await DataProvider.getChoices();
-    List<dynamic> actionsList = await DataProvider.getActions();
+    List<dynamic> suggestionsList = await (DataProvider.getSuggestions());
+    List<dynamic> choicesList = await (DataProvider.getChoices());
+    List<dynamic> actionsList = await (DataProvider.getActions());
 
     List<Suggestion> suggestions = suggestionsList
         .asMap()
@@ -48,7 +47,7 @@ class ActionRepository {
   }
 
   List<ActionChoice> getActions(int day) {
-    return actions[day];
+    return actions[day]!;
   }
 
   /*void _putToSuggestions(
@@ -78,17 +77,19 @@ class ActionRepository {
       int day = key["Day"];
       int suggestionId = key["Suggestion"];
       Suggestion suggestion = suggestions[suggestionId];
-      List<Choice> actionsChoices = List();
+      List<Choice> actionsChoices = [];
+
       for (int val in key["Choices"]) {
         actionsChoices.add(choices[val]);
       }
+
       ActionChoice actionChoice = ActionChoice(
           choices: actionsChoices,
           day: day,
           id: "${day}",
           suggestion: suggestion);
       actionChoices.putIfAbsent(day, () => []);
-      actionChoices[day].add(actionChoice);
+      actionChoices[day]!.add(actionChoice);
     }
   }
 }
