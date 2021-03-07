@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projet4/constants/routes.dart';
-import 'package:projet4/presentation/pages/choice.dart';
+import 'package:projet4/data/init.dart';
+import 'package:projet4/presentation/pages/daily_situation.dart';
 import 'package:projet4/presentation/pages/error.dart';
 import 'package:projet4/presentation/pages/home.dart';
 import 'package:projet4/presentation/router/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  DataInit.loadGameAssets().then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   final AppRouter _appRouter = AppRouter();
 
-  MyApp({Key? key}) : super(key: key) {
+  MyApp() : super() {
     _appRouter.define(HOME_PAGE, (_) => HomePage());
     _appRouter.define(ERROR_PAGE, (String arg) => ErrorPage(message: arg));
   }
@@ -53,7 +56,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         accentColor: Colors.indigo,
       ),
-      home: ChoicePage(),
+      home: DailySituationPage(),
     );
   }
 }

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projet4/data/models/choice.dart';
-import 'package:projet4/data/repositories/action.dart';
-import 'package:projet4/logic/cubit/action_choice_cubit.dart';
+import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
 
-class ChoicePage extends StatelessWidget {
-  final ActionChoiceCubit actionChoiceCubit =
-      ActionChoiceCubit(actionRepository: ActionRepository());
+class DailySituationPage extends StatelessWidget {
+  // ignore: close_sinks
+  final DailySituationCubit dailySituationCubit = DailySituationCubit();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:
-            Container() /*SafeArea(
+      body: SafeArea(
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => actionChoiceCubit,
+              create: (_) => dailySituationCubit,
             ),
             BlocProvider(
-              create: (_) => ChoiceCubit(actionChoiceCubit: actionChoiceCubit),
+              create: (_) =>
+                  ChoiceCubit(dailySituationCubit: dailySituationCubit),
             ),
           ],
           child: Container(
@@ -30,22 +29,22 @@ class ChoicePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Suggestion(),
-                Answers(),
-                ChoiceNextButton(),
+                Event(),
+                Choices(),
+                NextButton(),
               ],
             ),
           ),
         ),
-      ),*/
-        );
+      ),
+    );
   }
 }
 
-class Suggestion extends StatelessWidget {
+class Event extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ActionChoiceCubit, ActionChoiceState>(
+    return BlocBuilder<DailySituationCubit, DailySituationState>(
         builder: (context, state) {
       return Column(
         children: [
@@ -57,7 +56,7 @@ class Suggestion extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 20.0),
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
             child: Text(
-              state.current.suggestion.entitled,
+              state.current.event,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
             ),
           ),
@@ -67,35 +66,35 @@ class Suggestion extends StatelessWidget {
   }
 }
 
-class Answers extends StatelessWidget {
+class Choices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ChoiceCubit, ChoiceState>(
       builder: (context, state) {
         return Column(
-          children: state.all
+          children: state.choices
               .map(
                 (choice) => Container(
                   margin: EdgeInsets.only(bottom: 10.0),
                   decoration: BoxDecoration(
-                    color: choice == state.current
+                    color: choice == state.selected
                         ? Colors.blue[100]
                         : Colors.white,
                     borderRadius: BorderRadius.circular(20.0),
                     border: Border.all(
                       width: 2,
-                      color: choice == state.current
+                      color: choice == state.selected
                           ? Theme.of(context).accentColor
                           : Colors.blue[100]!,
                     ),
                   ),
                   child: RadioListTile<Choice>(
-                    title: Text(choice.choice),
-                    secondary: Text(choice.budget as String? ?? ''),
+                    title: Text(choice.label),
+                    secondary: Text('${choice.cost ?? ''}'),
                     value: choice,
-                    groupValue: state.current,
+                    groupValue: state.selected,
                     onChanged: (newValue) =>
-                        context.read<ChoiceCubit>().emitSelectAnswer(newValue!),
+                        context.read<ChoiceCubit>().emitSelectChoice(newValue!),
                   ),
                 ),
               )
@@ -106,16 +105,18 @@ class Answers extends StatelessWidget {
   }
 }
 
-class ChoiceNextButton extends StatelessWidget {
+class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 9.0),
       alignment: Alignment.bottomCenter,
-      child: RaisedButton(
-        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 70.0),
-        shape: StadiumBorder(),
-        color: Theme.of(context).accentColor,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 70.0),
+          shape: StadiumBorder(),
+          primary: Theme.of(context).accentColor,
+        ),
         onPressed: () {},
         child: Text(
           'NEXT'.toUpperCase(),

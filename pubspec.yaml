@@ -53,10 +53,10 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - lib/data/db/action.json
-    - lib/data/db/situation.json
-    - lib/data/db/suggestion.json
-    - lib/data/db/choice.json
+    - lib/data/db/choices.json
+    - lib/data/db/events.json
+    - lib/data/db/daily_situations.json
+    - lib/data/db/financial_situations.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

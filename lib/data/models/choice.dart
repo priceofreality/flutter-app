@@ -1,19 +1,25 @@
-import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 
 class Choice extends Equatable {
-  final int id;
-  final String choice;
-  final double budget;
+  final String label;
+  final double? cost;
 
-  const Choice(
-      {required this.id, required this.choice, required this.budget});
+  const Choice({required this.label, this.cost});
+
+  factory Choice.fromJson(Map<String, dynamic> json) => json.containsKey('cost')
+      ? Choice(
+          label: json['label'],
+          cost: json['cost'],
+        )
+      : Choice(
+          label: json['label'],
+        );
 
   @override
   String toString() {
-    return "${this.id} : ${this.choice}, ${this.budget}";
+    return "${this.label}, ${this.cost}";
   }
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [label, cost ?? 0.0];
 }
