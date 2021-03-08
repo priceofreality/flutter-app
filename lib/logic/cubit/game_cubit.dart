@@ -13,7 +13,6 @@ class GameCubit extends Cubit<GameState> {
   GameCubit({required this.dailySituationCubit}) : super(GameInitialState()) {
     _dailySituationSubscription =
         dailySituationCubit.listen((dailySituationState) {
-      print(dailySituationState.type);
       if (dailySituationState.type == DailySituationStateType.Finished) {
         emit(GameFinishedState());
       }

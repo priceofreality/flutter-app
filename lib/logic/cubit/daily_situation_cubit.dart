@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:projet4/data/init.dart';
 import 'package:projet4/data/models/daily_situation.dart';
 import 'package:projet4/data/repositories/game.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
@@ -24,8 +25,20 @@ class DailySituationCubit extends Cubit<DailySituationState> {
   }
 
   void emitNextDailySituations() {
+    if (state.current.id == 9) {
+      _day = 1;
+      _index = 0;
+      emit(DailySituationFinishedState());
+
+      return;
+    }
+
     if (++_index >= state.dailySituations.length) {
       _index = 0;
+
+      gameRepository.unlockDailySituation(
+          choiceCubit.state.selected!.id, state.current.id);
+
       final dailySituations = _getNextDayDailySituations();
 
       if (dailySituations == null ||
@@ -55,6 +68,8 @@ class DailySituationCubit extends Cubit<DailySituationState> {
 
     emit(DailySituationState(
         state.dailySituations, state.dailySituations[_index]));
+
+    choiceCubit.emitNewChoices(state.current.choices);
   }
 
   List<DailySituation>? _getNextDayDailySituations() {
@@ -67,11 +82,13 @@ class DailySituationCubit extends Cubit<DailySituationState> {
   }
 
   void emitReset() {
-    choiceCubit.emitReset();
-    financialSituationCubit.emitReset();
+    DataInit.loadGameAssets().then((value) {
+      choiceCubit.emitReset();
+      financialSituationCubit.emitReset();
 
-    emit(DailySituationState(gameRepository.dailySituations[1]!,
-        gameRepository.dailySituations[1]![0]));
-    choiceCubit.emitNewChoices(gameRepository.dailySituations[1]![0].choices);
+      emit(DailySituationState(gameRepository.dailySituations[1]!,
+          gameRepository.dailySituations[1]![0]));
+      choiceCubit.emitNewChoices(gameRepository.dailySituations[1]![0].choices);
+    });
   }
 }

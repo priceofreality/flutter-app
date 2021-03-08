@@ -7,13 +7,13 @@ import 'package:projet4/data/models/financial_situation.dart';
 
 class GameRepository {
   // Map day : list of the situations of the day
-  Map<int, List<DailySituation>> dailySituations = {};
-  Map<int, DailySituation> _dailySituationLocked = {};
+  late Map<int, List<DailySituation>> dailySituations;
+  late Map<int, DailySituation> _dailySituationLocked;
   // Private map of choices -> dailySituations
-  Map<int, Map<int, int>> _choicesToDailySituation = {};
+  late Map<int, Map<int, int>> _choicesToDailySituation;
 
   //List of financial situation
-  List<FinancialSituation> financialSituations = [];
+  late List<FinancialSituation> financialSituations;
 
   int maxDay = -1;
 
@@ -50,6 +50,11 @@ class GameRepository {
   }
 
   Future<void> loadRepository() async {
+    dailySituations = {};
+    _dailySituationLocked = {};
+    _choicesToDailySituation = {};
+    financialSituations = [];
+
     final futureChoices = _mapChoices();
     final futureEvents = _mapEvents();
     final futureFinancialSituations = _mapFinancialSituations();
@@ -104,9 +109,6 @@ class GameRepository {
         DailySituation situation = _dailySituationLocked[situationId]!;
         dailySituations.putIfAbsent(situation.day, () => []);
         dailySituations[situation.day]!.add(situation);
-
-        // remove situation from locked Situation
-        _dailySituationLocked.remove(situationId);
       }
     }
   }

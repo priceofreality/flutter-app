@@ -110,6 +110,8 @@ class Choices extends StatelessWidget {
 class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final disable = context.watch<ChoiceCubit>().state.selected;
+
     return Container(
       margin: EdgeInsets.only(bottom: 9.0),
       alignment: Alignment.bottomCenter,
@@ -119,8 +121,10 @@ class NextButton extends StatelessWidget {
           shape: StadiumBorder(),
           primary: Theme.of(context).accentColor,
         ),
-        onPressed: () =>
-            context.read<DailySituationCubit>().emitNextDailySituations(),
+        onPressed: disable == null
+            ? null
+            : () =>
+                context.read<DailySituationCubit>().emitNextDailySituations(),
         child: Text(
           AppLocalizations.of(context)!.next.toUpperCase(),
           style: TextStyle(color: Colors.white),
