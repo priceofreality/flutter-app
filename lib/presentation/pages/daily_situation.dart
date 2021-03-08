@@ -5,6 +5,7 @@ import 'package:projet4/logic/cubit/choice_cubit.dart';
 import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:projet4/presentation/widgets/custom_radio_button.dart';
 
 class DailySituationPage extends StatelessWidget {
   @override
@@ -80,19 +81,33 @@ class Choices extends StatelessWidget {
                   margin: EdgeInsets.only(bottom: 10.0),
                   decoration: BoxDecoration(
                     color: choice == state.selected
-                        ? Colors.blue[100]
+                        ? Color(0xff5390d9)
                         : Colors.white,
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(30.0),
                     border: Border.all(
                       width: 2,
-                      color: choice == state.selected
-                          ? Theme.of(context).accentColor
-                          : Colors.blue[100]!,
+                      color: Color(0xff5390d9),
                     ),
                   ),
-                  child: RadioListTile<Choice>(
-                    title: Text(choice.label),
-                    secondary: Text('${choice.cost ?? ''}'),
+                  child: CustomRadioListTile<Choice>(
+                    title: Padding(
+                      child: Text(
+                        choice.label,
+                        style: choice == state.selected
+                            ? Theme.of(context)
+                                .textTheme
+                                .button!
+                                .copyWith(color: Colors.white)
+                            : Theme.of(context).textTheme.button,
+                      ),
+                      padding: EdgeInsets.only(left: 17.0),
+                    ),
+                    secondary: Text(
+                      choice.cost == null ? '' : '${choice.cost}€',
+                      style: choice == state.selected
+                          ? TextStyle(color: Colors.white, fontSize: 14.7)
+                          : TextStyle(color: Colors.grey[800], fontSize: 14.7),
+                    ),
                     value: choice,
                     groupValue: state.selected,
                     onChanged: (newValue) =>

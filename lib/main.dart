@@ -57,6 +57,13 @@ class MyApp extends StatelessWidget {
       initialRoute: HOME_PAGE,
       onGenerateRoute: _appRouter.onGenerateRoute,
       theme: ThemeData(
+        textTheme: TextTheme(
+          button: TextStyle(
+            letterSpacing: 0.8,
+            color: Colors.black,
+            fontSize: 17.0,
+          ),
+        ),
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -71,7 +78,7 @@ class MyApp extends StatelessWidget {
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        accentColor: Colors.indigo,
+        accentColor: Color(0xff5e60ce),
       ),
       home: MultiBlocProvider(
         providers: [
