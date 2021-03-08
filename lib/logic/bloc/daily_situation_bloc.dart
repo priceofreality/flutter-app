@@ -1,15 +1,18 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:projet4/data/models/daily_situation.dart';
 import 'package:projet4/data/repositories/game.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
-import 'package:projet4/logic/cubit/game_cubit.dart';
 import 'package:projet4/logic/cubit_state.dart';
-import 'package:projet4/presentation/pages/daily_situation.dart';
 
+part 'daily_situation_event.dart';
 part 'daily_situation_state.dart';
 
-class DailySituationCubit extends Cubit<DailySituationState> {
+class DailySituationBloc
+    extends Bloc<DailySituationEvent, DailySituationState> {
   static final GameRepository gameRepository = GameRepository();
 
   final ChoiceCubit choiceCubit;
@@ -18,23 +21,33 @@ class DailySituationCubit extends Cubit<DailySituationState> {
   int _day = 1;
   int _index = 0;
 
-  DailySituationCubit(
+  DailySituationBloc(
       {required this.choiceCubit, required this.financialSituationCubit})
       : super(DailySituationState(gameRepository.dailySituations[1]!,
             gameRepository.dailySituations[1]![0])) {
     choiceCubit.emitNewChoices(gameRepository.dailySituations[1]![0].choices);
   }
 
-  void emitNextDailySituations() {
+  @override
+  Stream<DailySituationState> mapEventToState(
+    DailySituationEvent event,
+  ) async* {
+    if (event is DailySituationNextEvent) {
+      yield _mapNextEvent();
+    } else
+      yield D([], null);
+  }
+
+  DailySituationState _mapNextEvent() {
     if (++_index >= state.dailySituations.length) {
       _index = 0;
       final dailySituations = _getNextDayDailySituations();
 
       if (dailySituations == null ||
           financialSituationCubit.state.financialSituation.budget <= 0) {
-        emit(DailySituationFinishedState());
+        add(DailySituationFinishEvent());
 
-        return;
+        return D([], null);
       }
 
       financialSituationCubit.emitTransaction(
@@ -42,10 +55,9 @@ class DailySituationCubit extends Cubit<DailySituationState> {
               ? choiceCubit.state.selected!.cost!
               : 0);
 
-      emit(DailySituationState(dailySituations, dailySituations[_index]));
       choiceCubit.emitNewChoices(dailySituations[_index].choices);
 
-      return;
+      return DailySituationState(dailySituations, dailySituations[_index]);
     }
 
     financialSituationCubit.emitTransaction(
@@ -53,9 +65,8 @@ class DailySituationCubit extends Cubit<DailySituationState> {
             ? choiceCubit.state.selected!.cost!
             : 0);
 
-    emit(DailySituationState(
-        state.dailySituations, state.dailySituations[_index]));
-    //choiceCubit.emitNewChoices(state.dailySituations[_index].choices);
+    return DailySituationState(
+        state.dailySituations, state.dailySituations[_index]);
   }
 
   List<DailySituation>? _getNextDayDailySituations() {

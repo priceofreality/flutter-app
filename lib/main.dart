@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projet4/constants/routes.dart';
 import 'package:projet4/data/init.dart';
+import 'package:projet4/logic/cubit/choice_cubit.dart';
+import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
+import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
+import 'package:projet4/logic/cubit/game_cubit.dart';
 import 'package:projet4/logic/cubit/summary_cubit.dart';
 import 'package:projet4/presentation/pages/end_game.dart';
 import 'package:projet4/presentation/pages/error.dart';
@@ -18,6 +22,16 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final AppRouter _appRouter = AppRouter();
+
+  final ChoiceCubit choiceCubit = ChoiceCubit();
+  final FinancialSituationCubit financialSituationCubit =
+      FinancialSituationCubit();
+
+  late final DailySituationCubit dailySituationCubit = DailySituationCubit(
+      choiceCubit: choiceCubit,
+      financialSituationCubit: financialSituationCubit);
+  late final GameCubit gameCubit =
+      GameCubit(dailySituationCubit: dailySituationCubit);
 
   MyApp() : super() {
     _appRouter.define(HOME_PAGE, (_) => HomePage());
@@ -59,8 +73,21 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         accentColor: Colors.indigo,
       ),
-      home: BlocProvider(
-        create: (_) => SummaryCubit(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => gameCubit,
+          ),
+          BlocProvider(
+            create: (_) => dailySituationCubit,
+          ),
+          BlocProvider(
+            create: (_) => choiceCubit,
+          ),
+          BlocProvider(
+            create: (_) => financialSituationCubit,
+          ),
+        ],
         child: HomePage(),
       ),
     );
