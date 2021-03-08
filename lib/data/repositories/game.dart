@@ -80,18 +80,28 @@ class GameRepository {
     // load the ChoicesSituations
     final choicesSituationsJsonList = await futureChoicesSituations;
 
-    // Map<int, Map<int, DailySituation>> ; _dailySituationLocked
-    // Map<String, Map<String, dynamic>>
-    Map<int, dynamic> choicesSituationsmap = choicesSituationsJsonList
-        .map((key, value) => MapEntry(int.parse(key), value));
+    _choicesToDailySituation =
+        choicesSituationsJsonList.map((situationId, value) {
+      final jsonMap = Map<String, int>.from(value);
 
-    //TO DO
-    _choicesToDailySituation = {};
+      return MapEntry(
+          int.parse(situationId),
+          jsonMap.map((situation2Id, id) => MapEntry(
+              int.parse(situation2Id), _getDailySituation(situations, id))));
+    });
 
     final financialSituationsJsonList = await futureFinancialSituations;
 
     financialSituations = financialSituationsJsonList
         .map((json) => FinancialSituation.fromJson(json))
         .toList();
+  }
+
+  @deprecated
+  DailySituation _getDailySituation(List<DailySituation> liste, int id) {
+    for (var i in liste) {
+      if (i.id == id) return i;
+    }
+    return liste[0];
   }
 }
