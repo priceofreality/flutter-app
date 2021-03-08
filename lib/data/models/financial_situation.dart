@@ -3,9 +3,9 @@ import 'package:equatable/equatable.dart';
 class FinancialSituation extends Equatable {
   final int id;
   final String label;
-  final double budget;
+  double budget;
 
-  const FinancialSituation(
+  FinancialSituation(
       {required this.id, required this.label, required this.budget});
 
   factory FinancialSituation.fromJson(Map<String, dynamic> json) =>

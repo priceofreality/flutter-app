@@ -10,4 +10,12 @@ class FinancialSituationCubit extends Cubit<FinancialSituationState> {
 
   FinancialSituationCubit()
       : super(FinancialSituationState(gameRepository.financialSituations[0]));
+
+  void emitTransaction(double cost) {
+    FinancialSituation situation = state.financialSituation;
+
+    situation.budget += cost;
+
+    emit(FinancialSituationState(situation));
+  }
 }

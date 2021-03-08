@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projet4/constants/routes.dart';
 import 'package:projet4/data/init.dart';
-import 'package:projet4/presentation/pages/daily_situation.dart';
+import 'package:projet4/logic/cubit/summary_cubit.dart';
+import 'package:projet4/presentation/pages/end_game.dart';
 import 'package:projet4/presentation/pages/error.dart';
 import 'package:projet4/presentation/pages/home.dart';
 import 'package:projet4/presentation/router/router.dart';
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
   MyApp() : super() {
     _appRouter.define(HOME_PAGE, (_) => HomePage());
     _appRouter.define(ERROR_PAGE, (String arg) => ErrorPage(message: arg));
+    _appRouter.define(END_PAGE, () => EndGamePage());
   }
 
   // This widget is the root of your application.
@@ -56,7 +59,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         accentColor: Colors.indigo,
       ),
-      home: DailySituationPage(),
+      home: BlocProvider(
+        create: (_) => SummaryCubit(),
+        child: HomePage(),
+      ),
     );
   }
 }
