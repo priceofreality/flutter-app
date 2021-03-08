@@ -12,6 +12,8 @@ class GameRepository {
   //List of financial situation
   List<FinancialSituation> financialSituations = [];
 
+  int maxDay = -1;
+
   DataProvider _dataProvider = DataProvider();
 
   static final GameRepository _instance = GameRepository._internal();
@@ -54,6 +56,9 @@ class GameRepository {
         .toList();
 
     for (DailySituation situation in situations) {
+      if (situation.day > maxDay) {
+        maxDay = situation.day;
+      }
       dailySituations.putIfAbsent(situation.day, () => []);
       dailySituations[situation.day]!.add(situation);
     }
