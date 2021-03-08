@@ -44,6 +44,7 @@ class DailySituationCubit extends Cubit<DailySituationState> {
 
   List<DailySituation>? _getNextDayDailySituations() {
     while (++_day < gameRepository.dailySituations.keys.length) {
+      //ggetmaxday
       if (gameRepository.dailySituations.containsKey(_day))
         return gameRepository.dailySituations[_day];
     }
