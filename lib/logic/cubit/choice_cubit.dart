@@ -7,7 +7,7 @@ part 'choice_state.dart';
 class ChoiceCubit extends Cubit<ChoiceState> {
   ChoiceCubit() : super(ChoiceState([], null));
 
-  void emitNewCoices(List<Choice> choices) => emit(ChoiceState(choices, null));
+  void emitNewChoices(List<Choice> choices) => emit(ChoiceState(choices, null));
 
   void emitSelectChoice(Choice newValue) =>
       emit(ChoiceState(state.choices, newValue));

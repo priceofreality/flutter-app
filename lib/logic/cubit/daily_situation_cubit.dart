@@ -17,7 +17,7 @@ class DailySituationCubit extends Cubit<DailySituationState> {
   DailySituationCubit({required this.choiceCubit})
       : super(DailySituationState(gameRepository.dailySituations[1]!,
             gameRepository.dailySituations[1]![0])) {
-    choiceCubit.emitNewCoices(gameRepository.dailySituations[1]![0].choices);
+    choiceCubit.emitNewChoices(gameRepository.dailySituations[1]![0].choices);
   }
 
   void emitNextDailySituations() {
@@ -32,14 +32,14 @@ class DailySituationCubit extends Cubit<DailySituationState> {
       }
 
       emit(DailySituationState(dailySituations, dailySituations[_index]));
-      choiceCubit.emitNewCoices(dailySituations[_index].choices);
+      choiceCubit.emitNewChoices(dailySituations[_index].choices);
 
       return;
     }
 
     emit(DailySituationState(
         state.dailySituations, state.dailySituations[_index]));
-    choiceCubit.emitNewCoices(state.dailySituations[_index].choices);
+    choiceCubit.emitNewChoices(state.dailySituations[_index].choices);
   }
 
   List<DailySituation>? _getNextDayDailySituations() {
