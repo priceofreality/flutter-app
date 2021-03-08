@@ -9,6 +9,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class DailySituationPage extends StatelessWidget {
   // ignore: close_sinks
   final ChoiceCubit choiceCubit = ChoiceCubit();
+  // ignore: close_sinks
+  final FinancialSituationCubit financialSituationCubit =
+      FinancialSituationCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +20,15 @@ class DailySituationPage extends StatelessWidget {
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => DailySituationCubit(choiceCubit: choiceCubit),
+              create: (_) => DailySituationCubit(
+                  choiceCubit: choiceCubit,
+                  financialSituationCubit: financialSituationCubit),
             ),
             BlocProvider(
               create: (_) => choiceCubit,
             ),
             BlocProvider(
-              create: (_) => FinancialSituationCubit(),
+              create: (_) => financialSituationCubit,
             ),
           ],
           child: Container(
