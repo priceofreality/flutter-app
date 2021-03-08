@@ -6,7 +6,7 @@ import 'package:projet4/logic/cubit/choice_cubit.dart';
 
 class DailySituationPage extends StatelessWidget {
   // ignore: close_sinks
-  final DailySituationCubit dailySituationCubit = DailySituationCubit();
+  final ChoiceCubit choiceCubit = ChoiceCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +15,10 @@ class DailySituationPage extends StatelessWidget {
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => dailySituationCubit,
+              create: (_) => DailySituationCubit(choiceCubit: choiceCubit),
             ),
             BlocProvider(
-              create: (_) =>
-                  ChoiceCubit(dailySituationCubit: dailySituationCubit),
+              create: (_) => choiceCubit,
             ),
           ],
           child: Container(
@@ -117,7 +116,8 @@ class NextButton extends StatelessWidget {
           shape: StadiumBorder(),
           primary: Theme.of(context).accentColor,
         ),
-        onPressed: () {},
+        onPressed: () =>
+            context.read<DailySituationCubit>().emitNextDailySituations(),
         child: Text(
           'NEXT'.toUpperCase(),
           style: TextStyle(color: Colors.white),
