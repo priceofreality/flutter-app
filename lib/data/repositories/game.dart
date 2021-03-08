@@ -10,7 +10,7 @@ class GameRepository {
   Map<int, List<DailySituation>> dailySituations = {};
   Map<int, DailySituation> _dailySituationLocked = {};
   // Private map of choices -> dailySituations
-  Map<int, Map<int, DailySituation>> _choicesToDailySituation = {};
+  Map<int, Map<int, int>> _choicesToDailySituation = {};
 
   //List of financial situation
   List<FinancialSituation> financialSituations = [];
@@ -86,8 +86,8 @@ class GameRepository {
 
       return MapEntry(
           int.parse(situationId),
-          jsonMap.map((situation2Id, id) => MapEntry(
-              int.parse(situation2Id), _getDailySituation(situations, id))));
+          jsonMap.map(
+              (situation2Id, id) => MapEntry(int.parse(situation2Id), id)));
     });
 
     final financialSituationsJsonList = await futureFinancialSituations;
@@ -97,11 +97,17 @@ class GameRepository {
         .toList();
   }
 
-  @deprecated
-  DailySituation _getDailySituation(List<DailySituation> liste, int id) {
-    for (var i in liste) {
-      if (i.id == id) return i;
+  void unlockDailySituation(int choice, int firstSituation) {
+    if (_choicesToDailySituation[choice] != null) {
+      if (_choicesToDailySituation[choice]![firstSituation] != null) {
+        int situationId = _choicesToDailySituation[choice]![firstSituation]!;
+        DailySituation situation = _dailySituationLocked[situationId]!;
+        dailySituations.putIfAbsent(situation.day, () => []);
+        dailySituations[situation.day]!.add(situation);
+
+        // remove situation from locked Situation
+        _dailySituationLocked.remove(situationId);
+      }
     }
-    return liste[0];
   }
 }
