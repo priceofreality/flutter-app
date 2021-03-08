@@ -7,8 +7,16 @@
   "@somethingWentWrong": {
     "description": "Something went wrong"
   },
-  "toCounter": "Aller a la page counter",
-  "@toCounter": {
-    "description": "Navigate to counter page"
+  "day": "Jour",
+  "@day": {
+    "description": "Current day"
+  },
+  "next": "Suivant",
+  "@next": {
+    "description": "Suivant"
+  },
+  "budget": "Budget",
+  "@budget": {
+    "description": "Budget of user"
   }
 }

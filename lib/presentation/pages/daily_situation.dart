@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projet4/data/models/choice.dart';
 import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
+import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DailySituationPage extends StatelessWidget {
   // ignore: close_sinks
@@ -19,6 +21,9 @@ class DailySituationPage extends StatelessWidget {
             ),
             BlocProvider(
               create: (_) => choiceCubit,
+            ),
+            BlocProvider(
+              create: (_) => FinancialSituationCubit(),
             ),
           ],
           child: Container(
@@ -49,7 +54,10 @@ class Event extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text('DAY ${state.current.day}'), Text('BUDGET: 0')],
+            children: [
+              Text(AppLocalizations.of(context)!.day + ' ${state.current.day}'),
+              Budget()
+            ],
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 20.0),
@@ -61,6 +69,17 @@ class Event extends StatelessWidget {
           ),
         ],
       );
+    });
+  }
+}
+
+class Budget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
+        builder: (context, state) {
+      return Text(AppLocalizations.of(context)!.budget +
+          ': ${state.financialSituation.budget}');
     });
   }
 }
@@ -119,7 +138,7 @@ class NextButton extends StatelessWidget {
         onPressed: () =>
             context.read<DailySituationCubit>().emitNextDailySituations(),
         child: Text(
-          'NEXT'.toUpperCase(),
+          AppLocalizations.of(context)!.next.toUpperCase(),
           style: TextStyle(color: Colors.white),
         ),
       ),
