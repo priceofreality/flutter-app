@@ -9,15 +9,20 @@ class FinancialSituationCubit extends Cubit<FinancialSituationState> {
   static final GameRepository gameRepository = GameRepository();
 
   FinancialSituationCubit()
-      : super(FinancialSituationState(gameRepository.financialSituations[0]));
+      : super(FinancialSituationState(FinancialSituation.clone(
+            financialSituation: gameRepository.financialSituations[0])));
 
   void emitTransaction(double cost) {
     FinancialSituation situation = state.financialSituation;
 
     situation.budget += cost;
 
-    print(situation.budget);
-
     emit(FinancialSituationState(situation));
+  }
+
+  void emitReset() {
+    emit(FinancianSituationInitialState());
+    emit(FinancialSituationState(FinancialSituation.clone(
+        financialSituation: gameRepository.financialSituations[0])));
   }
 }

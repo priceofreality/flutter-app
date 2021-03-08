@@ -12,6 +12,12 @@ class FinancialSituation extends Equatable {
       FinancialSituation(
           id: json['id'], label: json['label'], budget: json['budget']);
 
+  FinancialSituation.clone({required FinancialSituation financialSituation})
+      : this(
+            id: financialSituation.id,
+            label: financialSituation.label,
+            budget: financialSituation.budget);
+
   @override
   String toString() {
     return "${this.id} : ${this.label} ${this.budget}";

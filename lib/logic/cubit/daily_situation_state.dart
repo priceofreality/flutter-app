@@ -13,7 +13,7 @@ class DailySituationState extends BlocState<DailySituationStateType> {
   DailySituationState.finish() : super(DailySituationStateType.Finished);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [current];
 }
 
 class DailySituationFinishedState extends DailySituationState {

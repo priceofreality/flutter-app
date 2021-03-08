@@ -5,10 +5,12 @@ import 'package:projet4/data/models/choice.dart';
 part 'choice_state.dart';
 
 class ChoiceCubit extends Cubit<ChoiceState> {
-  ChoiceCubit() : super(ChoiceState([], null));
+  ChoiceCubit() : super(ChoiceInitialState());
 
   void emitNewChoices(List<Choice> choices) => emit(ChoiceState(choices, null));
 
   void emitSelectChoice(Choice newValue) =>
       emit(ChoiceState(state.choices, newValue));
+
+  void emitReset() => emit(ChoiceInitialState());
 }

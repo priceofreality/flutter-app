@@ -3,9 +3,7 @@ import 'package:projet4/data/models/daily_situation.dart';
 import 'package:projet4/data/repositories/game.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
-import 'package:projet4/logic/cubit/game_cubit.dart';
 import 'package:projet4/logic/cubit_state.dart';
-import 'package:projet4/presentation/pages/daily_situation.dart';
 
 part 'daily_situation_state.dart';
 
@@ -32,6 +30,8 @@ class DailySituationCubit extends Cubit<DailySituationState> {
 
       if (dailySituations == null ||
           financialSituationCubit.state.financialSituation.budget <= 0) {
+        _day = 1;
+        _index = 0;
         emit(DailySituationFinishedState());
 
         return;
@@ -55,7 +55,6 @@ class DailySituationCubit extends Cubit<DailySituationState> {
 
     emit(DailySituationState(
         state.dailySituations, state.dailySituations[_index]));
-    //choiceCubit.emitNewChoices(state.dailySituations[_index].choices);
   }
 
   List<DailySituation>? _getNextDayDailySituations() {
@@ -65,5 +64,14 @@ class DailySituationCubit extends Cubit<DailySituationState> {
     }
 
     return null;
+  }
+
+  void emitReset() {
+    choiceCubit.emitReset();
+    financialSituationCubit.emitReset();
+
+    emit(DailySituationState(gameRepository.dailySituations[1]!,
+        gameRepository.dailySituations[1]![0]));
+    choiceCubit.emitNewChoices(gameRepository.dailySituations[1]![0].choices);
   }
 }

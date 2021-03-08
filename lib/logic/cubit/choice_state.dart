@@ -10,3 +10,7 @@ class ChoiceState extends Equatable {
   @override
   List<Object> get props => [selected ?? ''];
 }
+
+class ChoiceInitialState extends ChoiceState {
+  ChoiceInitialState() : super([], null);
+}

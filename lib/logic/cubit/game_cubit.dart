@@ -10,15 +10,19 @@ class GameCubit extends Cubit<GameState> {
   final DailySituationCubit dailySituationCubit;
   late StreamSubscription _dailySituationSubscription;
 
-  GameCubit({required this.dailySituationCubit}) : super(GameState()) {
+  GameCubit({required this.dailySituationCubit}) : super(GameInitialState()) {
     _dailySituationSubscription =
         dailySituationCubit.listen((dailySituationState) {
       print(dailySituationState.type);
       if (dailySituationState.type == DailySituationStateType.Finished) {
-        print('FINISHED');
-        emit(GameState.finished());
+        emit(GameFinishedState());
       }
     });
+  }
+
+  void emitNewGame() {
+    emit(GameInitialState());
+    dailySituationCubit.emitReset();
   }
 
   @override
