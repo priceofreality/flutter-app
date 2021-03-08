@@ -57,6 +57,7 @@ flutter:
     - lib/data/db/events.json
     - lib/data/db/daily_situations.json
     - lib/data/db/financial_situations.json
+    - lib/data/db/choice_daily_situation.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

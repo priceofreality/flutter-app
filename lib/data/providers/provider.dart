@@ -16,6 +16,9 @@ class DataProvider {
   Future<String> loadChoices() async =>
       await rootBundle.loadString('lib/data/db/choices.json');
 
+  Future<String> loadChoicesSituations() async =>
+      await rootBundle.loadString('lib/data/db/choice_daily_situation.json');
+
   Future<String> loadEvents() async =>
       await rootBundle.loadString('lib/data/db/events.json');
 }

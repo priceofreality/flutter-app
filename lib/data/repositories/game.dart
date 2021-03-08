@@ -8,6 +8,9 @@ import 'package:projet4/data/models/financial_situation.dart';
 class GameRepository {
   // Map day : list of the situations of the day
   Map<int, List<DailySituation>> dailySituations = {};
+  Map<int, DailySituation> _dailySituationLocked = {};
+  // Private map of choices -> dailySituations
+  Map<int, Map<int, DailySituation>> _choicesToDailySituation = {};
 
   //List of financial situation
   List<FinancialSituation> financialSituations = [];
@@ -24,6 +27,12 @@ class GameRepository {
 
   Future<Map<String, dynamic>> _mapChoices() {
     return _dataProvider.loadChoices().then((json) => jsonDecode(json));
+  }
+
+  Future<Map<String, dynamic>> _mapChoicesSituations() {
+    return _dataProvider
+        .loadChoicesSituations()
+        .then((json) => jsonDecode(json));
   }
 
   Future<Map<String, dynamic>> _mapEvents() {
@@ -45,6 +54,7 @@ class GameRepository {
     final futureEvents = _mapEvents();
     final futureFinancialSituations = _mapFinancialSituations();
     final futureDailySituations = _mapDailySituations();
+    final futureChoicesSituations = _mapChoicesSituations();
 
     final eventsJson = await futureEvents;
     final choicesJson = await futureChoices;
@@ -59,9 +69,24 @@ class GameRepository {
       if (situation.day > maxDay) {
         maxDay = situation.day;
       }
-      dailySituations.putIfAbsent(situation.day, () => []);
-      dailySituations[situation.day]!.add(situation);
+      if (situation.locked) {
+        _dailySituationLocked[situation.id] = situation;
+      } else {
+        dailySituations.putIfAbsent(situation.day, () => []);
+        dailySituations[situation.day]!.add(situation);
+      }
     }
+
+    // load the ChoicesSituations
+    final choicesSituationsJsonList = await futureChoicesSituations;
+
+    // Map<int, Map<int, DailySituation>> ; _dailySituationLocked
+    // Map<String, Map<String, dynamic>>
+    Map<int, dynamic> choicesSituationsmap = choicesSituationsJsonList
+        .map((key, value) => MapEntry(int.parse(key), value));
+
+    //TO DO
+    _choicesToDailySituation = {};
 
     final financialSituationsJsonList = await futureFinancialSituations;
 

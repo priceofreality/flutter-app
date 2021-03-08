@@ -1,19 +1,23 @@
 import 'package:equatable/equatable.dart';
 
 class Choice extends Equatable {
+  final int id;
   final String label;
   final double? cost;
 
-  const Choice({required this.label, this.cost});
+  const Choice({required this.id, required this.label, this.cost});
 
-  factory Choice.fromJson(Map<String, dynamic> json) => json.containsKey('cost')
-      ? Choice(
-          label: json['label'],
-          cost: json['cost'],
-        )
-      : Choice(
-          label: json['label'],
-        );
+  factory Choice.fromJson(int id, Map<String, dynamic> json) =>
+      json.containsKey('cost')
+          ? Choice(
+              id: id,
+              label: json['label'],
+              cost: json['cost'],
+            )
+          : Choice(
+              id: id,
+              label: json['label'],
+            );
 
   @override
   String toString() {
