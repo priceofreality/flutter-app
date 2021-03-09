@@ -87,10 +87,10 @@ class TopBar extends StatelessWidget {
         child: Text(
           AppLocalizations.of(context)!.day + ' ${state.current.day}',
           style: TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
-              fontWeight: FontWeight.w500,
-              letterSpacing: 0.8),
+            color: Colors.white,
+            fontSize: 20.0,
+            fontWeight: FontWeight.w700,
+          ),
         ),
       );
     });
@@ -126,7 +126,7 @@ class Budget extends StatelessWidget {
         style: TextStyle(
           fontSize: 20.0,
           color: Colors.black,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
         ),
       );
     });

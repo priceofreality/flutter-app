@@ -59,11 +59,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: TextTheme(
           button: TextStyle(
-            letterSpacing: 0.8,
+            //letterSpacing: 0.8,
             color: Colors.black,
             fontSize: 17.0,
           ),
         ),
+        fontFamily: 'Montserrat',
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the

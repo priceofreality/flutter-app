@@ -17,6 +17,7 @@ class FinancialSituationCubit extends Cubit<FinancialSituationState> {
 
     situation.budget += cost;
 
+    emit(FinancianSituationInitialState());
     emit(FinancialSituationState(situation));
   }
 
