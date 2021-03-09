@@ -8,13 +8,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: BlocBuilder<GameCubit, GameState>(
-        builder: (context, state) {
-          return (state.type == GameStateType.Finished)
-              ? EndGamePage()
-              : DailySituationPage();
-        },
-      )),
+      body: SafeArea(
+        child: BlocBuilder<GameCubit, GameState>(
+          builder: (context, state) {
+            return (state.type == GameStateType.Finished)
+                ? EndGamePage()
+                : DailySituationPage();
+          },
+        ),
+      ),
     );
   }
 }

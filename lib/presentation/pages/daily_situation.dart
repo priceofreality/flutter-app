@@ -10,23 +10,90 @@ import 'package:projet4/presentation/widgets/custom_radio_button.dart';
 class DailySituationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          padding: EdgeInsets.all(14.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Event(),
-              Choices(),
-              NextButton(),
-            ],
+    return Container(
+      width: double.infinity,
+      //padding: EdgeInsets.all(14.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ClipPath(
+            clipper: MyClipper(),
+            child: Container(
+              width: double.infinity,
+              height: 100,
+              child: TopBar(),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Color(0xff3f37c9), Color(0xff4895ef)]),
+              ),
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 14.0),
+            child: Container(
+              child: Column(
+                children: [
+                  Event(),
+                  SizedBox(height: 20.0),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Budget(),
+                  ),
+                  SizedBox(height: 20.0),
+                  Choices(),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 14.0),
+            child: NextButton(),
+          ),
+        ],
       ),
     );
+  }
+}
+
+class MyClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    path.lineTo(0, size.height);
+    path.quadraticBezierTo(
+        size.width / 2, size.height - 50, size.width, size.height);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
+  }
+}
+
+class TopBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DailySituationCubit, DailySituationState>(
+        builder: (context, state) {
+      return Container(
+        padding: EdgeInsets.only(top: 30.0),
+        alignment: Alignment.topCenter,
+        child: Text(
+          AppLocalizations.of(context)!.day + ' ${state.current.day}',
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.8),
+        ),
+      );
+    });
   }
 }
 
@@ -35,24 +102,14 @@ class Event extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DailySituationCubit, DailySituationState>(
         builder: (context, state) {
-      return Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(AppLocalizations.of(context)!.day + ' ${state.current.day}'),
-              Budget()
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 20.0),
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
-            child: Text(
-              state.current.event,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-            ),
-          ),
-        ],
+      return Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(vertical: 20.0),
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+        child: Text(
+          state.current.event,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+        ),
       );
     });
   }
@@ -63,8 +120,15 @@ class Budget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
         builder: (context, state) {
-      return Text(AppLocalizations.of(context)!.budget +
-          ': ${state.financialSituation.budget}');
+      return Text(
+        AppLocalizations.of(context)!.budget +
+            ': ${state.financialSituation.budget}€',
+        style: TextStyle(
+          fontSize: 20.0,
+          color: Colors.black,
+          fontWeight: FontWeight.w700,
+        ),
+      );
     });
   }
 }
