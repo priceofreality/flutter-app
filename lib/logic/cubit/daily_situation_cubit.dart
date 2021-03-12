@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:projet4/data/init.dart';
 import 'package:projet4/data/models/daily_situation.dart';
+import 'package:projet4/data/models/financial_situation.dart';
 import 'package:projet4/data/repositories/game.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
-import 'package:projet4/logic/cubit_state.dart';
 
 part 'daily_situation_state.dart';
 
@@ -15,26 +16,34 @@ class DailySituationCubit extends Cubit<DailySituationState> {
   final FinancialSituationCubit financialSituationCubit;
 
   int _day = 1;
-  int _index = 0;
+  int _currentOfDay = 0;
 
   DailySituationCubit(
       {required this.choiceCubit, required this.financialSituationCubit})
       : super(DailySituationState(gameRepository.dailySituations[1]!,
             gameRepository.dailySituations[1]![0])) {
-    choiceCubit.emitNewChoices(gameRepository.dailySituations[1]![0].choices);
+    choiceCubit.emitChoices(gameRepository.dailySituations[1]![0].choices);
   }
 
-  void emitNextDailySituations() {
-    if (state.current.id == 9) {
-      _day = 1;
-      _index = 0;
-      emit(DailySituationFinishedState());
+  void _resetIndexes() {
+    _day = 1;
+    _currentOfDay = 0;
+  }
 
+  void emitFinancialSituation(FinancialSituation financialSituation) =>
+      financialSituationCubit.emitFinancialSituation(financialSituation);
+
+  void emitNextDailySituation() {
+    //if choice finishes game
+    if (state.current.id == 9) {
+      _resetIndexes();
+      emit(DailySituationFinishedState());
       return;
     }
 
-    if (++_index >= state.dailySituations.length) {
-      _index = 0;
+    //new day
+    if (++_currentOfDay >= state.dailySituations.length) {
+      _currentOfDay = 0;
 
       gameRepository.unlockDailySituation(
           choiceCubit.state.selected!.id, state.current.id);
@@ -42,11 +51,9 @@ class DailySituationCubit extends Cubit<DailySituationState> {
       final dailySituations = _getNextDayDailySituations();
 
       if (dailySituations == null ||
-          financialSituationCubit.state.financialSituation.budget <= 0) {
-        _day = 1;
-        _index = 0;
+          financialSituationCubit.state.financialSituation!.budget <= 0) {
+        _resetIndexes();
         emit(DailySituationFinishedState());
-
         return;
       }
 
@@ -55,11 +62,17 @@ class DailySituationCubit extends Cubit<DailySituationState> {
               ? choiceCubit.state.selected!.cost!
               : 0);
 
-      emit(DailySituationState(dailySituations, dailySituations[_index]));
-      choiceCubit.emitNewChoices(dailySituations[_index].choices);
+      emit(
+          DailySituationState(dailySituations, dailySituations[_currentOfDay]));
+      choiceCubit.emitChoices(dailySituations[_currentOfDay].choices);
 
       return;
     }
+
+    //same day
+
+    gameRepository.unlockDailySituation(
+        choiceCubit.state.selected!.id, state.current.id);
 
     financialSituationCubit.emitTransaction(
         choiceCubit.state.selected!.cost != null
@@ -67,9 +80,8 @@ class DailySituationCubit extends Cubit<DailySituationState> {
             : 0);
 
     emit(DailySituationState(
-        state.dailySituations, state.dailySituations[_index]));
-
-    choiceCubit.emitNewChoices(state.current.choices);
+        state.dailySituations, state.dailySituations[_currentOfDay]));
+    choiceCubit.emitChoices(state.current.choices);
   }
 
   List<DailySituation>? _getNextDayDailySituations() {
@@ -84,11 +96,10 @@ class DailySituationCubit extends Cubit<DailySituationState> {
   void emitReset() {
     DataInit.loadGameAssets().then((value) {
       choiceCubit.emitReset();
-      financialSituationCubit.emitReset();
 
       emit(DailySituationState(gameRepository.dailySituations[1]!,
           gameRepository.dailySituations[1]![0]));
-      choiceCubit.emitNewChoices(gameRepository.dailySituations[1]![0].choices);
+      choiceCubit.emitChoices(gameRepository.dailySituations[1]![0].choices);
     });
   }
 }

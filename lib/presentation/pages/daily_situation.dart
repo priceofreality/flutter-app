@@ -122,7 +122,7 @@ class Budget extends StatelessWidget {
         builder: (context, state) {
       return Text(
         AppLocalizations.of(context)!.budget +
-            ': ${state.financialSituation.budget}€',
+            ': ${state.financialSituation!.budget}€',
         style: TextStyle(
           fontSize: 20.0,
           color: Colors.black,
@@ -203,7 +203,7 @@ class NextButton extends StatelessWidget {
         onPressed: disable == null
             ? null
             : () =>
-                context.read<DailySituationCubit>().emitNextDailySituations(),
+                context.read<DailySituationCubit>().emitNextDailySituation(),
         child: Text(
           AppLocalizations.of(context)!.next.toUpperCase(),
           style: TextStyle(color: Colors.white),

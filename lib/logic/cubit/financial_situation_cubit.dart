@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:projet4/data/models/financial_situation.dart';
 import 'package:projet4/data/repositories/game.dart';
 
@@ -8,22 +7,18 @@ part 'financial_situation_state.dart';
 class FinancialSituationCubit extends Cubit<FinancialSituationState> {
   static final GameRepository gameRepository = GameRepository();
 
-  FinancialSituationCubit()
-      : super(FinancialSituationState(FinancialSituation.clone(
-            financialSituation: gameRepository.financialSituations[0])));
+  FinancialSituationCubit() : super(FinancianSituationInitialState());
+
+  void emitFinancialSituation(FinancialSituation financialSituation) =>
+      emit(FinancialSituationState(financialSituation, []));
 
   void emitTransaction(double cost) {
-    FinancialSituation situation = state.financialSituation;
+    FinancialSituation situation = state.financialSituation!;
+    List<String> transactions = state.transactions;
 
     situation.budget += cost;
+    transactions.add('test $cost');
 
-    emit(FinancianSituationInitialState());
-    emit(FinancialSituationState(situation));
-  }
-
-  void emitReset() {
-    emit(FinancianSituationInitialState());
-    emit(FinancialSituationState(FinancialSituation.clone(
-        financialSituation: gameRepository.financialSituations[0])));
+    emit(FinancialSituationState(situation, transactions));
   }
 }

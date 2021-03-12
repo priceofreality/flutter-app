@@ -1,11 +1,9 @@
 part of 'game_cubit.dart';
 
-enum GameStateType { Initial, Running, Finished }
+abstract class GameState extends Equatable {
+  GameState.initial() : super();
 
-class GameState extends BlocState<GameStateType> {
-  GameState.initial() : super(GameStateType.Initial);
-
-  GameState.finish() : super(GameStateType.Finished);
+  GameState.finish() : super();
 
   @override
   List<Object> get props => [];

@@ -8,7 +8,7 @@ class ChoiceState extends Equatable {
   ChoiceState(this.choices, this.selected);
 
   @override
-  List<Object> get props => [selected ?? ''];
+  List<Object> get props => [selected ?? '', choices];
 }
 
 class ChoiceInitialState extends ChoiceState {

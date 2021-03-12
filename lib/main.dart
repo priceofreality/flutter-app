@@ -7,7 +7,6 @@ import 'package:projet4/logic/cubit/choice_cubit.dart';
 import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
 import 'package:projet4/logic/cubit/game_cubit.dart';
-import 'package:projet4/logic/cubit/summary_cubit.dart';
 import 'package:projet4/presentation/pages/end_game.dart';
 import 'package:projet4/presentation/pages/error.dart';
 import 'package:projet4/presentation/pages/home.dart';

@@ -1,16 +1,13 @@
 part of 'daily_situation_cubit.dart';
 
-enum DailySituationStateType { Running, Finished }
-
-class DailySituationState extends BlocState<DailySituationStateType> {
+class DailySituationState extends Equatable {
   late final List<DailySituation> dailySituations;
 
   late final DailySituation current;
 
-  DailySituationState(this.dailySituations, this.current)
-      : super(DailySituationStateType.Running);
+  DailySituationState(this.dailySituations, this.current);
 
-  DailySituationState.finish() : super(DailySituationStateType.Finished);
+  DailySituationState.finish();
 
   @override
   List<Object> get props => [current];

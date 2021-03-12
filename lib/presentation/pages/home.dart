@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<GameCubit, GameState>(
           builder: (context, state) {
-            return (state.type == GameStateType.Finished)
+            return (state is GameFinishedState)
                 ? EndGamePage()
                 : DailySituationPage();
           },
