@@ -1,18 +1,14 @@
 part of 'game_cubit.dart';
 
 abstract class GameState extends Equatable {
-  GameState.initial() : super();
-
-  GameState.finish() : super();
+  GameState();
 
   @override
   List<Object> get props => [];
 }
 
-class GameInitialState extends GameState {
-  GameInitialState() : super.initial();
-}
+class GameInitialState extends GameState {}
 
-class GameFinishedState extends GameState {
-  GameFinishedState() : super.finish();
-}
+class GameRunningState extends GameState {}
+
+class GameFinishedState extends GameState {}

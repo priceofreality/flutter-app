@@ -12,7 +12,8 @@ class AppRouter {
     return pages.containsKey(routeSettings.name)
         ? MaterialPageRoute(
             builder: (context) =>
-                pages[routeSettings.name!]!(routeSettings.arguments))
+                pages[routeSettings.name!]!(routeSettings.arguments),
+          )
         : MaterialPageRoute(builder: (context) => ErrorPage());
   }
 }

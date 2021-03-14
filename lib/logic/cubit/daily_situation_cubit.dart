@@ -34,6 +34,9 @@ class DailySituationCubit extends Cubit<DailySituationState> {
       financialSituationCubit.emitFinancialSituation(financialSituation);
 
   void emitNextDailySituation() {
+    final dailySituation = state.current;
+    final choice = choiceCubit.state.selected!;
+
     //if choice finishes game
     if (state.current.id == 9) {
       _resetIndexes();
@@ -45,8 +48,7 @@ class DailySituationCubit extends Cubit<DailySituationState> {
     if (++_currentOfDay >= state.dailySituations.length) {
       _currentOfDay = 0;
 
-      gameRepository.unlockDailySituation(
-          choiceCubit.state.selected!.id, state.current.id);
+      gameRepository.unlockDailySituation(choice.id, state.current.id);
 
       final dailySituations = _getNextDayDailySituations();
 
@@ -58,9 +60,7 @@ class DailySituationCubit extends Cubit<DailySituationState> {
       }
 
       financialSituationCubit.emitTransaction(
-          choiceCubit.state.selected!.cost != null
-              ? choiceCubit.state.selected!.cost!
-              : 0);
+          choice.cost != null ? choice.cost! : 0, dailySituation, choice);
 
       emit(
           DailySituationState(dailySituations, dailySituations[_currentOfDay]));
@@ -71,13 +71,10 @@ class DailySituationCubit extends Cubit<DailySituationState> {
 
     //same day
 
-    gameRepository.unlockDailySituation(
-        choiceCubit.state.selected!.id, state.current.id);
+    gameRepository.unlockDailySituation(choice.id, state.current.id);
 
     financialSituationCubit.emitTransaction(
-        choiceCubit.state.selected!.cost != null
-            ? choiceCubit.state.selected!.cost!
-            : 0);
+        choice.cost != null ? choice.cost! : 0, dailySituation, choice);
 
     emit(DailySituationState(
         state.dailySituations, state.dailySituations[_currentOfDay]));

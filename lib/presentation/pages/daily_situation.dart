@@ -6,53 +6,64 @@ import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:projet4/presentation/widgets/custom_radio_button.dart';
+import 'package:projet4/presentation/widgets/custom_slider.dart';
 
 class DailySituationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      //padding: EdgeInsets.all(14.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ClipPath(
-            clipper: MyClipper(),
-            child: Container(
-              width: double.infinity,
-              height: 100,
-              child: TopBar(),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Color(0xff3f37c9), Color(0xff4895ef)]),
-              ),
-            ),
+      child: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight:
+                MediaQuery.of(context).size.height - kToolbarHeight - 30.0,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.0),
-            child: Container(
-              child: Column(
-                children: [
-                  Event(),
-                  SizedBox(height: 20.0),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Budget(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ClipPath(
+                clipper: MyClipper(),
+                child: Container(
+                  width: double.infinity,
+                  height: 80,
+                  child: TopBar(),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color(0xff87CEEB),
+                          Color(0xff66c1e5),
+                        ]),
                   ),
-                  SizedBox(height: 20.0),
-                  Choices(),
-                ],
+                ),
               ),
-            ),
+              Event(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 14.0),
+                child: Container(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20.0),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Budget(),
+                      ),
+                      SizedBox(height: 20.0),
+                      Choices(),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 14.0, top: 10.0),
+                child: NextButton(),
+              ),
+            ],
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 14.0),
-            child: NextButton(),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -82,7 +93,7 @@ class TopBar extends StatelessWidget {
     return BlocBuilder<DailySituationCubit, DailySituationState>(
         builder: (context, state) {
       return Container(
-        padding: EdgeInsets.only(top: 30.0),
+        padding: EdgeInsets.only(top: 20.0),
         alignment: Alignment.topCenter,
         child: Text(
           AppLocalizations.of(context)!.day + ' ${state.current.day}',
@@ -104,7 +115,6 @@ class Event extends StatelessWidget {
         builder: (context, state) {
       return Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.symmetric(vertical: 20.0),
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
         child: Text(
           state.current.event,
@@ -145,12 +155,12 @@ class Choices extends StatelessWidget {
                   margin: EdgeInsets.only(bottom: 10.0),
                   decoration: BoxDecoration(
                     color: choice == state.selected
-                        ? Color(0xff5390d9)
+                        ? Theme.of(context).buttonColor
                         : Colors.white,
                     borderRadius: BorderRadius.circular(30.0),
                     border: Border.all(
                       width: 2,
-                      color: Color(0xff5390d9),
+                      color: Theme.of(context).buttonColor,
                     ),
                   ),
                   child: CustomRadioListTile<Choice>(
