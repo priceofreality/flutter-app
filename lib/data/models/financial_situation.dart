@@ -8,9 +8,9 @@ class FinancialSituation extends Equatable {
   FinancialSituation(
       {required this.id, required this.label, required this.budget});
 
-  factory FinancialSituation.fromJson(Map<String, dynamic> json) =>
+  factory FinancialSituation.fromTuple(Map<String, dynamic> tuple) =>
       FinancialSituation(
-          id: json['id'], label: json['label'], budget: json['budget']);
+          id: tuple['id'], label: tuple['label'], budget: tuple['budget']);
 
   FinancialSituation.clone({required FinancialSituation financialSituation})
       : this(

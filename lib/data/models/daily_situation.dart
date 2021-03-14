@@ -15,20 +15,20 @@ class DailySituation extends Equatable {
       required this.choices,
       required this.locked});
 
-  factory DailySituation.fromJson(Map<String, dynamic> dailySituationsJson,
-      Map<String, dynamic> eventsJson, Map<String, dynamic> choicesJson) {
-    final choicesRef = List<int>.from(dailySituationsJson['choices']);
-
-    List<Choice> choices = choicesRef
-        .map((e) => Choice.fromJson(e, choicesJson[e.toString()]!))
-        .toList();
+  factory DailySituation.fromTuple(Map<String, dynamic> dailySituationsTuple, List allEvents, List<Choice> allChoices) {
+    final choicesRef = List<int>.from(dailySituationsTuple['choices']);        
+    
+    List<Choice> choices = [];
+    for(int i in choicesRef){
+      choices.add(allChoices[i]);
+    }
 
     return DailySituation(
-        id: dailySituationsJson['id'],
-        day: dailySituationsJson['day'],
-        event: eventsJson[dailySituationsJson['event'].toString()],
+        id: dailySituationsTuple['id'],
+        day: dailySituationsTuple['day'],
+        event: allEvents[dailySituationsTuple['event']],
         choices: choices,
-        locked: dailySituationsJson['locked']);
+        locked: dailySituationsTuple['locked']);
   }
 
   @override

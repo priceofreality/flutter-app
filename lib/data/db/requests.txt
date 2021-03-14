@@ -1,0 +1,132 @@
+CREATE TABLE financial_situations(
+    id INTEGER PRIMARY KEY, 
+    label TEXT NOT NULL, 
+    budget DOUBLE NOT NULL   
+);
+
+CREATE TABLE choices(
+    id INTEGER PRIMARY KEY, 
+    label TEXT NOT NULL, 
+    end_game BOOLEAN NOT NULL
+);
+
+CREATE TABLE financial_choice_costs(
+    choice INTEGER REFERENCES choices(id) NOT NULL,
+    financial_situation INTEGER REFERENCES financial_situations(id) NOT NULL,
+    cost_min DOUBLE NOT NULL,
+    cost_max DOUBLE,
+    PRIMARY KEY (choice, financial_situation)
+);
+
+CREATE TABLE events(
+    id INTEGER PRIMARY KEY, 
+    entitled TEXT NOT NULL
+);
+
+CREATE TABLE daily_situations(
+    id INTEGER PRIMARY KEY, 
+    day INTEGER NOT NULL, 
+    event INTEGER REFERENCES events(id) NOT NULL, 
+    locked BOOLEAN NOT NULL
+);
+
+CREATE TABLE daily_situation_choices(
+    daily_situation INTEGER REFERENCES daily_situations(id) NOT NULL, 
+    choice INTEGER REFERENCES choices(id) NOT NULL, 
+    PRIMARY KEY (daily_situation, choice)
+);
+
+CREATE TABLE choice_daily_situations(
+    choice INTEGER REFERENCES choices(id) NOT NULL, 
+    from_daily_situation INTEGER REFERENCES daily_situations(id) NOT NULL, 
+    to_daily_situation INTEGER REFERENCES daily_situations(id) NOT NULL, 
+    PRIMARY KEY (choice, from_daily_situation, to_daily_situation)
+);
+
+
+INSERT INTO financial_situations(id, label, budget) VALUES
+    (0, "2.C (famille Monoparentale)", 1330.74);
+
+INSERT INTO choices(id, label, end_game) VALUES 
+    (0, "Payer loyer directement", FALSE),
+    (1, "Remettre à plus tard", FALSE),
+    (2, "Courses hebdomadaires de base", FALSE),
+    (3, "Négocier sept jours de délais", FALSE),
+    (4, "Payer factures directement", FALSE),
+    (5, "Payer directement le montant plus les intérêts", FALSE),
+    (6, "Payer directement", FALSE),
+    (7, "Payer directement le loyer avec les intérêts de la société de recouvrement", FALSE),
+    (8, "Percevoir salaire", FALSE),
+    (9, "Visite des Huissiers de Justice", TRUE);
+    
+INSERT INTO financial_choice_costs (financial_situation, choice, cost_min, cost_max) VALUES
+    (0, 0, -900.0, NULL),
+    (0, 2, -50.0, -150.0),
+    (0, 4, -100.0, NULL),
+    (0, 5, -990.0, NULL),
+    (0, 6, -107.5, NULL),
+    (0, 7, -990.0, NULL),
+    (0, 8, 1330.74, NULL);
+
+INSERT INTO events(id, entitled) VALUES
+    (0,"Payer le loyer du mois"),
+    (1,"Course alimentaire de la semaine pour le ménage"),
+    (2,"Premier rappel du propriétaire : Payer le loyer du mois"),
+    (3,"Second rappel du propriétaire : Payer le loyer du mois"),
+    (4,"Premier Rappel : Facture d’eau gaz et électricité"),
+    (5,"RAPPEL 3: Lettre de la société de recouvrement"),
+    (6,"Le délais prend fin : Payer le loyer du mois"),
+    (7,"Second Rappel : Facture d’eau gaz et électricité"),
+    (8,"Dernier rappel : Lettre de la société de recouvrement - Payer le loyer du mois"),
+    (9,"VISITE DES HUISSIERS DE JUSTICE"),
+    (10,"Revenus du mois");
+
+INSERT INTO daily_situations(id, day, event, locked) VALUES
+    (0, 1, 0,  FALSE),
+    (1, 2, 1,  FALSE),
+    (2, 3, 2,  TRUE),
+    (3, 6, 3,  TRUE),
+    (4, 7, 4,  FALSE),
+    (5, 8, 5,  TRUE),
+    (6, 10, 6,  TRUE),
+    (7, 22, 7,  TRUE),
+    (8, 23, 8,  TRUE),
+    (9, 31, 9,  TRUE),
+    (10, 31, 10,  FALSE),
+    (11, 32, 0,  FALSE);
+
+INSERT INTO daily_situation_choices(daily_situation, choice) VALUES
+    (0, 0),
+    (0, 1),
+    (1, 2),
+    (2, 0),
+    (2, 1),
+    (2, 3),
+    (3, 0),
+    (3, 1),
+    (4, 4),
+    (4, 1),
+    (5, 5),
+    (5, 1),
+    (6, 0),
+    (6, 1),
+    (7, 6),
+    (7, 1),
+    (8, 5),
+    (8, 1),
+    (9, 9),
+    (10, 8),
+    (11, 0);
+
+INSERT INTO choice_daily_situations(choice, from_daily_situation, to_daily_situation) VALUES
+    (1, 0, 2),
+    (1, 2, 3),
+    (1, 3, 5),
+    (1, 4, 7),
+    (1, 5, 8),
+    (1, 6, 8),
+    (1, 7, 9),
+    (1, 8, 9),
+    (3, 2, 6),
+    (9, 9, 0);
+

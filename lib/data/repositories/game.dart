@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:projet4/data/providers/provider.dart';
 import 'package:projet4/data/models/daily_situation.dart';
 import 'package:projet4/data/models/financial_situation.dart';
+import 'package:projet4/data/models/choice.dart';
 
 class GameRepository {
   // Map day : list of the situations of the day
@@ -25,28 +26,28 @@ class GameRepository {
 
   GameRepository._internal();
 
-  Future<Map<String, dynamic>> _mapChoices() {
-    return _dataProvider.loadChoices().then((json) => jsonDecode(json));
+  Future<List<Map<String, dynamic>>> _mapChoices() {
+    return _dataProvider.loadChoices();
   }
 
-  Future<Map<String, dynamic>> _mapChoicesSituations() {
-    return _dataProvider
-        .loadChoicesSituations()
-        .then((json) => jsonDecode(json));
+  Future<List<Map<String, dynamic>>> _mapChoicesSituations() {
+    return _dataProvider.loadChoiceDailySituations();
   }
 
-  Future<Map<String, dynamic>> _mapEvents() {
-    return _dataProvider.loadEvents().then((json) => jsonDecode(json));
+  Future<List<Map<String, dynamic>>> _mapEvents() {
+    return _dataProvider.loadEvents();
   }
 
-  Future<List<dynamic>> _mapDailySituations() {
-    return _dataProvider.loadDailySituations().then((json) => jsonDecode(json));
+  Future<List<Map<String, dynamic>>> _mapDailySituations() {
+    return _dataProvider.loadDailySituations();
   }
 
-  Future<List<dynamic>> _mapFinancialSituations() {
-    return _dataProvider
-        .loadFinancialSituations()
-        .then((json) => jsonDecode(json));
+  Future<List<Map<String, dynamic>>> _mapFinancialSituations() {
+    return _dataProvider.loadFinancialSituations();
+  }
+
+  Future<List<Map<String, dynamic>>> _mapFinancialChoiceCosts(){
+    return _dataProvider. loadFinancialChoiceCosts();
   }
 
   Future<void> loadRepository() async {
@@ -60,15 +61,19 @@ class GameRepository {
     final futureFinancialSituations = _mapFinancialSituations();
     final futureDailySituations = _mapDailySituations();
     final futureChoicesSituations = _mapChoicesSituations();
+    final futureFinancialChoiceCost = _mapFinancialChoiceCosts();
 
-    final eventsJson = await futureEvents;
-    final choicesJson = await futureChoices;
-    final dailySituationsJsonList = await futureDailySituations;
+    final eventsSql = await futureEvents;
+    final choicesSql = await futureChoices;
+    final dailySituationsSqlList = await futureDailySituations;
+    final financialChoiceCosts = await futureFinancialChoiceCost;
 
-    List<DailySituation> situations = dailySituationsJsonList
-        .map((dailyJson) =>
-            DailySituation.fromJson(dailyJson, eventsJson, choicesJson))
-        .toList();
+    List events = eventsSql.map((event) => event['entitled']).toList();
+
+    List<Choice> allChoices = choicesSql.map((choiceTuple) => Choice.fromTuple(choiceTuple, financialChoiceCosts)).toList();
+    List<DailySituation> situations = dailySituationsSqlList
+        .map((dailySql) =>
+            DailySituation.fromTuple(dailySql, events, allChoices)).toList();
 
     for (DailySituation situation in situations) {
       if (situation.day > maxDay) {
@@ -83,22 +88,17 @@ class GameRepository {
     }
 
     // load the ChoicesSituations
-    final choicesSituationsJsonList = await futureChoicesSituations;
+    final choicesSituationsSqlList = await futureChoicesSituations;
 
-    _choicesToDailySituation =
-        choicesSituationsJsonList.map((situationId, value) {
-      final jsonMap = Map<String, int>.from(value);
+    for(Map<String, dynamic> choiceDailySituation in choicesSituationsSqlList){
+      _choicesToDailySituation.putIfAbsent(choiceDailySituation['choice'], () => {});
+      _choicesToDailySituation['choice']![choiceDailySituation['from_daily_situation']] = choiceDailySituation['to_daily_situation'];
+    }
 
-      return MapEntry(
-          int.parse(situationId),
-          jsonMap.map(
-              (situation2Id, id) => MapEntry(int.parse(situation2Id), id)));
-    });
+    final financialSituationsList = await futureFinancialSituations;
 
-    final financialSituationsJsonList = await futureFinancialSituations;
-
-    financialSituations = financialSituationsJsonList
-        .map((json) => FinancialSituation.fromJson(json))
+    financialSituations = financialSituationsList
+        .map((sql) => FinancialSituation.fromTuple(sql))
         .toList();
   }
 
