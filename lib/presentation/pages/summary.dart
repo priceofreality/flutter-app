@@ -18,7 +18,7 @@ class _SummaryPageState extends State<SummaryPage> {
           groupBy(widget.summary.transactions, (Transaction t) => t.day);
 
       List<Widget> children = [];
-      double budget = widget.summary.initialbudget;
+      double budget = widget.summary.initialBudget;
 
       final initial = Container(
         alignment: Alignment.bottomRight,

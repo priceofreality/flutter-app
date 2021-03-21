@@ -1,50 +1,43 @@
-import "dart:io" as io;
 import 'dart:io';
+
 import "package:path/path.dart";
+import 'package:projet4/data/db/requests.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
 
-class SqliteDB {
-  static final SqliteDB _instance = new SqliteDB.internal();
+class SqfliteDb {
+  static final SqfliteDb _instance = SqfliteDb.internal();
 
-  factory SqliteDB() => _instance;
-  static Database? _db;
+  factory SqfliteDb() => _instance;
 
-  Future<Database> get db async {
-    if (_db != null) {
-      return _db!;
-    }
-    _db = await initDb();
-    // fill db with table
-    await fillDb();
-    return _db!;
-  }
+  SqfliteDb.internal();
 
-  SqliteDB.internal();
+  late Database db;
 
-  Future<Database> initDb() async {
-    io.Directory documentDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentDirectory.path, "galette.db");
-    var taskDb = await openDatabase(path, version: 1);
-    return taskDb;
-  }
+  Future<void> openDb() async {
+    String dbpath = await getDatabasesPath();
+    String path = join(dbpath, 'database.db');
+    Requests requests = Requests();
 
-  Future<void> fillDb() async {
-    var dbClient = await SqliteDB().db;
-    String requests = await readRequests();
-    await dbClient.execute(requests);
-  }
-
-  Future<String> readRequests() async {
-    String fileContent = "";
     try {
-      final directory = await getApplicationDocumentsDirectory();
-      final path = directory.path;
-      File fd = File('$path/lib/data/db/requests.txt');
-      fileContent = await fd.readAsString();
-    } catch (e) {
-      print("error read file db");
-    }
-    return fileContent;
+      await Directory(dbpath).create(recursive: true);
+    } catch (_) {}
+
+    db = await openDatabase(path, version: 1);
+
+    await db.execute(requests.createChoices);
+    await db.execute(requests.createEvents);
+    await db.execute(requests.createOptions);
+    await db.execute(requests.createDailySituations);
+    await db.execute(requests.createDailySituationsChoices);
+    await db.execute(requests.createAdditionalCharges);
+
+    await db.rawInsert(requests.insertChoices);
+    await db.rawInsert(requests.insertEvents);
+    await db.rawInsert(requests.insertOptions);
+    await db.rawInsert(requests.insertDailySituations);
+    await db.rawInsert(requests.insertDailySituationChoices);
+    await db.rawInsert(requests.insertAdditionalCharges);
   }
+
+  Future<void> closeDb() async => await db.close();
 }

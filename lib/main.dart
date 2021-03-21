@@ -6,6 +6,7 @@ import 'package:projet4/data/init.dart';
 import 'package:projet4/data/models/summary.dart';
 import 'package:projet4/data/models/transaction.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
+import 'package:projet4/logic/cubit/transaction_cubit.dart';
 import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
 import 'package:projet4/logic/cubit/game_cubit.dart';
@@ -28,10 +29,12 @@ class MyApp extends StatelessWidget {
   final ChoiceCubit choiceCubit = ChoiceCubit();
   final FinancialSituationCubit financialSituationCubit =
       FinancialSituationCubit();
+  final TransactionCubit transactionCubit = TransactionCubit();
 
   late final DailySituationCubit dailySituationCubit = DailySituationCubit(
       choiceCubit: choiceCubit,
-      financialSituationCubit: financialSituationCubit);
+      financialSituationCubit: financialSituationCubit,
+      transactionCubit: transactionCubit);
   late final GameCubit gameCubit =
       GameCubit(dailySituationCubit: dailySituationCubit);
 

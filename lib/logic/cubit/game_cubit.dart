@@ -12,14 +12,12 @@ class GameCubit extends Cubit<GameState> {
   final DailySituationCubit dailySituationCubit;
   late StreamSubscription _dailySituationSubscription;
 
-  final initialBudget = gameRepository.financialSituations[0].budget;
-
   GameCubit({required this.dailySituationCubit}) : super(GameInitialState()) {
     dailySituationCubit.emitFinancialSituation(
         gameRepository.financialSituations[0]); //LOAD SCREEN
 
     _dailySituationSubscription =
-        dailySituationCubit.listen((dailySituationState) {
+        dailySituationCubit.stream.listen((dailySituationState) {
       if (dailySituationState is DailySituationFinishedState) {
         emit(GameFinishedState());
       }

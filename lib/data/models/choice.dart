@@ -3,35 +3,28 @@ import 'package:equatable/equatable.dart';
 class Choice extends Equatable {
   final int id;
   final String label;
-  // Map financial Situation => cost
-  final Map<int,double> costMin;
-  final Map<int,double> costMax;
+  final bool concludes;
+  double minCost;
+  final double maxCost;
+  final int unlock;
 
-  const Choice({required this.id, required this.label, required this.costMin, required this.costMax});
+  Choice(
+      {required this.id,
+      required this.label,
+      required this.concludes,
+      required this.minCost,
+      required this.maxCost,
+      required this.unlock});
 
-  factory Choice.fromTuple(Map<String, dynamic> choiceTuple,List<Map<String, dynamic>> financialChoiceCostsTuples){
-
-    Map<int,double> costMin = {};
-    Map<int,double> costMax = {};
-    for(Map<String, dynamic> tuple in financialChoiceCostsTuples){
-      if(tuple['choice'] == choiceTuple['choice']){
-        costMin[tuple['financial_situation']] = tuple['costMin'];
-        if(tuple['costMax'] != null){
-          costMax[tuple['financial_situation']] = tuple['costMin'];
-        }
-      }
-    }
-    return Choice(
-      id: choiceTuple['id'],
-      label: choiceTuple['label'],
-      costMin: costMin,
-      costMax: costMax
-    );
-  }
-  @override
-  String toString() {
-    return "${this.label}, ${this.costMin}, ${this.costMax}";
-  }
+  factory Choice.fromTuple(
+          Map<String, dynamic> tuple, Map<int, String> choices) =>
+      Choice(
+          id: tuple['id'],
+          label: choices[tuple['choice']]!,
+          concludes: tuple['concludes'],
+          minCost: tuple['initial_min_cost'],
+          maxCost: tuple['initial_max_cost'],
+          unlock: tuple['unlock']);
 
   @override
   List<Object> get props => [id];

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projet4/constants/routes.dart';
 import 'package:projet4/data/models/summary.dart';
+import 'package:projet4/logic/cubit/transaction_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
 import 'package:projet4/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,11 +35,13 @@ class EndGamePage extends StatelessWidget {
               onPressed: () => Navigator.of(context).pushNamed(
                   TRANSACTIONS_PAGE,
                   arguments: Summary(
-                      initialbudget: context.read<GameCubit>().initialBudget,
-                      transactions: context
+                      initialBudget: context
                           .read<FinancialSituationCubit>()
                           .state
-                          .transactions)),
+                          .financialSituation!
+                          .initialBudget,
+                      transactions:
+                          context.read<CostCubit>().state.transactions)),
               child: Text(
                 'RESUME'.toUpperCase(),
                 style: TextStyle(color: Colors.white),

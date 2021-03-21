@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projet4/data/models/choice.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
+import 'package:projet4/logic/cubit/transaction_cubit.dart';
 import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -146,6 +147,12 @@ class Budget extends StatelessWidget {
 class Choices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final financialSituation = context
+        .read<DailySituationCubit>()
+        .financialSituationCubit
+        .state
+        .financialSituation;
+
     return BlocBuilder<ChoiceCubit, ChoiceState>(
       builder: (context, state) {
         return Column(
@@ -163,30 +170,46 @@ class Choices extends StatelessWidget {
                       color: Theme.of(context).buttonColor,
                     ),
                   ),
-                  child: CustomRadioListTile<Choice>(
-                    title: Padding(
-                      child: Text(
-                        choice.label,
-                        style: choice == state.selected
-                            ? Theme.of(context)
-                                .textTheme
-                                .button!
-                                .copyWith(color: Colors.white)
-                            : Theme.of(context).textTheme.button,
-                      ),
-                      padding: EdgeInsets.only(left: 17.0),
-                    ),
-                    secondary: Text(
-                      choice.cost == null ? '' : '${choice.cost}€',
-                      style: choice == state.selected
-                          ? TextStyle(color: Colors.white, fontSize: 14.7)
-                          : TextStyle(color: Colors.grey[800], fontSize: 14.7),
-                    ),
-                    value: choice,
-                    groupValue: state.selected,
-                    onChanged: (newValue) =>
-                        context.read<ChoiceCubit>().emitSelectChoice(newValue!),
-                  ),
+                  child: choice.costMax.isEmpty
+                      ? CustomRadioListTile<Choice>(
+                          title: Padding(
+                            child: Text(
+                              choice.label,
+                              style: choice == state.selected
+                                  ? Theme.of(context)
+                                      .textTheme
+                                      .button!
+                                      .copyWith(color: Colors.white)
+                                  : Theme.of(context).textTheme.button,
+                            ),
+                            padding: EdgeInsets.only(left: 17.0),
+                          ),
+                          secondary: Text(
+                            choice.costMin.isEmpty
+                                ? ''
+                                : '${choice.costMin[financialSituation!.id]}€',
+                            style: choice == state.selected
+                                ? TextStyle(color: Colors.white, fontSize: 14.7)
+                                : TextStyle(
+                                    color: Colors.grey[800], fontSize: 14.7),
+                          ),
+                          value: choice,
+                          groupValue: state.selected,
+                          onChanged: (newValue) {
+                            context
+                                .read<ChoiceCubit>()
+                                .emitSelectChoice(newValue!);
+                            context.read<TransactionCubit>().emitCost(
+                                newValue.costMin[financialSituation!.id]!);
+                          },
+                        )
+                      : CustomSlider(
+                          maxValue: choice.costMax[financialSituation!.id]!,
+                          minValue: choice.costMin[financialSituation.id]!,
+                          divisions: 10,
+                          onChanged: (value) =>
+                              context.read<TransactionCubit>().emitCost(value),
+                        ),
                 ),
               )
               .toList(),
