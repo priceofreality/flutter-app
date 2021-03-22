@@ -1,17 +1,10 @@
-enum Option {
+enum Option { Smoker, PrivateVehicle, PrivateComputer, Television, Smartphone }
+
+enum FamilySituation {
   Isolated,
   SingleParentFamily,
   Couple,
-  CoupleWithChildren,
-  Smoker,
-  PrivateVehicle,
-  PrivateComputer,
-  Television,
-  Smartphone,
-  Worker,
-  Insurance,
-  OCMW,
-  Unemployment
+  CoupleWithChildren
 }
 
-enum Situation { FamilySituation, FinancialSituation, OptionSituation }
+enum ProfessionalSituation { Worker, Insurance, OCMW, Unemployment }

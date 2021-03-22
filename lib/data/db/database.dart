@@ -24,19 +24,23 @@ class SqfliteDb {
 
     db = await openDatabase(path, version: 1);
 
+    await db.execute(requests.createFinancialSituations);
     await db.execute(requests.createChoices);
     await db.execute(requests.createEvents);
-    await db.execute(requests.createOptions);
+    //await db.execute(requests.createOptions);
     await db.execute(requests.createDailySituations);
     await db.execute(requests.createDailySituationsChoices);
-    await db.execute(requests.createAdditionalCharges);
+    await db.execute(requests.createFinancialChoiceCosts);
+    //await db.execute(requests.createAdditionalCharges);
 
+    await db.rawInsert(requests.insertFinancialSituations);
     await db.rawInsert(requests.insertChoices);
     await db.rawInsert(requests.insertEvents);
-    await db.rawInsert(requests.insertOptions);
+    //await db.rawInsert(requests.insertOptions);
     await db.rawInsert(requests.insertDailySituations);
     await db.rawInsert(requests.insertDailySituationChoices);
-    await db.rawInsert(requests.insertAdditionalCharges);
+    await db.rawInsert(requests.insertFinancialChoiceCost);
+    //await db.rawInsert(requests.insertAdditionalCharges);
   }
 
   Future<void> closeDb() async => await db.close();

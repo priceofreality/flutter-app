@@ -9,9 +9,21 @@ class DataProvider {
 
   static SqfliteDb sqlfliteDb = SqfliteDb();
 
+  Future<List<Map<String, dynamic>>> loadFinancialSituations() async {
+    List<Map<String, dynamic>> query =
+        await sqlfliteDb.db.query('financial_situations');
+    return query;
+  }
+
   Future<List<Map<String, dynamic>>> loadDailySituations() async {
     List<Map<String, dynamic>> query =
         await sqlfliteDb.db.query('daily_situations');
+    return query;
+  }
+
+  Future<List<Map<String, dynamic>>> loadFinancialChoicesCost() async {
+    List<Map<String, dynamic>> query =
+        await sqlfliteDb.db.query('financial_choice_costs');
     return query;
   }
 

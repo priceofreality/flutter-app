@@ -4,16 +4,16 @@ class Choice extends Equatable {
   final int id;
   final String label;
   final bool concludes;
-  double minCost;
-  final double maxCost;
   final int unlock;
+  double minCost;
+  double? maxCost;
 
   Choice(
       {required this.id,
       required this.label,
       required this.concludes,
       required this.minCost,
-      required this.maxCost,
+      this.maxCost,
       required this.unlock});
 
   factory Choice.fromTuple(

@@ -1,25 +1,31 @@
 import 'dart:async';
 
-import 'package:projet4/data/db/options.dart';
+import 'package:projet4/data/db/options.dart' as options;
 import 'package:projet4/data/models/additional_charge.dart';
-import 'package:projet4/data/models/family_situation.dart';
 import 'package:projet4/data/models/option_situation.dart';
-import 'package:projet4/data/models/user.dart';
 import 'package:projet4/data/providers/provider.dart';
 import 'package:projet4/data/models/daily_situation.dart';
 import 'package:projet4/data/models/financial_situation.dart';
 import 'package:projet4/data/models/choice.dart';
+import 'package:projet4/data/models/financial_choice_cost.dart';
 
 class GameRepository {
   List<FinancialSituation> _financialSituations = [];
-  List<FamilySituation> _familySituations = [];
   List<OptionSituation> _optionSituations = [];
 
   Map<int, List<DailySituation>> _dailySituationsPerDay = {};
   Map<int, DailySituation> _lockedDailySituations = {};
 
+  // dailySituation => daily_situation_choices
   Map<int, List<Choice>> _choicesOfDailySituation = {};
-  Map<Choice, Map<Option, AdditionalCharge>> _additionalChargesOfChoice = {};
+
+  //dailySituationChoice => financialId => cout
+  Map<int, Map<int, FinancialChoiceCost>> _financialChoicesCosts = {};
+
+  /* ITERATION 3
+  Map<Choice, Map<options.Option, AdditionalCharge>>
+      _additionalChargesOfChoice = {};
+  */
 
   int _maxDay = -1;
 
@@ -32,19 +38,29 @@ class GameRepository {
   GameRepository._internal();
 
   Future<void> loadRepository() async {
+    final futureFinancialSituations = _dataProvider.loadFinancialSituations();
+    final futureFinancialChoiceCosts = _dataProvider.loadFinancialChoicesCost();
     final futureChoices = _dataProvider.loadChoices();
     final futureEvents = _dataProvider.loadEvents();
     final futureDailySituations = _dataProvider.loadChoices();
     final futureOptions = _dataProvider.loadOptions();
     final futureDailySituationChoices = _dataProvider.loadChoices();
-    final futureAdditionalCharges = _dataProvider.loadAdditionalCharges();
 
+    /* ITERATION 3
+    final futureAdditionalCharges = _dataProvider.loadAdditionalCharges();
+    */
+
+    final financialSituationsSql = await futureFinancialSituations;
+    final financialChoiceCostsSql = await futureFinancialChoiceCosts;
     final choicesSql = await futureChoices;
     final eventsSql = await futureEvents;
     final dailySituationsSql = await futureDailySituations;
     final dailySituationchoicesSql = await futureDailySituationChoices;
     final optionsSql = await futureOptions;
+
+    /* ITERATION 3
     final additionalChargesSql = await futureAdditionalCharges;
+    */
 
     Map<int, String> events = Map.fromIterable(eventsSql,
         key: (e) => e['id'], value: (e) => e['label']);
@@ -56,13 +72,15 @@ class GameRepository {
         .map((e) => DailySituation.fromTuple(e, events))
         .toList();
 
+    /*
     for (var option in optionsSql) {
-      if (option['situation'] == Situation.FamilySituation)
-        _familySituations.add(FamilySituation.fromTuple(option));
-      else if (option['situation'] == Situation.FinancialSituation)
-        _financialSituations.add(FinancialSituation.fromTuple(option));
-      else if (option['situation'] == Situation.OptionSituation)
-        _optionSituations.add(OptionSituation.fromTuple(option));
+      _optionSituations.add(OptionSituation.fromTuple(option));
+    }
+    */
+
+    for (var financialSituation in financialSituationsSql) {
+      _financialSituations
+          .add(FinancialSituation.fromTuple(financialSituation));
     }
 
     for (var daily in dailySituations) {
@@ -76,12 +94,18 @@ class GameRepository {
       }
     }
 
+    Map<int, Map<int, Choice>> dailySituationChoicesMap = {};
     for (var choice in dailySituationchoicesSql) {
+      Choice choiceInstance = Choice.fromTuple(choice, choices);
+      dailySituationChoicesMap.putIfAbsent(choice['dailySituation'], () => {});
+      dailySituationChoicesMap[choice['dailySituation']]![choice['choice']] =
+          choiceInstance;
+
       _choicesOfDailySituation.putIfAbsent(choice['daily_situation'], () => []);
-      _choicesOfDailySituation[choice['daily_situation']]!
-          .add(Choice.fromTuple(choice, choices));
+      _choicesOfDailySituation[choice['daily_situation']]!.add(choiceInstance);
     }
 
+    /* ITERATION 3
     for (var charge in additionalChargesSql) {
       List<Choice> tmp = _choicesOfDailySituation[charge['daily_situation']]!;
       for (var choice in tmp) {
@@ -92,6 +116,28 @@ class GameRepository {
         }
       }
     }
+    */
+    /*
+      financial_situation INTEGER NOT NULL,
+      choice INTEGER NOT NULL,
+      daily_situation INTEGER NOT NULL,
+      cost_min DOUBLE NOT NULL,
+      cost_max DOUBLE,
+      PRIMARY KEY (choice, financial_situation)
+    */
+    //_financialChoicesCosts
+
+    // daily Sit -> Choice -> dailySituationChoice
+    for (var cost in financialChoiceCostsSql) {
+      _financialChoicesCosts.putIfAbsent(cost['choice'], () => {});
+      Choice choice =
+          dailySituationChoicesMap[cost['daily_situation']]![cost['choice']]!;
+
+      _financialChoicesCosts.putIfAbsent(choice.id, () => {});
+      _financialChoicesCosts[choice.id]![cost['financial_situation']] =
+          FinancialChoiceCost(
+              minCost: cost['cost_min'], maxCost: cost['cost_max']);
+    }
   }
 
   void unlockDailySituation(Choice choice) {
@@ -99,42 +145,62 @@ class GameRepository {
     _dailySituationsPerDay[unlocked.day]!.add(unlocked);
   }
 
+  /* ITERATION 3
   void unlockDailySituationByOptions(User user) {
     for (var unlocked in _lockedDailySituations.values) {
-      for (var option in Option.values) {
-        if (user.status & Option.Isolated.index == option.index) {
+      for (var option in options.FamilySituation.values) {
+        if (user.status & options.FamilySituation.Isolated.index ==
+            option.index) {
           _dailySituationsPerDay[unlocked.day]!.add(unlocked);
         }
-        if (user.status & Option.SingleParentFamily.index == option.index) ;
+        if (user.status & options.FamilySituation.SingleParentFamily.index ==
+            option.index) ;
         //TODO
       }
     }
   }
+  */
 
   List<DailySituation>? getDailySituationsOfDay(int day) =>
       _dailySituationsPerDay[day];
 
   List<Choice> getChoicesOfDailySituation(
+      int financialSituation, int dailysituation) {
+    for (var choice in _choicesOfDailySituation[dailysituation]!) {
+      FinancialChoiceCost financialChoiceCost =
+          _financialChoicesCosts[choice]![financialSituation]!;
+      choice.minCost = financialChoiceCost.minCost;
+      choice.maxCost = financialChoiceCost.maxCost;
+    }
+
+    return _choicesOfDailySituation[dailysituation]!;
+  }
+
+  /* ITERATION 3
+  List<Choice> getChoicesOfDailySituation(
     User user,
     int dailysituation,
   ) {
     for (var choice in _choicesOfDailySituation[dailysituation]!) {
-      for (var option in Option.values) {
-        if (user.status & Option.Isolated.index == option.index) {
+      for (var option in options.FamilySituation.values) {
+        if (user.status & options.FamilySituation.Isolated.index ==
+            option.index) {
           double charge = _additionalChargesOfChoice[choice]![option]!.charge;
           choice.minCost += charge;
         }
-        if (user.status & Option.SingleParentFamily.index == option.index) ;
+        if (user.status & options.FamilySituation.SingleParentFamily.index ==
+            option.index) ;
         //TODO
       }
     }
 
     return _choicesOfDailySituation[dailysituation]!;
   }
+  */
 
-  List<FamilySituation> get familySituations => _familySituations;
+  //List<FamilySituation> get familySituations => _familySituations;
 
   List<FinancialSituation> get financialSituations => _financialSituations;
 
-  List<OptionSituation> get optionSituations => _optionSituations;
+//  List<OptionSituation> get optionSituations => _optionSituations;
 }
