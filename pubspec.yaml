@@ -37,8 +37,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_native_splash: ^1.1.4+1
-  flutter_launcher_icons:
+  flutter_native_splash: ^0.3.2
+  flutter_launcher_icons: ^0.8.0
+  firebase_core: ^1.0.1
+  firebase_crashlytics: ^1.0.0
+
 
 
 flutter_native_splash:

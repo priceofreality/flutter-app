@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "24091529417",
+    "project_id": "la-galette-de-ble",
+    "storage_bucket": "la-galette-de-ble.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24091529417:android:cb749ace2e9c641feebd18",
+        "android_client_info": {
+          "package_name": "com.projet4.la_galette_de_ble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24091529417-r5ft4j0tsceqn1o0jeafqu3qbvgh3ahg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpGmZ9Q0YFFPVEeEMFmgqIIw1EV5L3cQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24091529417-r5ft4j0tsceqn1o0jeafqu3qbvgh3ahg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
