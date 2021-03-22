@@ -11,4 +11,13 @@ class FinancialSituationCubit extends Cubit<FinancialSituationState> {
 
   void emitFinancialSituation(FinancialSituation financialSituation) =>
       emit(FinancialSituationState(financialSituation, []));
+
+  void emitSelectFinancialSituation(FinancialSituation financialSituation) =>
+      emit(FinancialSituationState(
+          financialSituation, state.financialSituations));
+
+  List<FinancialSituation> get financialSituations =>
+      gameRepository.financialSituations;
+
+  emitReset() => emit(FinancianSituationInitialState());
 }

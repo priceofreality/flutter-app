@@ -7,4 +7,8 @@ class DataInit {
     await GameRepository().loadRepository();
     //await SqfliteDb().closeDb();
   }
+
+  static Future<void> reloadGameAssets() async {
+    await GameRepository().loadRepository();
+  }
 }

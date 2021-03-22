@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
           builder: (context, state) {
             if (state is GameFinishedState) return EndGamePage();
             if (state is GameRunningState) return DailySituationPage();
+
             return StartGamePage();
           },
         ),

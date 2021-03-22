@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projet4/data/models/financial_situation.dart';
+import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
 import 'package:projet4/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projet4/presentation/widgets/dot_indicator.dart';
@@ -14,7 +16,7 @@ class StartGamePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         controller: controller,
         children: [
-          FamilySituationView(),
+          //FamilySituationView(),
           FinancialSituationView(),
           OptionsView(),
         ],
@@ -26,6 +28,7 @@ class StartGamePage extends StatelessWidget {
   }
 }
 
+/*
 enum Test { A, B }
 
 class FamilySituationView extends StatefulWidget {
@@ -89,36 +92,36 @@ class _FamilySituationViewState extends State<FamilySituationView> {
     );
   }
 }
-
+*/
 class FinancialSituationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GridView.count(
-        padding: EdgeInsets.symmetric(horizontal: 14.0),
-        shrinkWrap: true,
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        children: [
-          ElevatedButton(
-            child: Text('MUtuelle'),
-            onPressed: null,
+    return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
+      builder: (context, state) {
+        return Center(
+          child: GridView.count(
+            padding: EdgeInsets.symmetric(horizontal: 14.0),
+            shrinkWrap: true,
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            children: context
+                .read<FinancialSituationCubit>()
+                .financialSituations
+                .map(
+                  (financialSituation) => GridButton<FinancialSituation?>(
+                    child: Text(financialSituation.label),
+                    value: financialSituation,
+                    groupValue: state.selected,
+                    onChanged: (newState) => context
+                        .read<FinancialSituationCubit>()
+                        .emitSelectFinancialSituation(newState!),
+                  ),
+                )
+                .toList(),
           ),
-          ElevatedButton(
-            child: Text('salaire bas'),
-            onPressed: null,
-          ),
-          ElevatedButton(
-            child: Text('cpAS'),
-            onPressed: null,
-          ),
-          ElevatedButton(
-            child: Text('ss'),
-            onPressed: null,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

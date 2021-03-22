@@ -67,7 +67,7 @@ class _SummaryPageState extends State<SummaryPage> {
           alignment: Alignment.bottomRight,
           padding: EdgeInsets.only(right: 20.0),
           child: Text(
-            '$budget€',
+            '${budget.toStringAsFixed(2)}€',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           ),
         );

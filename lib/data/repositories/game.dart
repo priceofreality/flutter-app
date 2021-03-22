@@ -10,24 +10,24 @@ import 'package:projet4/data/models/choice.dart';
 import 'package:projet4/data/models/financial_choice_cost.dart';
 
 class GameRepository {
-  List<FinancialSituation> _financialSituations = [];
-  List<OptionSituation> _optionSituations = [];
+  late List<FinancialSituation> _financialSituations;
+  late List<OptionSituation> _optionSituations;
 
-  Map<int, List<DailySituation>> _dailySituationsPerDay = {};
-  Map<int, DailySituation> _lockedDailySituations = {};
+  late Map<int, List<DailySituation>> _dailySituationsPerDay;
+  late Map<int, DailySituation> _lockedDailySituations;
 
   // dailySituation => daily_situation_choices
-  Map<int, List<Choice>> _choicesOfDailySituation = {};
+  late Map<int, List<Choice>> _choicesOfDailySituation;
 
   //dailySituationChoice => financialId => cout
-  Map<int, Map<int, FinancialChoiceCost>> _financialChoicesCosts = {};
+  late Map<int, Map<int, FinancialChoiceCost>> _financialChoicesCosts;
 
   /* ITERATION 3
   Map<Choice, Map<options.Option, AdditionalCharge>>
       _additionalChargesOfChoice = {};
   */
 
-  int _maxDay = -1;
+  int maxDay = -1;
 
   DataProvider _dataProvider = DataProvider();
 
@@ -38,13 +38,21 @@ class GameRepository {
   GameRepository._internal();
 
   Future<void> loadRepository() async {
+    _financialSituations = [];
+    _optionSituations = [];
+    _dailySituationsPerDay = {};
+    _lockedDailySituations = {};
+    _choicesOfDailySituation = {};
+    _financialChoicesCosts = {};
+
     final futureFinancialSituations = _dataProvider.loadFinancialSituations();
     final futureFinancialChoiceCosts = _dataProvider.loadFinancialChoicesCost();
     final futureChoices = _dataProvider.loadChoices();
     final futureEvents = _dataProvider.loadEvents();
-    final futureDailySituations = _dataProvider.loadChoices();
-    final futureOptions = _dataProvider.loadOptions();
-    final futureDailySituationChoices = _dataProvider.loadChoices();
+    final futureDailySituations = _dataProvider.loadDailySituations();
+    //final futureOptions = _dataProvider.loadOptions();
+    final futureDailySituationChoices =
+        _dataProvider.loadDailySituationChoices();
 
     /* ITERATION 3
     final futureAdditionalCharges = _dataProvider.loadAdditionalCharges();
@@ -56,7 +64,7 @@ class GameRepository {
     final eventsSql = await futureEvents;
     final dailySituationsSql = await futureDailySituations;
     final dailySituationchoicesSql = await futureDailySituationChoices;
-    final optionsSql = await futureOptions;
+    //final optionsSql = await futureOptions;
 
     /* ITERATION 3
     final additionalChargesSql = await futureAdditionalCharges;
@@ -84,7 +92,7 @@ class GameRepository {
     }
 
     for (var daily in dailySituations) {
-      if (daily.day > _maxDay) _maxDay = daily.day;
+      if (daily.day > maxDay) maxDay = daily.day;
 
       if (daily.locked) {
         _lockedDailySituations[daily.id] = daily;
@@ -97,10 +105,18 @@ class GameRepository {
     Map<int, Map<int, Choice>> dailySituationChoicesMap = {};
     for (var choice in dailySituationchoicesSql) {
       Choice choiceInstance = Choice.fromTuple(choice, choices);
-      dailySituationChoicesMap.putIfAbsent(choice['dailySituation'], () => {});
-      dailySituationChoicesMap[choice['dailySituation']]![choice['choice']] =
-          choiceInstance;
-
+      dailySituationChoicesMap.putIfAbsent(choice['daily_situation'], () => {});
+      if (dailySituationChoicesMap[choice['daily_situation']]![
+              choice['choice']] !=
+          null) {
+        dailySituationChoicesMap[choice['daily_situation']]![choice['choice']]!
+            .addUnlock(choice['unlock_daily_situation']);
+        choiceInstance = dailySituationChoicesMap[choice['daily_situation']]![
+            choice['choice']]!;
+      } else {
+        dailySituationChoicesMap[choice['daily_situation']]![choice['choice']] =
+            choiceInstance;
+      }
       _choicesOfDailySituation.putIfAbsent(choice['daily_situation'], () => []);
       _choicesOfDailySituation[choice['daily_situation']]!.add(choiceInstance);
     }
@@ -141,8 +157,14 @@ class GameRepository {
   }
 
   void unlockDailySituation(Choice choice) {
-    DailySituation unlocked = _lockedDailySituations[choice.unlock]!;
-    _dailySituationsPerDay[unlocked.day]!.add(unlocked);
+    if (choice.unlockDailySituation != null) {
+      for (int unlock in choice.unlockDailySituation!) {
+        DailySituation unlocked = _lockedDailySituations[unlock]!;
+
+        _dailySituationsPerDay.putIfAbsent(unlocked.day, () => []);
+        _dailySituationsPerDay[unlocked.day]!.add(unlocked);
+      }
+    }
   }
 
   /* ITERATION 3
@@ -164,16 +186,21 @@ class GameRepository {
   List<DailySituation>? getDailySituationsOfDay(int day) =>
       _dailySituationsPerDay[day];
 
-  List<Choice> getChoicesOfDailySituation(
+  Set<Choice> getChoicesOfDailySituation(
       int financialSituation, int dailysituation) {
     for (var choice in _choicesOfDailySituation[dailysituation]!) {
-      FinancialChoiceCost financialChoiceCost =
-          _financialChoicesCosts[choice]![financialSituation]!;
-      choice.minCost = financialChoiceCost.minCost;
-      choice.maxCost = financialChoiceCost.maxCost;
+      if (_financialChoicesCosts[choice.id] != null) {
+        if (_financialChoicesCosts[choice.id]![financialSituation] != null) {
+          FinancialChoiceCost financialChoiceCost =
+              _financialChoicesCosts[choice.id]![financialSituation]!;
+
+          choice.minCost = financialChoiceCost.minCost;
+          choice.maxCost = financialChoiceCost.maxCost;
+        }
+      }
     }
 
-    return _choicesOfDailySituation[dailysituation]!;
+    return _choicesOfDailySituation[dailysituation]!.toSet();
   }
 
   /* ITERATION 3

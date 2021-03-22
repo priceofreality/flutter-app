@@ -18,7 +18,7 @@ class DailySituation extends Equatable {
           id: tuple['id'],
           day: tuple['day'],
           event: events[tuple['event']]!,
-          locked: tuple['locked']);
+          locked: tuple['locked'] == 1);
 
   @override
   List<Object> get props => [id];

@@ -27,14 +27,17 @@ class MyApp extends StatelessWidget {
   final AppRouter _appRouter = AppRouter();
 
   final ChoiceCubit choiceCubit = ChoiceCubit();
+
   final FinancialSituationCubit financialSituationCubit =
       FinancialSituationCubit();
+
   final TransactionCubit transactionCubit = TransactionCubit();
 
   late final DailySituationCubit dailySituationCubit = DailySituationCubit(
       choiceCubit: choiceCubit,
       financialSituationCubit: financialSituationCubit,
       transactionCubit: transactionCubit);
+
   late final GameCubit gameCubit =
       GameCubit(dailySituationCubit: dailySituationCubit);
 
@@ -83,13 +86,16 @@ class MyApp extends StatelessWidget {
             create: (_) => gameCubit,
           ),
           BlocProvider(
+            create: (_) => financialSituationCubit,
+          ),
+          BlocProvider(
             create: (_) => dailySituationCubit,
           ),
           BlocProvider(
-            create: (_) => choiceCubit,
+            create: (_) => transactionCubit,
           ),
           BlocProvider(
-            create: (_) => financialSituationCubit,
+            create: (_) => choiceCubit,
           ),
         ],
         child: HomePage(),
