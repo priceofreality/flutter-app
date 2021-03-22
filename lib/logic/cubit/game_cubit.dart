@@ -1,22 +1,30 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:projet4/data/repositories/game.dart';
 import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
-import 'package:projet4/logic/cubit_state.dart';
 
 part 'game_state.dart';
 
 class GameCubit extends Cubit<GameState> {
+  static final GameRepository gameRepository = GameRepository();
   final DailySituationCubit dailySituationCubit;
   late StreamSubscription _dailySituationSubscription;
 
   GameCubit({required this.dailySituationCubit}) : super(GameInitialState()) {
     _dailySituationSubscription =
-        dailySituationCubit.listen((dailySituationState) {
-      if (dailySituationState.type == DailySituationStateType.Finished) {
+        dailySituationCubit.stream.listen((dailySituationState) {
+      if (dailySituationState is DailySituationFinishedState) {
         emit(GameFinishedState());
       }
     });
+  }
+
+  void emitStartGame() {
+    //add selections
+    dailySituationCubit.emitStart();
+    emit(GameRunningState());
   }
 
   void emitNewGame() {

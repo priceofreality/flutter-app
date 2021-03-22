@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:projet4/data/db/database.dart';
 
 class DataProvider {
   static final DataProvider _instance = DataProvider._internal();
@@ -7,18 +7,50 @@ class DataProvider {
 
   DataProvider._internal();
 
-  Future<String> loadFinancialSituations() async =>
-      await rootBundle.loadString('lib/data/db/financial_situations.json');
+  static SqfliteDb sqlfliteDb = SqfliteDb();
 
-  Future<String> loadDailySituations() async =>
-      await rootBundle.loadString('lib/data/db/daily_situations.json');
+  Future<List<Map<String, dynamic>>> loadFinancialSituations() async {
+    List<Map<String, dynamic>> query =
+        await sqlfliteDb.db.query('financial_situations');
+    return query;
+  }
 
-  Future<String> loadChoices() async =>
-      await rootBundle.loadString('lib/data/db/choices.json');
+  Future<List<Map<String, dynamic>>> loadDailySituations() async {
+    List<Map<String, dynamic>> query =
+        await sqlfliteDb.db.query('daily_situations');
+    return query;
+  }
 
-  Future<String> loadChoicesSituations() async =>
-      await rootBundle.loadString('lib/data/db/choice_daily_situation.json');
+  Future<List<Map<String, dynamic>>> loadFinancialChoicesCost() async {
+    List<Map<String, dynamic>> query =
+        await sqlfliteDb.db.query('financial_choice_costs');
+    return query;
+  }
 
-  Future<String> loadEvents() async =>
-      await rootBundle.loadString('lib/data/db/events.json');
+  Future<List<Map<String, dynamic>>> loadDailySituationChoices() async {
+    List<Map<String, dynamic>> query =
+        await sqlfliteDb.db.query('daily_situation_choices');
+    return query;
+  }
+
+  /*Future<List<Map<String, dynamic>>> loadAdditionalCharges() async {
+    List<Map<String, dynamic>> query =
+        await sqlfliteDb.db.query('additional_charges');
+    return query;
+  }
+*/
+  Future<List<Map<String, dynamic>>> loadChoices() async {
+    List<Map<String, dynamic>> query = await sqlfliteDb.db.query('choices');
+    return query;
+  }
+
+  Future<List<Map<String, dynamic>>> loadEvents() async {
+    List<Map<String, dynamic>> query = await sqlfliteDb.db.query('events');
+    return query;
+  }
+/*
+  Future<List<Map<String, dynamic>>> loadOptions() async {
+    List<Map<String, dynamic>> query = await sqlfliteDb.db.query('options');
+    return query;
+  }*/
 }

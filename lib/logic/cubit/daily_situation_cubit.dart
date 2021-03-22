@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:projet4/data/init.dart';
 import 'package:projet4/data/models/daily_situation.dart';
+import 'package:projet4/data/models/financial_situation.dart';
 import 'package:projet4/data/repositories/game.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
+import 'package:projet4/logic/cubit/transaction_cubit.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
-import 'package:projet4/logic/cubit_state.dart';
 
 part 'daily_situation_state.dart';
 
@@ -13,82 +15,115 @@ class DailySituationCubit extends Cubit<DailySituationState> {
 
   final ChoiceCubit choiceCubit;
   final FinancialSituationCubit financialSituationCubit;
+  final TransactionCubit transactionCubit;
+
+  late int financialSituationId;
 
   int _day = 1;
-  int _index = 0;
+  int _currentOfDay = 0;
 
-  DailySituationCubit(
-      {required this.choiceCubit, required this.financialSituationCubit})
-      : super(DailySituationState(gameRepository.dailySituations[1]!,
-            gameRepository.dailySituations[1]![0])) {
-    choiceCubit.emitNewChoices(gameRepository.dailySituations[1]![0].choices);
+  DailySituationCubit({
+    required this.choiceCubit,
+    required this.financialSituationCubit,
+    required this.transactionCubit,
+  }) : super(DailySituationState(gameRepository.getDailySituationsOfDay(1)!,
+            gameRepository.getDailySituationsOfDay(1)![0]));
+
+  emitStart() {
+    transactionCubit
+        .emitBudget(financialSituationCubit.state.selected!.initialBudget);
+
+    financialSituationId = financialSituationCubit.state.selected!.id;
+
+    choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
+        financialSituationId,
+        gameRepository.getDailySituationsOfDay(1)![0].id));
   }
 
-  void emitNextDailySituations() {
-    if (state.current.id == 9) {
-      _day = 1;
-      _index = 0;
-      emit(DailySituationFinishedState());
+  void _resetIndexes() {
+    _day = 1;
+    _currentOfDay = 0;
+  }
 
+  /*void emitFinancialSituation(FinancialSituation financialSituation) =>
+      financialSituationCubit.emitFinancialSituation(financialSituation);*/
+
+  void emitNextDailySituation() {
+    final dailySituation = state.current;
+    final choice = choiceCubit.state.selected!;
+
+    //if choice finishes game
+    if (choice.concludes) {
+      _resetIndexes();
+      emit(DailySituationFinishedState());
       return;
     }
 
-    if (++_index >= state.dailySituations.length) {
-      _index = 0;
+    gameRepository.unlockDailySituation(choice);
 
-      gameRepository.unlockDailySituation(
-          choiceCubit.state.selected!.id, state.current.id);
+    final dailySituations = _getSameDayDailySituations();
 
+    //new day
+    if (++_currentOfDay >= dailySituations.length) {
+      _currentOfDay = 0;
       final dailySituations = _getNextDayDailySituations();
 
-      if (dailySituations == null ||
-          financialSituationCubit.state.financialSituation.budget <= 0) {
-        _day = 1;
-        _index = 0;
-        emit(DailySituationFinishedState());
+      if (dailySituations == null) {
+        _resetIndexes();
 
+        transactionCubit.emitTransaction(dailySituation, choice);
+
+        emit(DailySituationFinishedState());
         return;
       }
 
-      financialSituationCubit.emitTransaction(
-          choiceCubit.state.selected!.cost != null
-              ? choiceCubit.state.selected!.cost!
-              : 0);
+      transactionCubit.emitTransaction(dailySituation, choice);
 
-      emit(DailySituationState(dailySituations, dailySituations[_index]));
-      choiceCubit.emitNewChoices(dailySituations[_index].choices);
+      emit(
+          DailySituationState(dailySituations, dailySituations[_currentOfDay]));
+      //choiceCubit.emitChoices(dailySituations[_currentOfDay].choices);
+
+      choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
+          financialSituationId,
+          gameRepository.getDailySituationsOfDay(_day)![_currentOfDay].id));
 
       return;
     }
 
-    financialSituationCubit.emitTransaction(
-        choiceCubit.state.selected!.cost != null
-            ? choiceCubit.state.selected!.cost!
-            : 0);
+    //same day
+
+    transactionCubit.emitTransaction(dailySituation, choice);
 
     emit(DailySituationState(
-        state.dailySituations, state.dailySituations[_index]));
+        dailySituations, state.dailySituations[_currentOfDay]));
+    //choiceCubit.emitChoices(state.current.choices);
 
-    choiceCubit.emitNewChoices(state.current.choices);
+    choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
+        financialSituationId,
+        gameRepository.getDailySituationsOfDay(_day)![_currentOfDay].id));
   }
 
   List<DailySituation>? _getNextDayDailySituations() {
     while (++_day <= gameRepository.maxDay) {
-      if (gameRepository.dailySituations.containsKey(_day))
-        return gameRepository.dailySituations[_day];
+      if (gameRepository.getDailySituationsOfDay(_day) != null)
+        return gameRepository.getDailySituationsOfDay(_day);
     }
 
     return null;
   }
 
+  List<DailySituation> _getSameDayDailySituations() {
+    return gameRepository.getDailySituationsOfDay(_day)!;
+  }
+
   void emitReset() {
-    DataInit.loadGameAssets().then((value) {
+    DataInit.reloadGameAssets().then((_) {
       choiceCubit.emitReset();
+
       financialSituationCubit.emitReset();
 
-      emit(DailySituationState(gameRepository.dailySituations[1]!,
-          gameRepository.dailySituations[1]![0]));
-      choiceCubit.emitNewChoices(gameRepository.dailySituations[1]![0].choices);
+      emit(DailySituationState(gameRepository.getDailySituationsOfDay(1)!,
+          gameRepository.getDailySituationsOfDay(1)![0]));
     });
   }
 }

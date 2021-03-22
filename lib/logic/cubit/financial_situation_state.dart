@@ -1,16 +1,13 @@
 part of 'financial_situation_cubit.dart';
 
-class FinancialSituationState extends Equatable {
-  late FinancialSituation financialSituation;
+class FinancialSituationState {
+  final FinancialSituation? selected;
 
-  FinancialSituationState(this.financialSituation);
+  final List<FinancialSituation> financialSituations;
 
-  FinancialSituationState.initial();
-
-  @override
-  List<Object> get props => [financialSituation];
+  FinancialSituationState(this.selected, this.financialSituations);
 }
 
 class FinancianSituationInitialState extends FinancialSituationState {
-  FinancianSituationInitialState() : super.initial();
+  FinancianSituationInitialState() : super(null, []);
 }
