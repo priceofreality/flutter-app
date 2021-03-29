@@ -3,8 +3,10 @@ import 'package:projet4/data/models/financial_situation.dart';
 import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
 import 'package:projet4/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projet4/presentation/widgets/custom_radio_button.dart';
 import 'package:projet4/presentation/widgets/dot_indicator.dart';
 import 'package:projet4/presentation/widgets/grid_button.dart';
+import 'package:projet4/data/db/options.dart';
 
 class StartGamePage extends StatelessWidget {
   final PageController controller = PageController(initialPage: 0);
@@ -99,23 +101,66 @@ class FinancialSituationView extends StatelessWidget {
     return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
       builder: (context, state) {
         return Center(
-          child: GridView.count(
+          child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 14.0),
             shrinkWrap: true,
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
             children: context
                 .read<FinancialSituationCubit>()
                 .financialSituations
                 .map(
-                  (financialSituation) => GridButton<FinancialSituation?>(
-                    child: Text(financialSituation.label),
+                  (financialSituation) =>
+                      /*GridButton<FinancialSituation?>(
+                    title: Text(
+                      financialSituation.familySituation.label,
+                      style: TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.w500),
+                    ),
+                    subtitle:
+                        Text(financialSituation.professionalSituation.label),
                     value: financialSituation,
                     groupValue: state.selected,
                     onChanged: (newState) => context
                         .read<FinancialSituationCubit>()
                         .emitSelectFinancialSituation(newState!),
+                  ),*/
+                      Container(
+                    margin: EdgeInsets.only(bottom: 10.0),
+                    decoration: BoxDecoration(
+                      color: financialSituation == state.selected
+                          ? Theme.of(context).buttonColor
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(30.0),
+                      border: Border.all(
+                        width: 2,
+                        color: Theme.of(context).buttonColor,
+                      ),
+                    ),
+                    child: CustomRadioListTile<FinancialSituation>(
+                      value: financialSituation,
+                      groupValue: state.selected,
+                      title: Text(
+                        financialSituation.familySituation.label,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          color: financialSituation == state.selected
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                      subtitle: Text(
+                        financialSituation.professionalSituation.label,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: financialSituation == state.selected
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                      onChanged: (newValue) => context
+                          .read<FinancialSituationCubit>()
+                          .emitSelectFinancialSituation(newValue!),
+                    ),
                   ),
                 )
                 .toList(),
@@ -129,8 +174,18 @@ class FinancialSituationView extends StatelessWidget {
 class OptionsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: () => context.read<GameCubit>().emitStartGame(),
-        child: Text('Start'));
+    final disable = context.watch<FinancialSituationCubit>().state.selected;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('options inc'),
+        TextButton(
+            onPressed: disable == null
+                ? null
+                : () => context.read<GameCubit>().emitStartGame(),
+            child: Text('Start'))
+      ],
+    );
   }
 }

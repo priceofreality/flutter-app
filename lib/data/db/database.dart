@@ -22,6 +22,7 @@ class SqfliteDb {
       await Directory(dbpath).create(recursive: true);
     } catch (_) {}
 
+    //DEBUG
     await databaseFactory.deleteDatabase(path);
 
     db = await openDatabase(path, version: 1);

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class GridButton<T> extends StatefulWidget {
-  final Widget child;
+  final Widget title;
+  final Widget subtitle;
   final T value;
   final T groupValue;
   final ValueChanged<T> onChanged;
@@ -15,7 +16,8 @@ class GridButton<T> extends StatefulWidget {
   }
 
   GridButton(
-      {required this.child,
+      {required this.title,
+      required this.subtitle,
       required this.value,
       required this.groupValue,
       required this.onChanged});
@@ -27,7 +29,7 @@ class GridButton<T> extends StatefulWidget {
 class _GridButtonState<T> extends State<GridButton<T>> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    /*return GestureDetector(
       onTap: () => widget._handleOnChanged(),
       child: Container(
         child: widget.child,
@@ -36,10 +38,26 @@ class _GridButtonState<T> extends State<GridButton<T>> {
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(
             width: widget._selected ? 3 : 0,
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).buttonColor,
           ),
         ),
       ),
+    );*/
+
+    return Container(
+      margin: EdgeInsets.only(bottom: 10.0),
+      decoration: BoxDecoration(
+        color: widget._selected ? Theme.of(context).buttonColor : Colors.white,
+        borderRadius: BorderRadius.circular(30.0),
+        border: Border.all(
+          width: 2,
+          color: Theme.of(context).buttonColor,
+        ),
+      ),
+      child: ListTile(
+          onTap: () => widget._handleOnChanged(),
+          title: widget.title,
+          subtitle: widget.subtitle),
     );
   }
 }

@@ -6,14 +6,14 @@ class FinancialSituation extends Equatable {
   final String label;
   final double initialBudget;
   final options.FamilySituation familySituation;
-  final options.ProfessionalSituation financialSituation;
+  final options.ProfessionalSituation professionalSituation;
 
   FinancialSituation(
       {required this.id,
       required this.label,
       required this.initialBudget,
       required this.familySituation,
-      required this.financialSituation});
+      required this.professionalSituation});
 
   factory FinancialSituation.fromTuple(Map<String, dynamic> tuple) =>
       FinancialSituation(
@@ -22,7 +22,7 @@ class FinancialSituation extends Equatable {
           initialBudget: tuple['budget'],
           familySituation:
               options.FamilySituation.values[tuple['familial_situation']],
-          financialSituation: options
+          professionalSituation: options
               .ProfessionalSituation.values[tuple['professional_situation']]);
 
   @override
