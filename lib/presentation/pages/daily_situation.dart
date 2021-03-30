@@ -48,57 +48,64 @@ class DailySituationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight:
-                MediaQuery.of(context).size.height - kToolbarHeight - 30.0,
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: ClipPath(
+              clipper: MyClipper(),
+              child: Container(
+                width: double.infinity,
+                height: 80,
+                child: TopBar(),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xff87CEEB),
+                        Color(0xff66c1e5),
+                      ]),
+                ),
+              ),
+            ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ClipPath(
-                clipper: MyClipper(),
-                child: Container(
-                  width: double.infinity,
-                  height: 80,
-                  child: TopBar(),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xff87CEEB),
-                          Color(0xff66c1e5),
-                        ]),
-                  ),
-                ),
+          SliverToBoxAdapter(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight:
+                    MediaQuery.of(context).size.height - kToolbarHeight - 200.0,
               ),
-              Event(eventPadding: eventPadding),
-              Padding(
-                padding: padding,
-                child: Container(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20.0),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Budget(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Event(eventPadding: eventPadding),
+                  SizedBox(height: 20.0),
+                  Padding(
+                    padding: padding,
+                    child: Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20.0),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Budget(),
+                          ),
+                          SizedBox(height: 20.0),
+                          Choices(),
+                        ],
                       ),
-                      SizedBox(height: 20.0),
-                      Choices(),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-              Padding(
+                  /* Padding(
                 padding: EdgeInsets.only(bottom: 14.0, top: 10.0),
                 child: NextButton(),
+              ),*/
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -224,20 +231,35 @@ class Choices extends StatelessWidget {
                     value: choice,
                     groupValue: state.selected,
                     onChanged: (newValue) {
+                      if (state.selected != null) return;
+
                       context.read<ChoiceCubit>().emitSelectChoice(newValue!);
                       context.read<TransactionCubit>().emitCost(
                           newValue.minCost == null ? 0 : newValue.minCost!);
+
+                      Future.delayed(Duration(milliseconds: 230)).then(
+                          (value) => context
+                              .read<DailySituationCubit>()
+                              .emitNextDailySituation());
                     },
                   ));
             } else {
               context.read<ChoiceCubit>().emitSelectChoice(choice);
-              return CustomSlider(
-                maxValue: -choice.maxCost!,
-                minValue: -choice.minCost!,
-                divisions: 10,
-                onChanged: (value) {
-                  context.read<TransactionCubit>().emitCost(-value);
-                },
+              return Column(
+                children: [
+                  CustomSlider(
+                    maxValue: -choice.maxCost!,
+                    minValue: -choice.minCost!,
+                    divisions: 10,
+                    onChanged: (value) {
+                      context.read<TransactionCubit>().emitCost(-value);
+                    },
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 14.0, top: 30.0),
+                    child: NextButton(),
+                  ),
+                ],
               );
             }
           }).toList(),
@@ -263,8 +285,8 @@ class NextButton extends StatelessWidget {
         ),
         onPressed: disable == null
             ? null
-            : () =>
-                context.read<DailySituationCubit>().emitNextDailySituation(),
+            : () => Future.delayed(Duration(milliseconds: 230)).then((value) =>
+                context.read<DailySituationCubit>().emitNextDailySituation()),
         child: Text(
           AppLocalizations.of(context)!.next.toUpperCase(),
           style: TextStyle(color: Colors.white),
