@@ -18,7 +18,6 @@ class StartGamePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         controller: controller,
         children: [
-          //FamilySituationView(),
           FinancialSituationView(),
           OptionsView(),
         ],
@@ -30,141 +29,92 @@ class StartGamePage extends StatelessWidget {
   }
 }
 
-/*
-enum Test { A, B }
-
-class FamilySituationView extends StatefulWidget {
-  @override
-  _FamilySituationViewState createState() => _FamilySituationViewState();
-}
-
-class _FamilySituationViewState extends State<FamilySituationView> {
-  Test _test = Test.A;
-
+class FinancialSituationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GridView.count(
-        padding: EdgeInsets.symmetric(horizontal: 14.0),
-        shrinkWrap: true,
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        children: [
-          GridButton<Test>(
-            value: Test.A,
-            groupValue: _test,
-            onChanged: (newValue) {
-              setState(() {
-                _test = newValue;
-              });
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.person,
-                  size: 80,
-                ),
-                Text('Solo'),
-              ],
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        if (orientation == Orientation.portrait) {
+          final padding = EdgeInsets.symmetric(horizontal: 14.0);
+          return Center(
+            child: FinancialSituationList(
+              padding: padding,
             ),
-          ),
-          GridButton<Test>(
-            value: Test.B,
-            groupValue: _test,
-            onChanged: (newValue) {
-              setState(() {
-                _test = newValue;
-              });
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.people,
-                  size: 80,
-                ),
-                Text('Couple'),
-              ],
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+        final width = MediaQuery.of(context).size.width;
+        double horizontalPadding = width / 6;
+        final padding = EdgeInsets.only(
+          left: horizontalPadding,
+          right: horizontalPadding,
+          top: 30.0,
+          bottom: 10.0,
+        );
+        return FinancialSituationList(
+          padding: padding,
+        );
+      },
     );
   }
 }
-*/
-class FinancialSituationView extends StatelessWidget {
+
+class FinancialSituationList extends StatelessWidget {
+  final EdgeInsets padding;
+
+  FinancialSituationList({required this.padding});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
       builder: (context, state) {
-        return Center(
-          child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 14.0),
-            shrinkWrap: true,
-            children: context
-                .read<FinancialSituationCubit>()
-                .financialSituations
-                .map(
-                  (financialSituation) =>
-                      /*GridButton<FinancialSituation?>(
+        return ListView(
+          padding: padding,
+          shrinkWrap: true,
+          children: context
+              .read<FinancialSituationCubit>()
+              .financialSituations
+              .map(
+                (financialSituation) => Container(
+                  margin: EdgeInsets.only(bottom: 10.0),
+                  decoration: BoxDecoration(
+                    color: financialSituation == state.selected
+                        ? Theme.of(context).buttonColor
+                        : Colors.white,
+                    borderRadius: BorderRadius.circular(30.0),
+                    border: Border.all(
+                      width: 2,
+                      color: Theme.of(context).buttonColor,
+                    ),
+                  ),
+                  child: CustomRadioListTile<FinancialSituation>(
+                    value: financialSituation,
+                    groupValue: state.selected,
                     title: Text(
                       financialSituation.familySituation.label,
                       style: TextStyle(
-                          fontSize: 15.0, fontWeight: FontWeight.w500),
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w500,
+                        color: financialSituation == state.selected
+                            ? Colors.white
+                            : Colors.black,
+                      ),
                     ),
-                    subtitle:
-                        Text(financialSituation.professionalSituation.label),
-                    value: financialSituation,
-                    groupValue: state.selected,
-                    onChanged: (newState) => context
+                    subtitle: Text(
+                      financialSituation.professionalSituation.label,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: financialSituation == state.selected
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                    onChanged: (newValue) => context
                         .read<FinancialSituationCubit>()
-                        .emitSelectFinancialSituation(newState!),
-                  ),*/
-                      Container(
-                    margin: EdgeInsets.only(bottom: 10.0),
-                    decoration: BoxDecoration(
-                      color: financialSituation == state.selected
-                          ? Theme.of(context).buttonColor
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(30.0),
-                      border: Border.all(
-                        width: 2,
-                        color: Theme.of(context).buttonColor,
-                      ),
-                    ),
-                    child: CustomRadioListTile<FinancialSituation>(
-                      value: financialSituation,
-                      groupValue: state.selected,
-                      title: Text(
-                        financialSituation.familySituation.label,
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500,
-                          color: financialSituation == state.selected
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
-                      subtitle: Text(
-                        financialSituation.professionalSituation.label,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: financialSituation == state.selected
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
-                      onChanged: (newValue) => context
-                          .read<FinancialSituationCubit>()
-                          .emitSelectFinancialSituation(newValue!),
-                    ),
+                        .emitSelectFinancialSituation(newValue!),
                   ),
-                )
-                .toList(),
-          ),
+                ),
+              )
+              .toList(),
         );
       },
     );
