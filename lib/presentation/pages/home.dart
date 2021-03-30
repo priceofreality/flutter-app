@@ -5,6 +5,17 @@ import 'package:projet4/presentation/pages/daily_situation.dart';
 import 'package:projet4/presentation/pages/end_game.dart';
 import 'package:projet4/presentation/pages/start_game.dart';
 
+enum Action { NewGame }
+
+extension on Action {
+  String get label {
+    switch (this) {
+      case Action.NewGame:
+        return "New";
+    }
+  }
+}
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,13 +24,22 @@ class HomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).accentColor,
         title: Text('Galette de ble'),
         actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(Icons.more_vert),
-            ),
-          ),
+          PopupMenuButton<Action>(
+            onSelected: (value) {
+              switch (value) {
+                case Action.NewGame:
+                  return context.read<GameCubit>().emitNewGame();
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return Action.values.map((Action action) {
+                return PopupMenuItem<Action>(
+                  value: action,
+                  child: Text(action.label),
+                );
+              }).toList();
+            },
+          )
         ],
       ),
       body: SafeArea(
