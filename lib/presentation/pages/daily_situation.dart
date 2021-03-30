@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projet4/data/models/choice.dart';
+import 'package:projet4/data/models/daily_situation.dart';
 import 'package:projet4/logic/cubit/choice_cubit.dart';
 import 'package:projet4/logic/cubit/transaction_cubit.dart';
 import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
@@ -9,6 +10,40 @@ import 'package:projet4/presentation/widgets/custom_radio_button.dart';
 import 'package:projet4/presentation/widgets/custom_slider.dart';
 
 class DailySituationPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return OrientationBuilder(
+      builder: (conext, orientation) {
+        if (orientation == Orientation.portrait) {
+          final padding = EdgeInsets.symmetric(horizontal: 14.0);
+          final eventPadding =
+              EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0);
+          return DailySituationView(
+              padding: padding, eventPadding: eventPadding);
+        }
+        final width = MediaQuery.of(context).size.width;
+        double horizontalPadding = width / 6;
+        double event = width / 7;
+        final padding = EdgeInsets.only(
+          left: horizontalPadding,
+          right: horizontalPadding,
+          top: 30.0,
+          bottom: 10.0,
+        );
+        final eventPadding =
+            EdgeInsets.symmetric(vertical: 20.0, horizontal: event);
+        return DailySituationView(padding: padding, eventPadding: eventPadding);
+      },
+    );
+  }
+}
+
+class DailySituationView extends StatelessWidget {
+  final EdgeInsets padding;
+  final EdgeInsets eventPadding;
+
+  DailySituationView({required this.padding, required this.eventPadding});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,9 +75,9 @@ class DailySituationPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Event(),
+              Event(eventPadding: eventPadding),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14.0),
+                padding: padding,
                 child: Container(
                   child: Column(
                     children: [
@@ -109,13 +144,17 @@ class TopBar extends StatelessWidget {
 }
 
 class Event extends StatelessWidget {
+  final EdgeInsets eventPadding;
+
+  Event({required this.eventPadding});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DailySituationCubit, DailySituationState>(
         builder: (context, state) {
       return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+        padding: eventPadding,
         child: Text(
           state.current.event,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
