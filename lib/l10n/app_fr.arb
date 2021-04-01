@@ -1,5 +1,5 @@
 {
-  "title": "Galette de ble",
+  "title": "Price of Reality",
   "@title": {
     "description": "The title of the application"
   },
@@ -13,10 +13,27 @@
   },
   "next": "Suivant",
   "@next": {
-    "description": "Suivant"
+    "description": "Next"
   },
   "budget": "Budget",
   "@budget": {
     "description": "Budget of user"
+  },
+  "resume" : "Resumé de la partie",
+  "@resume" : {
+    "description": "Resume of the game"
+  },
+  "newgame" : "Nouvelle partie",
+  "@newgame" : {
+    "description": "New game"
+  },
+  "exit" : "Quitter",
+  "@exit" : {
+    "description": "Exit the game"
+  },
+  "start" : "Commencer",
+  "@start" : {
+    "description": "Start the game"
   }
+
 }

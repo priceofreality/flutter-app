@@ -5,6 +5,7 @@ import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
 import 'package:price_of_reality/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EndGamePage extends StatelessWidget {
   //TODO ADD COFNFETTIII
@@ -42,7 +43,7 @@ class EndGamePage extends StatelessWidget {
                       transactions:
                           context.read<TransactionCubit>().state.transactions)),
               child: Text(
-                'RESUME'.toUpperCase(),
+                AppLocalizations.of(context)!.resume.toUpperCase(),
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -58,7 +59,7 @@ class EndGamePage extends StatelessWidget {
               ),
               onPressed: () => context.read<GameCubit>().emitNewGame(),
               child: Text(
-                'NEW GAME'.toUpperCase(),
+                AppLocalizations.of(context)!.newgame.toUpperCase(),
                 style: TextStyle(color: Colors.white),
               ),
             ),

@@ -5,8 +5,8 @@ import 'package:price_of_reality/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:price_of_reality/presentation/widgets/custom_radio_button.dart';
 import 'package:price_of_reality/presentation/widgets/dot_indicator.dart';
-import 'package:price_of_reality/presentation/widgets/grid_button.dart';
 import 'package:price_of_reality/data/db/options.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartGamePage extends StatelessWidget {
   final PageController controller = PageController(initialPage: 0);
@@ -134,7 +134,7 @@ class OptionsView extends StatelessWidget {
             onPressed: disable == null
                 ? null
                 : () => context.read<GameCubit>().emitStartGame(),
-            child: Text('Start'))
+            child: Text(AppLocalizations.of(context)!.start))
       ],
     );
   }

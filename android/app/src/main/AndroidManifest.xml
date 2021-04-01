@@ -8,7 +8,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="Price of Reality"
-        android:roundIcon="@mipmap/ic_launcher">
+        android:roundIcon="@mipmap/priceofreality">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

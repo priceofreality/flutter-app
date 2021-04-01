@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Galette de Ble',
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.title,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         AppLocalizations.delegate,
