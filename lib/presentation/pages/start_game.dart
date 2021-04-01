@@ -129,12 +129,17 @@ class OptionsView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('options inc'),
-        TextButton(
-            onPressed: disable == null
-                ? null
-                : () => context.read<GameCubit>().emitStartGame(),
-            child: Text(AppLocalizations.of(context)!.start))
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 70.0),
+            shape: StadiumBorder(),
+            primary: Theme.of(context).accentColor,
+          ),
+          onPressed: disable == null
+              ? null
+              : () => context.read<GameCubit>().emitStartGame(),
+          child: Text(AppLocalizations.of(context)!.start.toUpperCase()),
+        ),
       ],
     );
   }

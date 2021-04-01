@@ -19,9 +19,13 @@
   "@budget": {
     "description": "Budget of user"
   },
-  "resume" : "Resumé de la partie",
-  "@resume" : {
-    "description": "Resume of the game"
+  "startingBudget": "Budget initial",
+  "@startingBudget": {
+    "description": "Starting budget"
+  },
+  "summary" : "Resumé de la partie",
+  "@summary" : {
+    "description": "Summary of the game"
   },
   "newgame" : "Nouvelle partie",
   "@newgame" : {
@@ -34,6 +38,9 @@
   "start" : "Commencer",
   "@start" : {
     "description": "Start the game"
+  },
+  "loading" : "Chargement",
+  "@loading" : {
+    "description": "Loading"
   }
-
 }

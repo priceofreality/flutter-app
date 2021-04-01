@@ -43,7 +43,7 @@ class EndGamePage extends StatelessWidget {
                       transactions:
                           context.read<TransactionCubit>().state.transactions)),
               child: Text(
-                AppLocalizations.of(context)!.resume.toUpperCase(),
+                AppLocalizations.of(context)!.summary.toUpperCase(),
                 style: TextStyle(color: Colors.white),
               ),
             ),
