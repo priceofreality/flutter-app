@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projet4/logic/cubit/game_cubit.dart';
-import 'package:projet4/presentation/pages/daily_situation.dart';
-import 'package:projet4/presentation/pages/end_game.dart';
-import 'package:projet4/presentation/pages/start_game.dart';
+import 'package:price_of_reality/logic/cubit/game_cubit.dart';
+import 'package:price_of_reality/presentation/pages/daily_situation.dart';
+import 'package:price_of_reality/presentation/pages/end_game.dart';
+import 'package:price_of_reality/presentation/pages/start_game.dart';
 
 enum Action { NewGame }
 

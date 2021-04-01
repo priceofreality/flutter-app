@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:projet4/data/models/financial_situation.dart';
-import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
-import 'package:projet4/logic/cubit/game_cubit.dart';
+import 'package:price_of_reality/data/models/financial_situation.dart';
+import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
+import 'package:price_of_reality/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projet4/presentation/widgets/custom_radio_button.dart';
-import 'package:projet4/presentation/widgets/dot_indicator.dart';
-import 'package:projet4/presentation/widgets/grid_button.dart';
-import 'package:projet4/data/db/options.dart';
+import 'package:price_of_reality/presentation/widgets/custom_radio_button.dart';
+import 'package:price_of_reality/presentation/widgets/dot_indicator.dart';
+import 'package:price_of_reality/presentation/widgets/grid_button.dart';
+import 'package:price_of_reality/data/db/options.dart';
 
 class StartGamePage extends StatelessWidget {
   final PageController controller = PageController(initialPage: 0);

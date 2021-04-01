@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projet4/presentation/pages/error.dart';
+import 'package:price_of_reality/presentation/pages/error.dart';
 
 class AppRouter {
   final pages = <String, Function>{};

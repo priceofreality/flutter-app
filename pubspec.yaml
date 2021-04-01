@@ -1,5 +1,5 @@
-name: projet4
-description: A new Flutter project.
+name: price_of_reality
+description: Mini game showing the price of reality.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.

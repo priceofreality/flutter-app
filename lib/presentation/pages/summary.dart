@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:collection/collection.dart";
-import 'package:projet4/data/models/summary.dart';
-import 'package:projet4/data/models/transaction.dart';
+import 'package:price_of_reality/data/models/summary.dart';
+import 'package:price_of_reality/data/models/transaction.dart';
 
 class SummaryPage extends StatefulWidget {
   Summary summary;

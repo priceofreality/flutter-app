@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:projet4/data/db/options.dart' as options;
-import 'package:projet4/data/models/additional_charge.dart';
-import 'package:projet4/data/models/option_situation.dart';
-import 'package:projet4/data/providers/provider.dart';
-import 'package:projet4/data/models/daily_situation.dart';
-import 'package:projet4/data/models/financial_situation.dart';
-import 'package:projet4/data/models/choice.dart';
-import 'package:projet4/data/models/financial_choice_cost.dart';
+import 'package:price_of_reality/data/db/options.dart' as options;
+import 'package:price_of_reality/data/models/additional_charge.dart';
+import 'package:price_of_reality/data/models/option_situation.dart';
+import 'package:price_of_reality/data/providers/provider.dart';
+import 'package:price_of_reality/data/models/daily_situation.dart';
+import 'package:price_of_reality/data/models/financial_situation.dart';
+import 'package:price_of_reality/data/models/choice.dart';
+import 'package:price_of_reality/data/models/financial_choice_cost.dart';
 
 class GameRepository {
   late List<FinancialSituation> _financialSituations;

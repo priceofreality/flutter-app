@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:projet4/data/models/transaction.dart';
+import 'package:price_of_reality/data/models/transaction.dart';
 
 class Summary extends Equatable {
   final double initialBudget;

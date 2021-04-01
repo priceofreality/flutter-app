@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import "package:path/path.dart";
-import 'package:projet4/data/db/requests.dart';
+import 'package:price_of_reality/data/db/requests.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqfliteDb {

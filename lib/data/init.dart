@@ -1,5 +1,5 @@
-import 'package:projet4/data/db/database.dart';
-import 'package:projet4/data/repositories/game.dart';
+import 'package:price_of_reality/data/db/database.dart';
+import 'package:price_of_reality/data/repositories/game.dart';
 
 class DataInit {
   static Future<void> loadGameAssets() async {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projet4/data/models/choice.dart';
-import 'package:projet4/data/models/daily_situation.dart';
-import 'package:projet4/logic/cubit/choice_cubit.dart';
-import 'package:projet4/logic/cubit/transaction_cubit.dart';
-import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
+import 'package:price_of_reality/data/models/choice.dart';
+import 'package:price_of_reality/data/models/daily_situation.dart';
+import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
+import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
+import 'package:price_of_reality/logic/cubit/daily_situation_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:projet4/presentation/widgets/custom_radio_button.dart';
-import 'package:projet4/presentation/widgets/custom_slider.dart';
+import 'package:price_of_reality/presentation/widgets/custom_radio_button.dart';
+import 'package:price_of_reality/presentation/widgets/custom_slider.dart';
 
 class DailySituationPage extends StatelessWidget {
   @override

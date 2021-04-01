@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:projet4/data/models/financial_situation.dart';
-import 'package:projet4/data/repositories/game.dart';
+import 'package:price_of_reality/data/models/financial_situation.dart';
+import 'package:price_of_reality/data/repositories/game.dart';
 
 part 'financial_situation_state.dart';
 

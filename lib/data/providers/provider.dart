@@ -1,4 +1,4 @@
-import 'package:projet4/data/db/database.dart';
+import 'package:price_of_reality/data/db/database.dart';
 
 class DataProvider {
   static final DataProvider _instance = DataProvider._internal();

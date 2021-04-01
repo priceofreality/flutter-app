@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:projet4/constants/routes.dart';
-import 'package:projet4/data/init.dart';
-import 'package:projet4/data/models/summary.dart';
-import 'package:projet4/data/models/transaction.dart';
-import 'package:projet4/logic/cubit/choice_cubit.dart';
-import 'package:projet4/logic/cubit/transaction_cubit.dart';
-import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
-import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
-import 'package:projet4/logic/cubit/game_cubit.dart';
-import 'package:projet4/presentation/pages/end_game.dart';
-import 'package:projet4/presentation/pages/error.dart';
-import 'package:projet4/presentation/pages/home.dart';
-import 'package:projet4/presentation/pages/summary.dart';
-import 'package:projet4/presentation/router/router.dart';
+import 'package:price_of_reality/constants/routes.dart';
+import 'package:price_of_reality/data/init.dart';
+import 'package:price_of_reality/data/models/summary.dart';
+import 'package:price_of_reality/data/models/transaction.dart';
+import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
+import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
+import 'package:price_of_reality/logic/cubit/daily_situation_cubit.dart';
+import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
+import 'package:price_of_reality/logic/cubit/game_cubit.dart';
+import 'package:price_of_reality/presentation/pages/end_game.dart';
+import 'package:price_of_reality/presentation/pages/error.dart';
+import 'package:price_of_reality/presentation/pages/home.dart';
+import 'package:price_of_reality/presentation/pages/summary.dart';
+import 'package:price_of_reality/presentation/router/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {

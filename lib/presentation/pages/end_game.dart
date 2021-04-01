@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:projet4/constants/routes.dart';
-import 'package:projet4/data/models/summary.dart';
-import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
-import 'package:projet4/logic/cubit/game_cubit.dart';
+import 'package:price_of_reality/constants/routes.dart';
+import 'package:price_of_reality/data/models/summary.dart';
+import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
+import 'package:price_of_reality/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projet4/logic/cubit/transaction_cubit.dart';
+import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
 
 class EndGamePage extends StatelessWidget {
   //TODO ADD COFNFETTIII

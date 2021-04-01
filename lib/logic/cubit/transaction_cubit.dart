@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:projet4/data/models/choice.dart';
-import 'package:projet4/data/models/daily_situation.dart';
-import 'package:projet4/data/models/financial_situation.dart';
-import 'package:projet4/data/models/transaction.dart';
-import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
+import 'package:price_of_reality/data/models/choice.dart';
+import 'package:price_of_reality/data/models/daily_situation.dart';
+import 'package:price_of_reality/data/models/financial_situation.dart';
+import 'package:price_of_reality/data/models/transaction.dart';
+import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
 
 part 'transaction_state.dart';
 
