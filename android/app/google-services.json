@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "24091529417",
-    "project_id": "la-galette-de-ble",
-    "storage_bucket": "la-galette-de-ble.appspot.com"
+    "project_number": "628500781998",
+    "project_id": "price-of-reality",
+    "storage_bucket": "price-of-reality.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:24091529417:android:cb749ace2e9c641feebd18",
+        "mobilesdk_app_id": "1:628500781998:android:9e34a0da8ff7e35741063f",
         "android_client_info": {
-          "package_name": "com.projet4.la_galette_de_ble"
+          "package_name": "com.projet4.price_of_reality"
         }
       },
       "oauth_client": [
         {
-          "client_id": "24091529417-r5ft4j0tsceqn1o0jeafqu3qbvgh3ahg.apps.googleusercontent.com",
+          "client_id": "628500781998-9a8km22kp5ksh8225gm9cmduuerqd0qc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDpGmZ9Q0YFFPVEeEMFmgqIIw1EV5L3cQA"
+          "current_key": "AIzaSyB23eWqStzKV0UlVr1H41sjB66ORmv3m-s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "24091529417-r5ft4j0tsceqn1o0jeafqu3qbvgh3ahg.apps.googleusercontent.com",
+              "client_id": "628500781998-9a8km22kp5ksh8225gm9cmduuerqd0qc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,4 +1,4 @@
-package com.example.projet4
+package com.projet4.price_of_reality
 
 import io.flutter.embedding.android.FlutterActivity
 
