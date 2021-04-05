@@ -1,4 +1,9 @@
-enum Option { Smoker, PrivateVehicle, PrivateComputer, Television, Smartphone }
+enum Option { 
+  Smoker, 
+  PrivateVehicle, 
+  PrivateComputer, 
+  Television, 
+  Smartphone }
 
 enum FamilySituation {
   Isolated,
@@ -22,7 +27,12 @@ extension FamilySituationModifier on FamilySituation {
   }
 }
 
-enum ProfessionalSituation { Worker, Insurance, OCMW, Unemployment }
+enum ProfessionalSituation { 
+  Worker, 
+  Insurance, 
+  OCMW, 
+  Unemployment 
+}
 
 extension ProfessionalSituationModifier on ProfessionalSituation {
   String get label {

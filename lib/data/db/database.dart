@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import "package:path/path.dart";
-import 'package:price_of_reality/data/db/requests.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/services.dart' show ByteData, rootBundle;
 
 class SqfliteDb {
   static final SqfliteDb _instance = SqfliteDb.internal();
@@ -14,38 +14,19 @@ class SqfliteDb {
   late Database db;
 
   Future<void> openDb() async {
-    String dbpath = await getDatabasesPath();
+  /*
+    String dbpath = 'lib/data/db/database.sqlite';
     String path = join(dbpath, 'database.db');
-    Requests requests = Requests();
 
     try {
       await Directory(dbpath).create(recursive: true);
     } catch (_) {}
-
+  */
     //DEBUG
-    await databaseFactory.deleteDatabase(path);
-
-    db = await openDatabase(path, version: 1);
-
-    await db.execute(requests.createFinancialSituations);
-    await db.execute(requests.createChoices);
-    await db.execute(requests.createEvents);
-    //await db.execute(requests.createOptions);
-    await db.execute(requests.createDailySituations);
-    await db.execute(requests.createDailySituationsChoices);
-    await db.execute(requests.createFinancialChoiceCosts);
-    //await db.execute(requests.createAdditionalCharges);
-
-    //await Future.delayed(Duration(seconds: 10));
-
-    await db.rawInsert(requests.insertChoices);
-    await db.rawInsert(requests.insertEvents);
-    //await db.rawInsert(requests.insertOptions);
-    await db.rawInsert(requests.insertDailySituations);
-    await db.rawInsert(requests.insertFinancialSituations);
-    await db.rawInsert(requests.insertDailySituationChoices);
-    await db.rawInsert(requests.insertFinancialChoiceCost);
-    //await db.rawInsert(requests.insertAdditionalCharges);
+    //await databaseFactory.deleteDatabase(path);
+    
+    //ByteData data = await rootBundle.load('lib/data/db/database.sqlite');
+    db = await openDatabase('lib/data/db/database.sqlite', version: 1);
   }
 
   Future<void> closeDb() async => await db.close();
