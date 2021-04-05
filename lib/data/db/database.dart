@@ -14,19 +14,27 @@ class SqfliteDb {
   late Database db;
 
   Future<void> openDb() async {
-    /*
-    String dbpath = 'lib/data/db/database.sqlite';
-    String path = join(dbpath, 'database.db');
-
-    try {
-      await Directory(dbpath).create(recursive: true);
-    } catch (_) {}
-  */
     //DEBUG
     //await databaseFactory.deleteDatabase(path);
+    //
 
-    //ByteData data = await rootBundle.load('lib/data/db/database.sqlite');
-    db = await openDatabase('lib/data/db/db.db', version: 1);
+    var databasesPath = await getDatabasesPath();
+    var path = join(databasesPath, "price_of_reality.db");
+
+    var exists = await databaseExists(path);
+
+    if (!exists) {
+      try {
+        await Directory(dirname(path)).create(recursive: true);
+      } catch (_) {}
+
+      ByteData data = await rootBundle.load('assets/database/database.sqlite');
+      List<int> bytes =
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      await File(path).writeAsBytes(bytes, flush: true);
+    }
+
+    db = await openDatabase(path, version: 1);
   }
 
   Future<void> closeDb() async => await db.close();
