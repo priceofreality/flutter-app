@@ -14,7 +14,7 @@ class SqfliteDb {
   late Database db;
 
   Future<void> openDb() async {
-  /*
+    /*
     String dbpath = 'lib/data/db/database.sqlite';
     String path = join(dbpath, 'database.db');
 
@@ -24,9 +24,9 @@ class SqfliteDb {
   */
     //DEBUG
     //await databaseFactory.deleteDatabase(path);
-    
+
     //ByteData data = await rootBundle.load('lib/data/db/database.sqlite');
-    db = await openDatabase('lib/data/db/database.sqlite', version: 1);
+    db = await openDatabase('lib/data/db/db.db', version: 1);
   }
 
   Future<void> closeDb() async => await db.close();
