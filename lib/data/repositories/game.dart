@@ -102,23 +102,10 @@ class GameRepository {
       }
     }
 
-    Map<int, Map<int, Choice>> dailySituationChoicesMap = {};
+    Map<int, Choice> dailySituationChoicesMap = {};
     for (var choice in dailySituationchoicesSql) {
       Choice choiceInstance = Choice.fromTuple(choice, choices);
-      dailySituationChoicesMap.putIfAbsent(choice['daily_situation'], () => {});
-      if (dailySituationChoicesMap[choice['daily_situation']]![
-              choice['choice']] !=
-          null) {
-        dailySituationChoicesMap[choice['daily_situation']]![choice['choice']]!
-            .addUnlock(choice['unlock_daily_situation']);
-        choiceInstance = dailySituationChoicesMap[choice['daily_situation']]![
-            choice['choice']]!;
-      } else {
-        dailySituationChoicesMap[choice['daily_situation']]![choice['choice']] =
-            choiceInstance;
-      }
-      _choicesOfDailySituation.putIfAbsent(choice['daily_situation'], () => []);
-      _choicesOfDailySituation[choice['daily_situation']]!.add(choiceInstance);
+      dailySituationChoicesMap[choiceInstance.id] = choiceInstance;
     }
 
     /* ITERATION 3
@@ -145,14 +132,12 @@ class GameRepository {
 
     // daily Sit -> Choice -> dailySituationChoice
     for (var cost in financialChoiceCostsSql) {
-      _financialChoicesCosts.putIfAbsent(cost['choice'], () => {});
-      Choice choice =
-          dailySituationChoicesMap[cost['daily_situation']]![cost['choice']]!;
+      Choice choice = dailySituationChoicesMap[cost['daily_choice']]!;
 
       _financialChoicesCosts.putIfAbsent(choice.id, () => {});
       _financialChoicesCosts[choice.id]![cost['financial_situation']] =
           FinancialChoiceCost(
-              minCost: cost['cost_min'], maxCost: cost['cost_max']);
+              minCost: cost['min_cost'], maxCost: cost['max_cost']);
     }
   }
 

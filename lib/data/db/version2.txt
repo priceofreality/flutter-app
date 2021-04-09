@@ -1,0 +1,39 @@
+ALTER TABLE financial_choice_costs ADD COLUMN daily_choice INTEGER REFERENCES daily_situation_choices(id);
+
+UPDATE financial_choice_costs
+SET
+    daily_choice = (SELECT dsc.id
+                                FROM  daily_situation_choices dsc
+                                WHERE financial_choice_costs.daily_situation = dsc.daily_situation AND financial_choice_costs.choice = dsc.choice)
+WHERE
+    EXISTS (
+       SELECT *
+       FROM  daily_situation_choices dsc
+       WHERE financial_choice_costs.daily_situation = dsc.daily_situation AND financial_choice_costs.choice = dsc.choice
+   );
+
+CREATE TABLE new_financial_choice_costs(
+financial_situation INTEGER NOT NULL REFERENCES financial_situations(id),
+daily_choice INTEGER NOT NULL REFERENCES daily_situation_choices(id),
+min_cost DOUBLE NOT NULL,
+max_cost DOUBLE,
+PRIMARY KEY (financial_situation, daily_choice)
+);
+
+INSERT INTO new_financial_choice_costs (financial_situation, daily_choice, min_cost, max_cost) 
+SELECT financial_situation, daily_choice, cost_min, cost_max FROM financial_choice_costs;
+
+DROP TABLE financial_choice_costs;
+
+ALTER TABLE new_financial_choice_costs RENAME TO financial_choice_costs;
+
+CREATE TABLE financial_dailies(
+financial_situation INTEGER REFERENCES financial_situations(id),
+daily_situation INTEGER REFERENCES daily_situations(id),
+PRIMARY KEY (financial_situation, daily_situation)
+);
+
+INSERT INTO financial_dailies (daily_situation, financial_situation) VALUES
+(16,0),
+(16,3),
+(22,2); 
