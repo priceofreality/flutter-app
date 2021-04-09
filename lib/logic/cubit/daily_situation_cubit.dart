@@ -30,14 +30,18 @@ class DailySituationCubit extends Cubit<DailySituationState> {
             gameRepository.getDailySituationsOfDay(1)![0]));
 
   emitStart() {
+    print("start daily_situation_cubit");
+    print("start transaction_cubit");
     transactionCubit
         .emitBudget(financialSituationCubit.state.selected!.initialBudget);
 
     financialSituationId = financialSituationCubit.state.selected!.id;
-
+    print("start choice_situation_cubit");
     choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
         financialSituationId,
         gameRepository.getDailySituationsOfDay(1)![0].id));
+
+    print("end daily_situation_cubit");
   }
 
   void _resetIndexes() {

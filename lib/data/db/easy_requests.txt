@@ -1,3 +1,4 @@
 SELECT ds.id, e.label, c.label
 FROM events e, choices c, daily_situations ds, daily_situation_choices dss
 WHERE ds.event = e.id AND dss.daily_situation = ds.id  AND dss.choice = c.id;
+
