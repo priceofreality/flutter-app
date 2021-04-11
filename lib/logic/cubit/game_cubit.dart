@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:projet4/data/repositories/game.dart';
-import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
+import 'package:price_of_reality/data/repositories/game.dart';
+import 'package:price_of_reality/logic/cubit/daily_situation_cubit.dart';
 
 part 'game_state.dart';
 
@@ -13,9 +13,6 @@ class GameCubit extends Cubit<GameState> {
   late StreamSubscription _dailySituationSubscription;
 
   GameCubit({required this.dailySituationCubit}) : super(GameInitialState()) {
-    dailySituationCubit.emitFinancialSituation(
-        gameRepository.financialSituations[0]); //LOAD SCREEN
-
     _dailySituationSubscription =
         dailySituationCubit.stream.listen((dailySituationState) {
       if (dailySituationState is DailySituationFinishedState) {
@@ -26,13 +23,12 @@ class GameCubit extends Cubit<GameState> {
 
   void emitStartGame() {
     //add selections
+    dailySituationCubit.emitStart();
     emit(GameRunningState());
   }
 
   void emitNewGame() {
     emit(GameInitialState());
-    dailySituationCubit
-        .emitFinancialSituation(gameRepository.financialSituations[0]);
     dailySituationCubit.emitReset();
   }
 

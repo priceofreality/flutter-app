@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import "package:path/path.dart";
-import 'package:projet4/data/db/requests.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/services.dart' show ByteData, rootBundle;
 
 class SqfliteDb {
   static final SqfliteDb _instance = SqfliteDb.internal();
@@ -14,33 +14,27 @@ class SqfliteDb {
   late Database db;
 
   Future<void> openDb() async {
-    String dbpath = await getDatabasesPath();
-    String path = join(dbpath, 'database.db');
-    Requests requests = Requests();
+    //DEBUG
+    //await databaseFactory.deleteDatabase(path);
+    //
 
-    try {
-      await Directory(dbpath).create(recursive: true);
-    } catch (_) {}
+    var databasesPath = await getDatabasesPath();
+    var path = join(databasesPath, "price_of_reality.db");
+
+    var exists = await databaseExists(path);
+
+    if (!exists) {
+      try {
+        await Directory(dirname(path)).create(recursive: true);
+      } catch (_) {}
+
+      ByteData data = await rootBundle.load('assets/database/database.sqlite');
+      List<int> bytes =
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      await File(path).writeAsBytes(bytes, flush: true);
+    }
 
     db = await openDatabase(path, version: 1);
-
-    await db.execute(requests.createFinancialSituations);
-    await db.execute(requests.createChoices);
-    await db.execute(requests.createEvents);
-    //await db.execute(requests.createOptions);
-    await db.execute(requests.createDailySituations);
-    await db.execute(requests.createDailySituationsChoices);
-    await db.execute(requests.createFinancialChoiceCosts);
-    //await db.execute(requests.createAdditionalCharges);
-
-    await db.rawInsert(requests.insertFinancialSituations);
-    await db.rawInsert(requests.insertChoices);
-    await db.rawInsert(requests.insertEvents);
-    //await db.rawInsert(requests.insertOptions);
-    await db.rawInsert(requests.insertDailySituations);
-    await db.rawInsert(requests.insertDailySituationChoices);
-    await db.rawInsert(requests.insertFinancialChoiceCost);
-    //await db.rawInsert(requests.insertAdditionalCharges);
   }
 
   Future<void> closeDb() async => await db.close();

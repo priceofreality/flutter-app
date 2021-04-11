@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "628500781998",
+    "project_id": "price-of-reality",
+    "storage_bucket": "price-of-reality.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628500781998:android:9e34a0da8ff7e35741063f",
+        "android_client_info": {
+          "package_name": "com.projet4.price_of_reality"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628500781998-9a8km22kp5ksh8225gm9cmduuerqd0qc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB23eWqStzKV0UlVr1H41sjB66ORmv3m-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628500781998-9a8km22kp5ksh8225gm9cmduuerqd0qc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

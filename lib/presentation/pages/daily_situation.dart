@@ -1,70 +1,107 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projet4/data/models/choice.dart';
-import 'package:projet4/logic/cubit/choice_cubit.dart';
-import 'package:projet4/logic/cubit/transaction_cubit.dart';
-import 'package:projet4/logic/cubit/daily_situation_cubit.dart';
-import 'package:projet4/logic/cubit/financial_situation_cubit.dart';
+import 'package:price_of_reality/data/models/choice.dart';
+import 'package:price_of_reality/data/models/daily_situation.dart';
+import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
+import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
+import 'package:price_of_reality/logic/cubit/daily_situation_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:projet4/presentation/widgets/custom_radio_button.dart';
-import 'package:projet4/presentation/widgets/custom_slider.dart';
+import 'package:price_of_reality/presentation/widgets/custom_radio_button.dart';
+import 'package:price_of_reality/presentation/widgets/custom_slider.dart';
 
 class DailySituationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return OrientationBuilder(
+      builder: (conext, orientation) {
+        if (orientation == Orientation.portrait) {
+          final padding = EdgeInsets.symmetric(horizontal: 14.0);
+          final eventPadding =
+              EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0);
+          return DailySituationView(
+              padding: padding, eventPadding: eventPadding);
+        }
+        final width = MediaQuery.of(context).size.width;
+        double horizontalPadding = width / 6;
+        double event = width / 7;
+        final padding = EdgeInsets.only(
+          left: horizontalPadding,
+          right: horizontalPadding,
+          top: 30.0,
+          bottom: 10.0,
+        );
+        final eventPadding =
+            EdgeInsets.symmetric(vertical: 20.0, horizontal: event);
+        return DailySituationView(padding: padding, eventPadding: eventPadding);
+      },
+    );
+  }
+}
+
+class DailySituationView extends StatelessWidget {
+  final EdgeInsets padding;
+  final EdgeInsets eventPadding;
+
+  DailySituationView({required this.padding, required this.eventPadding});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight:
-                MediaQuery.of(context).size.height - kToolbarHeight - 30.0,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ClipPath(
-                clipper: MyClipper(),
-                child: Container(
-                  width: double.infinity,
-                  height: 80,
-                  child: TopBar(),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xff87CEEB),
-                          Color(0xff66c1e5),
-                        ]),
-                  ),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: ClipPath(
+              clipper: MyClipper(),
+              child: Container(
+                width: double.infinity,
+                height: 80,
+                child: TopBar(),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xff87CEEB),
+                        Color(0xff66c1e5),
+                      ]),
                 ),
               ),
-              Event(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14.0),
-                child: Container(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20.0),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Budget(),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight:
+                    MediaQuery.of(context).size.height - kToolbarHeight - 200.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Event(eventPadding: eventPadding),
+                  SizedBox(height: 20.0),
+                  Padding(
+                    padding: padding,
+                    child: Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20.0),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Budget(),
+                          ),
+                          SizedBox(height: 20.0),
+                          Choices(),
+                        ],
                       ),
-                      SizedBox(height: 20.0),
-                      Choices(),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 14.0, top: 10.0),
-                child: NextButton(),
-              ),
-            ],
-          ),
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -110,13 +147,17 @@ class TopBar extends StatelessWidget {
 }
 
 class Event extends StatelessWidget {
+  final EdgeInsets eventPadding;
+
+  Event({required this.eventPadding});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DailySituationCubit, DailySituationState>(
         builder: (context, state) {
       return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+        padding: eventPadding,
         child: Text(
           state.current.event,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
@@ -129,11 +170,11 @@ class Event extends StatelessWidget {
 class Budget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
+    return BlocBuilder<TransactionCubit, TransactionState>(
         builder: (context, state) {
       return Text(
         AppLocalizations.of(context)!.budget +
-            ': ${state.financialSituation!.budget}€',
+            ': ${state.budget.toStringAsFixed(2)}€',
         style: TextStyle(
           fontSize: 20.0,
           color: Colors.black,
@@ -147,18 +188,12 @@ class Budget extends StatelessWidget {
 class Choices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final financialSituation = context
-        .read<DailySituationCubit>()
-        .financialSituationCubit
-        .state
-        .financialSituation;
-
     return BlocBuilder<ChoiceCubit, ChoiceState>(
       builder: (context, state) {
         return Column(
-          children: state.choices
-              .map(
-                (choice) => Container(
+          children: state.choices.map((choice) {
+            if (choice.maxCost == null) {
+              return Container(
                   margin: EdgeInsets.only(bottom: 10.0),
                   decoration: BoxDecoration(
                     color: choice == state.selected
@@ -170,49 +205,60 @@ class Choices extends StatelessWidget {
                       color: Theme.of(context).buttonColor,
                     ),
                   ),
-                  child: choice.costMax.isEmpty
-                      ? CustomRadioListTile<Choice>(
-                          title: Padding(
-                            child: Text(
-                              choice.label,
-                              style: choice == state.selected
-                                  ? Theme.of(context)
-                                      .textTheme
-                                      .button!
-                                      .copyWith(color: Colors.white)
-                                  : Theme.of(context).textTheme.button,
-                            ),
-                            padding: EdgeInsets.only(left: 17.0),
-                          ),
-                          secondary: Text(
-                            choice.costMin.isEmpty
-                                ? ''
-                                : '${choice.costMin[financialSituation!.id]}€',
-                            style: choice == state.selected
-                                ? TextStyle(color: Colors.white, fontSize: 14.7)
-                                : TextStyle(
-                                    color: Colors.grey[800], fontSize: 14.7),
-                          ),
-                          value: choice,
-                          groupValue: state.selected,
-                          onChanged: (newValue) {
-                            context
-                                .read<ChoiceCubit>()
-                                .emitSelectChoice(newValue!);
-                            context.read<TransactionCubit>().emitCost(
-                                newValue.costMin[financialSituation!.id]!);
-                          },
-                        )
-                      : CustomSlider(
-                          maxValue: choice.costMax[financialSituation!.id]!,
-                          minValue: choice.costMin[financialSituation.id]!,
-                          divisions: 10,
-                          onChanged: (value) =>
-                              context.read<TransactionCubit>().emitCost(value),
-                        ),
-                ),
-              )
-              .toList(),
+                  child: CustomRadioListTile<Choice>(
+                    title: Padding(
+                      child: Text(
+                        choice.label,
+                        style: choice == state.selected
+                            ? Theme.of(context)
+                                .textTheme
+                                .button!
+                                .copyWith(color: Colors.white)
+                            : Theme.of(context).textTheme.button,
+                      ),
+                      padding: EdgeInsets.only(left: 17.0),
+                    ),
+                    secondary: Text(
+                      choice.minCost == null ? '' : '${choice.minCost}€',
+                      style: choice == state.selected
+                          ? TextStyle(color: Colors.white, fontSize: 14.7)
+                          : TextStyle(color: Colors.grey[800], fontSize: 14.7),
+                    ),
+                    value: choice,
+                    groupValue: state.selected,
+                    onChanged: (newValue) {
+                      if (state.selected != null) return;
+
+                      context.read<ChoiceCubit>().emitSelectChoice(newValue!);
+                      context.read<TransactionCubit>().emitCost(
+                          newValue.minCost == null ? 0 : newValue.minCost!);
+
+                      Future.delayed(Duration(milliseconds: 230)).then(
+                          (value) => context
+                              .read<DailySituationCubit>()
+                              .emitNextDailySituation());
+                    },
+                  ));
+            } else {
+              context.read<ChoiceCubit>().emitSelectChoice(choice);
+              return Column(
+                children: [
+                  CustomSlider(
+                    maxValue: -choice.maxCost!,
+                    minValue: -choice.minCost!,
+                    divisions: 10,
+                    onChanged: (value) {
+                      context.read<TransactionCubit>().emitCost(-value);
+                    },
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 14.0, top: 30.0),
+                    child: NextButton(),
+                  ),
+                ],
+              );
+            }
+          }).toList(),
         );
       },
     );
@@ -235,8 +281,8 @@ class NextButton extends StatelessWidget {
         ),
         onPressed: disable == null
             ? null
-            : () =>
-                context.read<DailySituationCubit>().emitNextDailySituation(),
+            : () => Future.delayed(Duration(milliseconds: 230)).then((value) =>
+                context.read<DailySituationCubit>().emitNextDailySituation()),
         child: Text(
           AppLocalizations.of(context)!.next.toUpperCase(),
           style: TextStyle(color: Colors.white),

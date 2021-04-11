@@ -1,29 +1,29 @@
 import 'package:equatable/equatable.dart';
-import 'package:projet4/data/db/options.dart' as options;
+import 'package:price_of_reality/data/db/options.dart' as options;
 
 class FinancialSituation extends Equatable {
   final int id;
   final String label;
-  double budget;
+  final double initialBudget;
   final options.FamilySituation familySituation;
-  final options.ProfessionalSituation financialSituation;
+  final options.ProfessionalSituation professionalSituation;
 
   FinancialSituation(
       {required this.id,
       required this.label,
-      required this.budget,
+      required this.initialBudget,
       required this.familySituation,
-      required this.financialSituation});
+      required this.professionalSituation});
 
   factory FinancialSituation.fromTuple(Map<String, dynamic> tuple) =>
       FinancialSituation(
           id: tuple['id'],
           label: tuple['label'],
-          budget: tuple['budget'],
+          initialBudget: tuple['budget'],
           familySituation:
               options.FamilySituation.values[tuple['familial_situation']],
-          financialSituation: options
-              .ProfessionalSituation.values[tuple['financial_situations']]);
+          professionalSituation: options
+              .ProfessionalSituation.values[tuple['professional_situation']]);
 
   @override
   List<Object> get props => [id];

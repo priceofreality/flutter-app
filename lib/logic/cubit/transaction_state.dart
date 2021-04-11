@@ -15,6 +15,7 @@ class TransactionState extends Equatable {
   List<Object> get props => [budget, currentCost];
 }
 
-class TransactionInitial extends TransactionState {
-  TransactionInitial() : super(currentCost: 0, transactions: []);
+class TransactionInitialState extends TransactionState {
+  TransactionInitialState(double budget)
+      : super(currentCost: 0, transactions: [], budget: budget);
 }

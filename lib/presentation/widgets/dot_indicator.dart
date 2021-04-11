@@ -39,13 +39,6 @@ class _DotIndicatorGroupState extends State<DotIndicatorGroup> {
             value: 1,
             groupValue: _index,
           ),
-          SizedBox(
-            width: 20.0,
-          ),
-          DotIndicator(
-            value: 2,
-            groupValue: _index,
-          ),
         ],
       ),
     );

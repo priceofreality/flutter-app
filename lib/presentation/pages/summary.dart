@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import "package:collection/collection.dart";
-import 'package:projet4/data/models/summary.dart';
-import 'package:projet4/data/models/transaction.dart';
+import 'package:price_of_reality/data/models/summary.dart';
+import 'package:price_of_reality/data/models/transaction.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SummaryPage extends StatefulWidget {
   Summary summary;
@@ -12,7 +13,7 @@ class SummaryPage extends StatefulWidget {
 }
 
 class _SummaryPageState extends State<SummaryPage> {
-  Future<List<Widget>> sortTransactions() {
+  Future<List<Widget>> sortTransactions(BuildContext context) {
     return Future(() {
       Map<int, List<Transaction>> transactions =
           groupBy(widget.summary.transactions, (Transaction t) => t.day);
@@ -24,7 +25,7 @@ class _SummaryPageState extends State<SummaryPage> {
         alignment: Alignment.bottomRight,
         padding: EdgeInsets.only(right: 20.0),
         child: Text(
-          'Starting budget: $budget€',
+          AppLocalizations.of(context)!.startingBudget + ': $budget€',
           style: TextStyle(
             fontSize: 17.0,
             color: Colors.black,
@@ -39,7 +40,7 @@ class _SummaryPageState extends State<SummaryPage> {
         final day = Container(
           padding: EdgeInsets.only(left: 14.0, top: 13.0, bottom: 7.0),
           child: Text(
-            'Jour ${entry.key}',
+            AppLocalizations.of(context)!.day + ' ${entry.key}',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
         );
@@ -67,7 +68,7 @@ class _SummaryPageState extends State<SummaryPage> {
           alignment: Alignment.bottomRight,
           padding: EdgeInsets.only(right: 20.0),
           child: Text(
-            '$budget€',
+            '${budget.toStringAsFixed(2)}€',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           ),
         );
@@ -86,13 +87,13 @@ class _SummaryPageState extends State<SummaryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Resume'),
+        title: Text(AppLocalizations.of(context)!.summary),
         backgroundColor: Theme.of(context).accentColor,
         centerTitle: true,
       ),
       body: SafeArea(
         child: FutureBuilder(
-          future: sortTransactions(),
+          future: sortTransactions(context),
           builder: (context, AsyncSnapshot<List<Widget>?> snapshot) {
             return snapshot.hasData
                 ? ListView.builder(
@@ -100,7 +101,7 @@ class _SummaryPageState extends State<SummaryPage> {
                     itemBuilder: (context, index) => snapshot.data![index],
                     padding: EdgeInsets.only(top: 18.0, bottom: 50.0),
                   )
-                : Center(child: Text('Loading'));
+                : Center(child: Text(AppLocalizations.of(context)!.loading));
           },
         ),
       ),

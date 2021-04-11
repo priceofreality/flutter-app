@@ -1,9 +1,11 @@
 part of 'financial_situation_cubit.dart';
 
 class FinancialSituationState {
-  final FinancialSituation? financialSituation;
+  final FinancialSituation? selected;
 
-  FinancialSituationState(this.financialSituation, this.transactions);
+  final List<FinancialSituation> financialSituations;
+
+  FinancialSituationState(this.selected, this.financialSituations);
 }
 
 class FinancianSituationInitialState extends FinancialSituationState {
