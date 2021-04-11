@@ -1,0 +1,54 @@
+ALTER TABLE financial_choice_costs ADD COLUMN daily_choice INTEGER REFERENCES daily_situation_choices(id);
+
+UPDATE financial_choice_costs
+SET
+    daily_choice = (SELECT dsc.id
+                                FROM  daily_situation_choices dsc
+                                WHERE financial_choice_costs.daily_situation = dsc.daily_situation AND financial_choice_costs.choice = dsc.choice)
+WHERE
+    EXISTS (
+       SELECT *
+       FROM  daily_situation_choices dsc
+       WHERE financial_choice_costs.daily_situation = dsc.daily_situation AND financial_choice_costs.choice = dsc.choice
+   );
+
+CREATE TABLE new_financial_choice_costs(
+financial_situation INTEGER NOT NULL REFERENCES financial_situations(id),
+daily_choice INTEGER NOT NULL REFERENCES daily_situation_choices(id),
+min_cost DOUBLE NOT NULL,
+max_cost DOUBLE,
+PRIMARY KEY (financial_situation, daily_choice)
+);
+
+INSERT INTO new_financial_choice_costs (financial_situation, daily_choice, min_cost, max_cost) 
+SELECT financial_situation, daily_choice, cost_min, cost_max FROM financial_choice_costs;
+
+DROP TABLE financial_choice_costs;
+
+ALTER TABLE new_financial_choice_costs RENAME TO financial_choice_costs;
+
+CREATE TABLE financial_dailies(
+financial_situation INTEGER REFERENCES financial_situations(id),
+daily_situation INTEGER REFERENCES daily_situations(id),
+PRIMARY KEY (financial_situation, daily_situation)
+);
+
+INSERT INTO financial_dailies (daily_situation, financial_situation) VALUES
+(16,0),
+(16,3),
+(22,2); 
+
+
+CREATE TABLE definitions(
+id INTEGER PRIMARY KEY,
+label TEXT NOT NULL,
+description TEXT NOT NULL
+);
+
+INSERT INTO definitions (label, description) VALUES
+("Actiris","Actiris est l’organisme régional chargé de la politique de l’emploi de Bruxelles-capitale. Les missions principales d’Actiris sont de faciliter le Matching entre chercheur d’emploi et employeur et aider à la transition vers l’emploi. La transition peut se faire à travers des stages, une reprise d’étude,..."),
+("Service de médiation de dette", "Le service de médiation de dette est une des aides proposées par le CPAS. a comme mission de proposer un accompagnement à toute personne désirant assainir sa situation financière. L'accompagnement a pour but d’aider à trouver un compromis pour vivre décemment et rembourser les dettes. Le médiateur de dette fait le pont entre la personne aidée et le créancier pour trouver un compromis et faire valoir ses droits."),
+("ONEM","L’Office National de l’emploi est une institution publique de sécurité sociale responsable principalement de l’organisation l’assurance chômage, d’interruption de carrière et de crédit-temps. Ils sont donc responsables de l’admissibilité d’une personne à l’allocation de chômage et contrôlent le montant. Ils sont responsables de l’intégration sur le marché de l’emploi ou à la reprise après une longue période de chômage et de la gestion des régimes d’allocations lors de la reprise d’un emploi ou pendant le chômage temporaire."),
+("CAPAC","La Caisse auxiliaire de paiement des allocations de chômage est chargée du paiement des allocations de chômage. Elle assure chaque mois le versement d'un revenu de remplacement. La sécurité sociale est principalement financée par : les cotisations des travailleurs salariés et des employeurs ; et l'intervention de l'État. Pour le secteur chômage, les fonds sont gérés par l'ONEM, qui les répartit entre les 4 organismes de paiement des allocations de chômage (la CAPAC et les syndicats) en fonction des paiements effectués."),
+("CPAS","centre public d'action sociale, assure la prestation d'un certain nombre de services sociaux et veille au bien-être de chaque citoyen. Chaque commune ou ville à son propre CPAS offrant un large éventail de services.En Belgique bon nombre de gens disposent de moyens de subsistance insuffisants ou sont parfois sans domicile fixe. Toutes ces personnes peuvent bénéficier de l'assistance sociale du CPAS. Chaque personne résidant légalement en Belgique a droit à une assistance sociale. Cette assistance sociale a pour but de garantir un revenu minimum à l'ensemble de la population."),
+("Mutuelle","La mutualité est l’organisme qui gère l’assurance obligatoire permettant de bénéficier d’une assurance maladie de base. Si tu travailles ou que tu as plus de 25 ans, tu dois impérativement t’inscrire dans une mutualité pour pouvoir être remboursé des soins de santé, ou toucher des indemnités en cas de souci.Une fois que tu t’es inscrit à une mutualité en tant que titulaire, ta cotisation te couvre ainsi que les personnes à ta charge (tes enfants, les personnes domiciliées chez toi (conjoint, cohabitant, ascendant) et qui ont un revenu inférieur à un plafond déterminé).De façon générale, tu es couvert par la mutuelle de tes parents jusqu’à ce que tu travailles ou jusqu’à tes 25 ans. ");
