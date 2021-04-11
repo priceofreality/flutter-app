@@ -14,16 +14,18 @@ class SqfliteDb {
   late Database db;
 
   Future<void> openDb() async {
-    //DEBUG
-    //await databaseFactory.deleteDatabase(path);
-    //
-
     var databasesPath = await getDatabasesPath();
     var path = join(databasesPath, "price_of_reality.db");
+
+    //DEBUG
+    print("Delete DB");
+    await databaseFactory.deleteDatabase(path);
+    //
 
     var exists = await databaseExists(path);
 
     if (!exists) {
+      print("Db doesn't exists");
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}

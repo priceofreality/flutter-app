@@ -20,4 +20,8 @@ class FinancialSituationCubit extends Cubit<FinancialSituationState> {
       gameRepository.financialSituations;
 
   emitReset() => emit(FinancianSituationInitialState());
+
+  void emitNewDailySituation() {
+    gameRepository.unlockDailyFinancialSituations(state.selected!.id);
+  }
 }
