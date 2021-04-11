@@ -25,7 +25,6 @@ class SqfliteDb {
     var exists = await databaseExists(path);
 
     if (!exists) {
-      print("Db doesn't exists");
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
