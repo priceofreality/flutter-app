@@ -52,3 +52,33 @@ INSERT INTO definitions (label, description) VALUES
 ("CAPAC","La Caisse auxiliaire de paiement des allocations de chômage est chargée du paiement des allocations de chômage. Elle assure chaque mois le versement d'un revenu de remplacement. La sécurité sociale est principalement financée par : les cotisations des travailleurs salariés et des employeurs ; et l'intervention de l'État. Pour le secteur chômage, les fonds sont gérés par l'ONEM, qui les répartit entre les 4 organismes de paiement des allocations de chômage (la CAPAC et les syndicats) en fonction des paiements effectués."),
 ("CPAS","centre public d'action sociale, assure la prestation d'un certain nombre de services sociaux et veille au bien-être de chaque citoyen. Chaque commune ou ville à son propre CPAS offrant un large éventail de services.En Belgique bon nombre de gens disposent de moyens de subsistance insuffisants ou sont parfois sans domicile fixe. Toutes ces personnes peuvent bénéficier de l'assistance sociale du CPAS. Chaque personne résidant légalement en Belgique a droit à une assistance sociale. Cette assistance sociale a pour but de garantir un revenu minimum à l'ensemble de la population."),
 ("Mutuelle","La mutualité est l’organisme qui gère l’assurance obligatoire permettant de bénéficier d’une assurance maladie de base. Si tu travailles ou que tu as plus de 25 ans, tu dois impérativement t’inscrire dans une mutualité pour pouvoir être remboursé des soins de santé, ou toucher des indemnités en cas de souci.Une fois que tu t’es inscrit à une mutualité en tant que titulaire, ta cotisation te couvre ainsi que les personnes à ta charge (tes enfants, les personnes domiciliées chez toi (conjoint, cohabitant, ascendant) et qui ont un revenu inférieur à un plafond déterminé).De façon générale, tu es couvert par la mutuelle de tes parents jusqu’à ce que tu travailles ou jusqu’à tes 25 ans. ");
+
+CREATE TABLE group_options(
+id INTEGER PRIMARY KEY,
+label TEXT NOT NULL
+);
+
+CREATE TABLE options(
+id INTEGER PRIMARY KEY,
+group_option INTEGER REFERENCES group_options(id),
+label TEXT NOT NULL
+);
+
+CREATE TABLE option_dailies(
+option INTEGER NOT NULL REFERENCES options(id),
+daily_situation INTEGER NOT NULL REFERENCES daily_situations(id),
+PRIMARY KEY (option, daily_situation)
+);
+
+CREATE TABLE additionnal_charges(
+option INTEGER NOT NULL REFERENCES options(id),
+daily_situation_choice INTEGER NOT NULL REFERENCES daily_situation_choices(id),
+charge DOUBLE NOT NULL,
+PRIMARY KEY (option, daily_situation_choice)
+);
+
+INSERT INTO options (label) VALUES ("Smoker");
+
+INSERT INTO option_dailies (option, daily_situation) VALUES (1,0);
+
+INSERT INTO additionnal_charges (option, daily_situation_choice, charge) VALUES (1,1, 7.25);
