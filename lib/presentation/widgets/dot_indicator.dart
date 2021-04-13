@@ -45,6 +45,65 @@ class _DotIndicatorGroupState extends State<DotIndicatorGroup> {
   }
 }
 
+class Dot4IndicatorGroup extends StatefulWidget {
+  final PageController controller;
+  Dot4IndicatorGroup({required this.controller});
+
+  @override
+  _Dot4IndicatorGroupState createState() => _Dot4IndicatorGroupState();
+}
+
+class _Dot4IndicatorGroupState extends State<Dot4IndicatorGroup> {
+  int _index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(() {
+      setState(() {
+        _index = widget.controller.page!.round();
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DotIndicator(
+            value: 0,
+            groupValue: _index,
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+          DotIndicator(
+            value: 1,
+            groupValue: _index,
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+          DotIndicator(
+            value: 2,
+            groupValue: _index,
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+          DotIndicator(
+            value: 3,
+            groupValue: _index,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class DotIndicator extends StatelessWidget {
   final int value;
   final int groupValue;

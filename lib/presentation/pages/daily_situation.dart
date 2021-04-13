@@ -137,7 +137,7 @@ class TopBar extends StatelessWidget {
           AppLocalizations.of(context)!.day + ' ${state.current.day}',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 20.0,
+            fontSize: 19.0,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -160,7 +160,7 @@ class Event extends StatelessWidget {
         padding: eventPadding,
         child: Text(
           state.current.event,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23.0),
         ),
       );
     });
@@ -176,7 +176,7 @@ class Budget extends StatelessWidget {
         AppLocalizations.of(context)!.budget +
             ': ${state.budget.toStringAsFixed(2)}€',
         style: TextStyle(
-          fontSize: 20.0,
+          fontSize: 18.0,
           color: Colors.black,
           fontWeight: FontWeight.w600,
         ),
@@ -221,8 +221,8 @@ class Choices extends StatelessWidget {
                     secondary: Text(
                       choice.minCost == null ? '' : '${choice.minCost}€',
                       style: choice == state.selected
-                          ? TextStyle(color: Colors.white, fontSize: 14.7)
-                          : TextStyle(color: Colors.grey[800], fontSize: 14.7),
+                          ? TextStyle(color: Colors.white, fontSize: 14)
+                          : TextStyle(color: Colors.grey[800], fontSize: 14),
                     ),
                     value: choice,
                     groupValue: state.selected,
