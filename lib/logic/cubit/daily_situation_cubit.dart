@@ -34,10 +34,10 @@ class DailySituationCubit extends Cubit<DailySituationState> {
         .emitBudget(financialSituationCubit.state.selected!.initialBudget);
 
     financialSituationId = financialSituationCubit.state.selected!.id;
-
     choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
         financialSituationId,
         gameRepository.getDailySituationsOfDay(1)![0].id));
+    financialSituationCubit.emitNewDailySituation();
   }
 
   void _resetIndexes() {

@@ -1,20 +1,22 @@
 import 'package:equatable/equatable.dart';
-import 'package:price_of_reality/data/db/options.dart';
+import 'package:price_of_reality/data/models/choice.dart';
+import 'package:price_of_reality/data/models/option.dart';
 
 class AdditionalCharge extends Equatable {
-  final int id;
-  final double charge;
   final Option option;
+  final Choice choice;
+  final double charge;
 
   const AdditionalCharge(
-      {required this.id, required this.charge, required this.option});
+      {required this.charge, required this.option, required this.choice});
 
-  factory AdditionalCharge.fromTuple(Map<String, dynamic> tuple) =>
+  factory AdditionalCharge.fromTuple(Map<String, dynamic> tuple,
+          Map<int, Option> options, Map<int, Choice> dailySituationChoices) =>
       AdditionalCharge(
-          id: tuple['id'],
-          charge: tuple['additional_charge'],
-          option: Option.values[tuple['option']]);
+          charge: tuple['charge'],
+          option: options[tuple['option']]!,
+          choice: dailySituationChoices[tuple['daily_situation_choice']]!);
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [option, charge, choice];
 }
