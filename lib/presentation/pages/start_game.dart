@@ -20,12 +20,11 @@ class StartGamePage extends StatelessWidget {
         controller: controller,
         children: [
           FinancialSituationView(),
-          TView(),
-          OptionsView(),
+          OptionView(),
         ],
       ),
       bottomNavigationBar: DotIndicator(
-        length: 3,
+        length: 2,
         controller: controller,
       ),
     );
@@ -124,49 +123,78 @@ class FinancialSituationList extends StatelessWidget {
   }
 }
 
-class OptionsView extends StatelessWidget {
+class OptionView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OptionCubit, OptionState>(builder: (context, state) {
+      return CustomScrollView(slivers: [
+        SliverToBoxAdapter(
+          child: Container(
+            padding: EdgeInsets.only(top: 25.0),
+            alignment: Alignment.center,
+            child: Text(
+              'Options',
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+            ),
+          ),
+        ),
+        ...state.options.entries
+            .map(
+              (e) => SliverToBoxAdapter(
+                  child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return ListTile(
+                      title: Text(
+                        e.key.label,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16.5,
+                        ),
+                      ),
+                    );
+                  }
+                  return CheckboxListTile(
+                    activeColor: Theme.of(context).buttonColor,
+                    value: state.selected.contains(e.value[index - 1]),
+                    onChanged: (value) => context
+                        .read<OptionCubit>()
+                        .emitSelectOption(value!, e.value[index - 1]),
+                    title: Text(e.value[index - 1].label),
+                    controlAffinity: ListTileControlAffinity.leading,
+                  );
+                },
+                itemCount: e.value.length + 1,
+              )),
+            )
+            .toList(),
+        SliverToBoxAdapter(
+          child: StartButton(),
+        ),
+      ]);
+    });
+  }
+}
+
+class StartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final disable = context.watch<FinancialSituationCubit>().state.selected;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 70.0),
-            shape: StadiumBorder(),
-            primary: Theme.of(context).accentColor,
-          ),
-          onPressed: disable == null
-              ? null
-              : () => context.read<GameCubit>().emitStartGame(),
-          child: Text(AppLocalizations.of(context)!.start.toUpperCase()),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 35.0, vertical: 20.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: 15.0),
+          shape: StadiumBorder(),
+          primary: Theme.of(context).accentColor,
         ),
-      ],
+        onPressed: disable == null
+            ? null
+            : () => context.read<GameCubit>().emitStartGame(),
+        child: Text(AppLocalizations.of(context)!.start.toUpperCase()),
+      ),
     );
-  }
-}
-
-class TView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<OptionCubit, OptionState>(builder: (context, state) {
-      return ListView.builder(
-        itemBuilder: (context, index) {
-          for (MapEntry entry in state.options.entries) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Text(entry.value[index].label);
-              },
-              itemCount: entry.value.length,
-            );
-          }
-          return Container();
-        },
-        itemCount: state.options.length,
-      );
-    });
   }
 }

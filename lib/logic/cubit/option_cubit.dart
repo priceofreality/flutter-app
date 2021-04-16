@@ -16,10 +16,13 @@ class OptionCubit extends Cubit<OptionState> {
     emit(OptionState(gameRepository.getOptions(), []));
   }*/
 
-  void emitSelectOption(int optionGroupId, Option option) {
+  void emitSelectOption(bool checked, Option option) {
     List<Option> selected = state.selected;
 
-    selected.add(option);
+    if (checked)
+      selected.add(option);
+    else
+      selected.remove(option);
 
     emit(OptionState(state.options, selected));
   }
