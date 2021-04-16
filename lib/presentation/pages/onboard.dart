@@ -37,7 +37,8 @@ class OnBoardPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Dot4IndicatorGroup(
+      bottomNavigationBar: DotIndicator(
+        length: 4,
         controller: controller,
       ),
     );

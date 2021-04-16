@@ -24,7 +24,8 @@ class StartGamePage extends StatelessWidget {
           OptionsView(),
         ],
       ),
-      bottomNavigationBar: DotIndicatorGroup(
+      bottomNavigationBar: DotIndicator(
+        length: 3,
         controller: controller,
       ),
     );
@@ -152,7 +153,6 @@ class TView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OptionCubit, OptionState>(builder: (context, state) {
       return ListView.builder(
-        shrinkWrap: true,
         itemBuilder: (context, index) {
           for (MapEntry entry in state.options.entries) {
             return ListView.builder(
