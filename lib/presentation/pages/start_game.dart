@@ -3,9 +3,10 @@ import 'package:price_of_reality/data/models/financial_situation.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
 import 'package:price_of_reality/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:price_of_reality/logic/cubit/option_cubit.dart';
 import 'package:price_of_reality/presentation/widgets/custom_radio_button.dart';
 import 'package:price_of_reality/presentation/widgets/dot_indicator.dart';
-import 'package:price_of_reality/data/db/options.dart';
+import 'package:price_of_reality/data/db/situations_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartGamePage extends StatelessWidget {
@@ -19,6 +20,7 @@ class StartGamePage extends StatelessWidget {
         controller: controller,
         children: [
           FinancialSituationView(),
+          TView(),
           OptionsView(),
         ],
       ),
@@ -142,5 +144,29 @@ class OptionsView extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class TView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OptionCubit, OptionState>(builder: (context, state) {
+      return ListView.builder(
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          for (MapEntry entry in state.options.entries) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Text(entry.value[index].label);
+              },
+              itemCount: entry.value.length,
+            );
+          }
+          return Container();
+        },
+        itemCount: state.options.length,
+      );
+    });
   }
 }

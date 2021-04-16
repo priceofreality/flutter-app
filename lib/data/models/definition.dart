@@ -12,7 +12,7 @@ class Definition extends Equatable {
     return Definition(
         id: tuple['id'],
         label: tuple['label'],
-        description: tuple['description']);
+        description: tuple['definition']);
   }
 
   @override

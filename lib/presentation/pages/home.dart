@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OnboardCubit, bool?>(builder: (context, state) {
-      if (state == null || state == false) {
+      if (state == null || state == true) {
         //CHANGE TO TRUE
         return OnBoardPage();
       }

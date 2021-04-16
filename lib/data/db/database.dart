@@ -29,7 +29,7 @@ class SqfliteDb {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
 
-      ByteData data = await rootBundle.load('assets/database/database.sqlite');
+      ByteData data = await rootBundle.load('assets/database/database.db');
       List<int> bytes =
           data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await File(path).writeAsBytes(bytes, flush: true);

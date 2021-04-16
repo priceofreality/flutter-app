@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:price_of_reality/data/models/additional_charge.dart';
 import 'package:price_of_reality/data/models/definition.dart';
-import 'package:price_of_reality/data/models/group.dart';
+import 'package:price_of_reality/data/models/option_group.dart';
 import 'package:price_of_reality/data/models/option.dart';
 import 'package:price_of_reality/data/models/option_situation.dart';
 import 'package:price_of_reality/data/providers/provider.dart';
@@ -13,7 +13,9 @@ import 'package:price_of_reality/data/models/financial_choice_cost.dart';
 
 class GameRepository {
   late List<FinancialSituation> _financialSituations;
-  late Map<int, List<Option>> _options;
+  // Group.id -> options
+  late Map<OptionGroup, List<Option>>
+      _optionsPerGroup; //if group == null, key = -1;
 
   late Map<int, List<DailySituation>> _dailySituationsPerDay;
   late Map<int, DailySituation> _lockedDailySituations;
@@ -43,7 +45,7 @@ class GameRepository {
 
   Future<void> loadRepository() async {
     _financialSituations = [];
-    _options = {};
+    _optionsPerGroup = {};
     _dailySituationsPerDay = {};
     _lockedDailySituations = {};
     _choicesOfDailySituation = {};
@@ -62,7 +64,7 @@ class GameRepository {
     final definitionsSql = await _dataProvider.loadDefinitions();
 
     final optionsSql = await _dataProvider.loadOptions();
-    final groupOptionsSql = await _dataProvider.loadGroupOptions();
+    final optionGroupsSql = await _dataProvider.loadOptionGroups();
     final optionDailiesSql = await _dataProvider.loadOptionsDailies();
     final additionalChargesSql = await _dataProvider.loadAdditionalCharges();
 
@@ -91,23 +93,29 @@ class GameRepository {
         .toList();
 
     //get options and their group
-    Map<int, Group> groupOptions = Map.fromIterable(groupOptionsSql,
-        key: (e) => e['id'], value: (e) => Group.fromTuple(e));
-    Map<int, Option> optionsMap = {};
-    //organize options by groupOption
+    Map<int, OptionGroup> optionGroups = Map.fromIterable(optionGroupsSql,
+        key: (e) => e['id'], value: (e) => OptionGroup.fromTuple(e));
+    //optionGroups[-1] = OptionGroup(id: -1, label: 'Divers'); //Miscellaneous
+
+    Map<int, Option> options = {};
+    //organize options by optionGroup
     for (var optionTuple in optionsSql) {
-      Option option = Option.fromTuple(optionTuple, groupOptions);
-      int groupId = (option.group != null) ? option.group!.id : -1;
-      _options.putIfAbsent(groupId, () => []);
-      _options[groupId]!.add(option);
-      optionsMap[option.id] = option;
+      Option option = Option.fromTuple(optionTuple, optionGroups);
+
+      //int groupId = option.optionGroup.id;
+
+      _optionsPerGroup.putIfAbsent(option.optionGroup, () => []);
+      _optionsPerGroup[option.optionGroup]!.add(option);
+
+      options[option.id] = option;
     }
+
     // get the daily situations that need options
     // int dailySituation.id => List<int option.id>
-    Map<int, List<int>> optionDailiesMap = {};
+    Map<int, List<int>> dailyOptionsMap = {};
     for (var optionDaily in optionDailiesSql) {
-      optionDailiesMap.putIfAbsent(optionDaily['daily_situation'], () => []);
-      optionDailiesMap[optionDaily['daily_situation']]!
+      dailyOptionsMap.putIfAbsent(optionDaily['daily_situation'], () => []);
+      dailyOptionsMap[optionDaily['daily_situation']]!
           .add(optionDaily['option']);
     }
 
@@ -123,15 +131,15 @@ class GameRepository {
 
       // if the dailySituation depends on the financial one
       if (dailyFinancialMap[daily.id] != null &&
-          optionDailiesMap[daily.id] != null) {
+          dailyOptionsMap[daily.id] != null) {
         if (dailyFinancialMap[daily.id] != null) {
           dailyFinancialMap[daily.id]!.forEach((f) {
             _financialDailySituations.putIfAbsent(f, () => []);
             _financialDailySituations[f]!.add(daily);
           });
         }
-        if (optionDailiesMap[daily.id] != null) {
-          optionDailiesMap[daily.id]!.forEach((f) {
+        if (dailyOptionsMap[daily.id] != null) {
+          dailyOptionsMap[daily.id]!.forEach((f) {
             _optionDailySituation.putIfAbsent(f, () => []);
             _optionDailySituation[f]!.add(daily);
           });
@@ -157,7 +165,7 @@ class GameRepository {
 
     // Choice -> financialSituation -> financialChoiceCost
     for (var cost in financialChoiceCostsSql) {
-      Choice choice = dailySituationChoicesMap[cost['daily_choice']]!;
+      Choice choice = dailySituationChoicesMap[cost['daily_situation_choice']]!;
 
       _financialChoicesCosts.putIfAbsent(choice.id, () => {});
       _financialChoicesCosts[choice.id]![cost['financial_situation']] =
@@ -171,7 +179,7 @@ class GameRepository {
           addCharge['daily_situation_choice'], () => []);
       _additionalChargesOfChoice[addCharge['daily_situation_choice']]!.add(
           AdditionalCharge.fromTuple(
-              addCharge, optionsMap, dailySituationChoicesMap));
+              addCharge, options, dailySituationChoicesMap));
     }
   }
 
@@ -219,16 +227,16 @@ class GameRepository {
 
   List<Definition> getDefinitions() => _definitions;
 
-  Map<int, List<Option>> getOptions() => _options;
+  Map<OptionGroup, List<Option>> getOptionsPerGroup() => _optionsPerGroup;
 
   Set<Choice> getChoicesOfDailySituation(
-      int financialSituation, int dailysituation) {
+      int financialSituation, int dailysituation, List<Option> options) {
     for (var choice in _choicesOfDailySituation[dailysituation]!) {
       print(choice.label);
       if (_financialChoicesCosts[choice.id] != null) {
         if (_financialChoicesCosts[choice.id]![financialSituation] != null) {
           double charge = 0;
-          /* Add the additional charge
+          // Add the additional charge
           if (_additionalChargesOfChoice[choice.id] != null) {
             for (AdditionalCharge addCharge
                 in _additionalChargesOfChoice[choice.id]!) {
@@ -237,7 +245,6 @@ class GameRepository {
               }
             }
           }
-          */
           FinancialChoiceCost financialChoiceCost =
               _financialChoicesCosts[choice.id]![financialSituation]!;
 

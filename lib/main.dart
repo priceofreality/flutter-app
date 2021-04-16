@@ -6,6 +6,7 @@ import 'package:price_of_reality/data/init.dart';
 import 'package:price_of_reality/data/models/summary.dart';
 import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
 import 'package:price_of_reality/logic/cubit/onboard_cubit.dart';
+import 'package:price_of_reality/logic/cubit/option_cubit.dart';
 import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
 import 'package:price_of_reality/logic/cubit/daily_situation_cubit.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
@@ -36,15 +37,18 @@ class MyApp extends StatelessWidget {
 
   final TransactionCubit transactionCubit = TransactionCubit();
 
+  final OptionCubit optionCubit = OptionCubit();
+
   final SharedPreferences sharedPreferences;
 
   late final DailySituationCubit dailySituationCubit = DailySituationCubit(
       choiceCubit: choiceCubit,
       financialSituationCubit: financialSituationCubit,
-      transactionCubit: transactionCubit);
+      transactionCubit: transactionCubit,
+      optionCubit: optionCubit);
 
-  late final GameCubit gameCubit =
-      GameCubit(dailySituationCubit: dailySituationCubit);
+  late final GameCubit gameCubit = GameCubit(
+      dailySituationCubit: dailySituationCubit, optionCubit: optionCubit);
 
   late final OnboardCubit onboardCubit =
       OnboardCubit(sharedPreferences.getBool('firstLoad'));
@@ -108,6 +112,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (_) => choiceCubit,
+          ),
+          BlocProvider(
+            create: (_) => optionCubit,
           ),
         ],
         child: HomePage(),
