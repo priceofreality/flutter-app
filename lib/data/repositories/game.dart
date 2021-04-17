@@ -28,7 +28,7 @@ class GameRepository {
   //dailySituationChoice => financialId => cout
   late Map<int, Map<int, FinancialChoiceCost>> _financialChoicesCosts;
 
-  late List<Definition> _definitions;
+  late List<Definition> _glossary;
 
   // choice.id => additional charge
   Map<int, List<AdditionalCharge>> _additionalChargesOfChoice = {};
@@ -69,7 +69,7 @@ class GameRepository {
     final additionalChargesSql = await _dataProvider.loadAdditionalCharges();
 
     // Get definitions
-    _definitions = definitionsSql.map((d) => Definition.fromTuple(d)).toList();
+    _glossary = definitionsSql.map((d) => Definition.fromTuple(d)).toList();
 
     //get Events for DailySituation
     Map<int, String> events = Map.fromIterable(eventsSql,
@@ -225,7 +225,7 @@ class GameRepository {
   List<DailySituation>? getDailySituationsOfDay(int day) =>
       _dailySituationsPerDay[day];
 
-  List<Definition> getDefinitions() => _definitions;
+  List<Definition> getGlossary() => _glossary;
 
   Map<OptionGroup, List<Option>> getOptionsPerGroup() => _optionsPerGroup;
 

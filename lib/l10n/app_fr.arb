@@ -74,53 +74,5 @@
   "glossary" : "Lexique",
   "@gloassary": {
     "description" : "Gloassary"
-  },
-  "actiris": "Actiris",
-  "@actiris":{
-    "description" : "Actiris"
-  },
-  "actirisDef": "Actiris est l’organisme régional chargé de la politique de l’emploi de Bruxelles-capitale. Les missions principales d’Actiris sont de faciliter le Matching entre chercheur d’emploi et employeur et aider à la transition vers l’emploi. La transition peut se faire à travers des stages, une reprise d’étude,...",
-  "@actirisDef" : {
-    "description": "Actiris description"
-  },
-  "debtMediationService": "Service de médiation de dette",
-  "@debtMediationService":{
-    "description" : "Debt Mediation Service"
-  },
-  "debtMediationServiceDef": "Le service de médiation de dette est une des aides proposées par le CPAS. a comme mission de proposer un accompagnement à toute personne désirant assainir sa situation financière. L'accompagnement a pour but d’aider à trouver un compromis pour vivre décemment et rembourser les dettes. Le médiateur de dette fait le pont entre la personne aidée et le créancier pour trouver un compromis et faire valoir ses droits.",
-  "@debtMediationServiceDef" : {
-    "description": "Debt Mediation Service description"
-  },
-  "neo": "ONEM",
-  "@neo":{
-    "description" : "Neo"
-  },
-  "neoDef": "L’Office National de l’emploi est une institution publique de sécurité sociale responsable principalement de l’organisation l’assurance chômage, d’interruption de carrière et de crédit-temps. Ils sont donc responsables de l’admissibilité d’une personne à l’allocation de chômage et contrôlent le montant. Ils sont responsables de l’intégration sur le marché de l’emploi ou à la reprise après une longue période de chômage et de la gestion des régimes d’allocations lors de la reprise d’un emploi ou pendant le chômage temporaire.",
-  "@neoDef" : {
-    "description": "NEO description"
-  },
-  "capac": "CAPAC",
-  "@capac":{
-    "description" : "Capac"
-  },
-  "capacDef" : "La Caisse auxiliaire de paiement des allocations de chômage est chargée du paiement des allocations de chômage. Elle assure chaque mois le versement d'un revenu de remplacement. La sécurité sociale est principalement financée par : les cotisations des travailleurs salariés et des employeurs ; et l'intervention de l'État. Pour le secteur chômage, les fonds sont gérés par l'ONEM, qui les répartit entre les 4 organismes de paiement des allocations de chômage (la CAPAC et les syndicats) en fonction des paiements effectués.",
-  "@capacDef" : {
-     "description": "NEO description"
-  },
-  "ocmw": "CPAS",
-  "@ocmw":{
-    "description" : "ocmw"
-  },
-  "ocmwDef": "\"centre public d'action sociale\", assure la prestation d'un certain nombre de services sociaux et veille au bien-être de chaque citoyen. Chaque commune ou ville à son propre CPAS offrant un large éventail de services.En Belgique bon nombre de gens disposent de moyens de subsistance insuffisants ou sont parfois sans domicile fixe. Toutes ces personnes peuvent bénéficier de l'assistance sociale du CPAS. Chaque personne résidant légalement en Belgique a droit à une assistance sociale. Cette assistance sociale a pour but de garantir un revenu minimum à l'ensemble de la population.",
-  "@ocmwDef" : {
-    "description" : "OMCW description"
-  },
-  "insurance": "Mutuelle",
-  "@insurance":{
-    "description" : "Insurrance"
-  },
-  "insuranceDef" : "La mutualité est l’organisme qui gère l’assurance obligatoire permettant de bénéficier d’une assurance maladie de base. Si tu travailles ou que tu as plus de 25 ans, tu dois impérativement t’inscrire dans une mutualité pour pouvoir être remboursé des soins de santé, ou toucher des indemnités en cas de souci.Une fois que tu t’es inscrit à une mutualité en tant que titulaire, ta cotisation te couvre ainsi que les personnes à ta charge (tes enfants, les personnes domiciliées chez toi (conjoint, cohabitant, ascendant) et qui ont un revenu inférieur à un plafond déterminé).De façon générale, tu es couvert par la mutuelle de tes parents jusqu’à ce que tu travailles ou jusqu’à tes 25 ans. ",
-  "@insuranceDef" : {
-    "description" : "insurance description"
   }
 }

@@ -3,16 +3,15 @@ import 'package:equatable/equatable.dart';
 class Definition extends Equatable {
   final int id;
   final String label;
-  final String description;
+  final String definition;
 
-  Definition(
-      {required this.id, required this.label, required this.description});
+  Definition({required this.id, required this.label, required this.definition});
 
   factory Definition.fromTuple(Map<String, dynamic> tuple) {
     return Definition(
         id: tuple['id'],
         label: tuple['label'],
-        description: tuple['definition']);
+        definition: tuple['definition']);
   }
 
   @override
