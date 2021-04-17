@@ -58,6 +58,11 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/database/database.db
+    - assets/images/choice.png
+    - assets/images/experiment.jpg
+    - assets/images/explore.png
+    - assets/images/help.png
+    - assets/images/priceofreality.png
 
   fonts:
     - family: Montserrat

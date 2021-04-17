@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:price_of_reality/data/init.dart';
 import 'package:price_of_reality/data/models/daily_situation.dart';
-import 'package:price_of_reality/data/models/financial_situation.dart';
 import 'package:price_of_reality/data/repositories/game.dart';
 import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
 import 'package:price_of_reality/logic/cubit/option_cubit.dart';
@@ -49,9 +48,6 @@ class DailySituationCubit extends Cubit<DailySituationState> {
     _currentOfDay = 0;
   }
 
-  /*void emitFinancialSituation(FinancialSituation financialSituation) =>
-      financialSituationCubit.emitFinancialSituation(financialSituation);*/
-
   void emitNextDailySituation() {
     final dailySituation = state.current;
     final choice = choiceCubit.state.selected!;
@@ -85,7 +81,6 @@ class DailySituationCubit extends Cubit<DailySituationState> {
 
       emit(
           DailySituationState(dailySituations, dailySituations[_currentOfDay]));
-      //choiceCubit.emitChoices(dailySituations[_currentOfDay].choices);
 
       choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
           financialSituationId,
@@ -101,7 +96,6 @@ class DailySituationCubit extends Cubit<DailySituationState> {
 
     emit(DailySituationState(
         dailySituations, state.dailySituations[_currentOfDay]));
-    //choiceCubit.emitChoices(state.current.choices);
 
     choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
         financialSituationId,

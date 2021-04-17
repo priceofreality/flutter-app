@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:price_of_reality/data/models/choice.dart';
-import 'package:price_of_reality/data/models/daily_situation.dart';
 import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
 import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
 import 'package:price_of_reality/logic/cubit/daily_situation_cubit.dart';
@@ -9,41 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:price_of_reality/presentation/widgets/custom_radio_button.dart';
 import 'package:price_of_reality/presentation/widgets/custom_slider.dart';
 
-class DailySituationPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (conext, orientation) {
-        if (orientation == Orientation.portrait) {
-          final padding = EdgeInsets.symmetric(horizontal: 14.0);
-          final eventPadding =
-              EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0);
-          return DailySituationView(
-              padding: padding, eventPadding: eventPadding);
-        }
-        final width = MediaQuery.of(context).size.width;
-        double horizontalPadding = width / 6;
-        double event = width / 7;
-        final padding = EdgeInsets.only(
-          left: horizontalPadding,
-          right: horizontalPadding,
-          top: 30.0,
-          bottom: 10.0,
-        );
-        final eventPadding =
-            EdgeInsets.symmetric(vertical: 20.0, horizontal: event);
-        return DailySituationView(padding: padding, eventPadding: eventPadding);
-      },
-    );
-  }
-}
-
-class DailySituationView extends StatelessWidget {
-  final EdgeInsets padding;
-  final EdgeInsets eventPadding;
-
-  DailySituationView({required this.padding, required this.eventPadding});
-
+class RunningGamePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -75,32 +41,52 @@ class DailySituationView extends StatelessWidget {
                 minHeight:
                     MediaQuery.of(context).size.height - kToolbarHeight - 200.0,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Event(eventPadding: eventPadding),
-                  SizedBox(height: 20.0),
-                  Padding(
-                    padding: padding,
-                    child: Container(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20.0),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Budget(),
-                          ),
-                          SizedBox(height: 20.0),
-                          Choices(),
-                        ],
+              child: BlocBuilder<DailySituationCubit, DailySituationState>(
+                  builder: (context, state) {
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 350),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    return SlideTransition(
+                      transformHitTests: false,
+                      position: new Tween<Offset>(
+                        begin: const Offset(1.5, 0.0),
+                        end: const Offset(0.0, 0.0),
+                      ).animate(animation),
+                      child: child,
+                    );
+                  },
+                  child: Column(
+                    key: ValueKey<int>(state.current.id),
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Event(
+                        event: state.current.event,
                       ),
-                    ),
+                      SizedBox(height: 20.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 14.0),
+                        child: Container(
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20.0),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Budget(),
+                              ),
+                              SizedBox(height: 20.0),
+                              Choices(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              }),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -147,23 +133,20 @@ class TopBar extends StatelessWidget {
 }
 
 class Event extends StatelessWidget {
-  final EdgeInsets eventPadding;
+  final String event;
 
-  Event({required this.eventPadding});
+  Event({required this.event});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DailySituationCubit, DailySituationState>(
-        builder: (context, state) {
-      return Container(
-        alignment: Alignment.center,
-        padding: eventPadding,
-        child: Text(
-          state.current.event,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23.0),
-        ),
-      );
-    });
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+      child: Text(
+        event,
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23.0),
+      ),
+    );
   }
 }
 
@@ -281,7 +264,7 @@ class NextButton extends StatelessWidget {
         ),
         onPressed: disable == null
             ? null
-            : () => Future.delayed(Duration(milliseconds: 230)).then((value) =>
+            : () => Future.delayed(Duration(milliseconds: 50)).then((value) =>
                 context.read<DailySituationCubit>().emitNextDailySituation()),
         child: Text(
           AppLocalizations.of(context)!.next.toUpperCase(),

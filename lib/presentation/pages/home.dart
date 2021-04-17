@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:price_of_reality/constants/routes.dart';
 import 'package:price_of_reality/logic/cubit/game_cubit.dart';
 import 'package:price_of_reality/logic/cubit/onboard_cubit.dart';
-import 'package:price_of_reality/presentation/pages/daily_situation.dart';
+import 'package:price_of_reality/presentation/pages/running_game.dart';
 import 'package:price_of_reality/presentation/pages/end_game.dart';
 import 'package:price_of_reality/presentation/pages/onboard.dart';
 import 'package:price_of_reality/presentation/pages/start_game.dart';
@@ -27,7 +27,7 @@ extension on Action {
 }
 
 class HomePage extends StatelessWidget {
-  _gotoGlossary(BuildContext context) => Navigator.of(context).pushNamed(
+  _goToGlossary(BuildContext context) => Navigator.of(context).pushNamed(
         GLOSSARY_PAGE,
       );
 
@@ -40,7 +40,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OnboardCubit, bool?>(builder: (context, state) {
       if (state == null || state == true) {
-        //CHANGE TO TRUE
         return OnBoardPage();
       }
       return Scaffold(
@@ -54,7 +53,7 @@ class HomePage extends StatelessWidget {
                   case Action.NewGame:
                     return context.read<GameCubit>().emitNewGame();
                   case Action.Glossary:
-                    return _gotoGlossary(context);
+                    return _goToGlossary(context);
                   case Action.ExitGame:
                     return _exitGame();
                 }
@@ -74,7 +73,7 @@ class HomePage extends StatelessWidget {
           child: BlocBuilder<GameCubit, GameState>(
             builder: (context, state) {
               if (state is GameFinishedState) return EndGamePage();
-              if (state is GameRunningState) return DailySituationPage();
+              if (state is GameRunningState) return RunningGamePage();
 
               return StartGamePage();
             },

@@ -26,6 +26,7 @@ class GameCubit extends Cubit<GameState> {
 
   void emitStartGame() {
     //add selections
+
     optionCubit.emitDailySituations();
     dailySituationCubit.emitStart();
     emit(GameRunningState());

@@ -9,11 +9,6 @@ class OptionCubit extends Cubit<OptionState> {
   static GameRepository gameRepository = GameRepository();
 
   OptionCubit() : super(OptionState(gameRepository.optionsPerGroup, []));
-  /*
-  void emitOptions() {
-    print(gameRepository.getOptions());
-    emit(OptionState(gameRepository.getOptions(), []));
-  }*/
 
   void emitSelectOption(bool checked, Option option) {
     List<Option> selected = state.selected;

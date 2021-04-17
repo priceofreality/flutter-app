@@ -14,7 +14,6 @@ import 'package:price_of_reality/logic/cubit/game_cubit.dart';
 import 'package:price_of_reality/presentation/pages/error.dart';
 import 'package:price_of_reality/presentation/pages/glossary.dart';
 import 'package:price_of_reality/presentation/pages/home.dart';
-import 'package:price_of_reality/presentation/pages/onboard.dart';
 import 'package:price_of_reality/presentation/pages/summary.dart';
 import 'package:price_of_reality/presentation/router/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

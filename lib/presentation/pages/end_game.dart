@@ -15,8 +15,8 @@ class EndGamePage extends StatelessWidget {
           : showDialog(
               barrierDismissible: true,
               context: context,
-              builder: (_) =>
-                  AlertDialog(title: Text('Impossible de charger l\'url')));
+              builder: (_) => AlertDialog(
+                  title: Text(AppLocalizations.of(context)!.launchUrlError)));
 
   @override
   Widget build(BuildContext context) {

@@ -2,15 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:price_of_reality/data/models/choice.dart';
 import 'package:price_of_reality/data/models/daily_situation.dart';
-import 'package:price_of_reality/data/models/financial_situation.dart';
 import 'package:price_of_reality/data/models/transaction.dart';
-import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
 
 part 'transaction_state.dart';
 
 class TransactionCubit extends Cubit<TransactionState> {
-  //final FinancialSituationCubit financialSituationCubit;
-
   TransactionCubit() : super(TransactionInitialState(0));
 
   emitBudget(double budget) {
