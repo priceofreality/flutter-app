@@ -23,7 +23,7 @@ class GlossaryPage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Center(
                     child: Text(
-                      gameRepository.getGlossary()[index].label,
+                      gameRepository.glossary[index].label,
                       style: TextStyle(
                           fontWeight: FontWeight.w500, fontSize: 16.0),
                     ),
@@ -32,11 +32,11 @@ class GlossaryPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 7.0, bottom: 10.0),
                   child: Text(
-                    gameRepository.getGlossary()[index].definition,
+                    gameRepository.glossary[index].definition,
                     style: TextStyle(fontSize: 15.0),
                   ),
                 ),
-                if (index < gameRepository.getGlossary().length - 1)
+                if (index < gameRepository.glossary.length - 1)
                   Divider(
                     thickness: 1.5,
                     color: Theme.of(context).buttonColor,
@@ -44,7 +44,7 @@ class GlossaryPage extends StatelessWidget {
               ],
             );
           },
-          itemCount: gameRepository.getGlossary().length,
+          itemCount: gameRepository.glossary.length,
         ),
       ),
     );
