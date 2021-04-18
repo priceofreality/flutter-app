@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:price_of_reality/data/db/options.dart' as options;
+import 'package:price_of_reality/data/db/situations_options.dart' as options;
 
 class FinancialSituation extends Equatable {
   final int id;
@@ -21,7 +21,7 @@ class FinancialSituation extends Equatable {
           label: tuple['label'],
           initialBudget: tuple['budget'],
           familySituation:
-              options.FamilySituation.values[tuple['familial_situation']],
+              options.FamilySituation.values[tuple['family_situation']],
           professionalSituation: options
               .ProfessionalSituation.values[tuple['professional_situation']]);
 

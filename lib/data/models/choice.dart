@@ -16,11 +16,11 @@ class Choice extends Equatable {
       this.maxCost,
       this.unlockDailySituation});
 
-  factory Choice.fromTuple(
-      Map<String, dynamic> tuple, Map<int, String> choices) {
+  factory Choice.fromTuple(Map<String, dynamic> tuple, Map<int, String> choices,
+      Map<int, List<int>> unlockDailySituations) {
     List<int> unlocks = [];
-    if (tuple['unlock_daily_situation'] != null) {
-      unlocks.add(tuple['unlock_daily_situation']);
+    if (unlockDailySituations[tuple['id']] != null) {
+      unlocks = unlockDailySituations[tuple['id']]!;
     }
     return Choice(
         id: tuple['id'],

@@ -8,6 +8,15 @@ class ErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(message ?? AppLocalizations.of(context)!.somethingWentWrong);
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Text(
+            message ?? AppLocalizations.of(context)!.somethingWentWrong,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
   }
 }

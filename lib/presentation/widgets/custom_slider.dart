@@ -6,8 +6,6 @@ class CustomSlider extends StatefulWidget {
   final int divisions;
   final ValueChanged<double> onChanged;
 
-  late double _currentSliderValue = minValue;
-
   void _handleOnChanged(double value) {
     onChanged(value);
   }
@@ -23,25 +21,33 @@ class CustomSlider extends StatefulWidget {
 }
 
 class _CustomSliderState extends State<CustomSlider> {
+  double _currentSliderValue = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentSliderValue = widget.minValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          '-${widget._currentSliderValue}€',
+          '-$_currentSliderValue€',
           style: TextStyle(fontSize: 14.7),
         ),
         Slider(
           onChangeEnd: widget._handleOnChanged,
           activeColor: Theme.of(context).buttonColor,
-          value: widget._currentSliderValue,
+          value: _currentSliderValue,
           min: widget.minValue,
           max: widget.maxValue,
           divisions: widget.divisions,
-          label: widget._currentSliderValue.round().toString(),
+          label: _currentSliderValue.round().toString(),
           onChanged: (double value) {
             setState(() {
-              widget._currentSliderValue = value;
+              _currentSliderValue = value;
             });
           },
         ),

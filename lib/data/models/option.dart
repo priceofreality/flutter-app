@@ -1,18 +1,22 @@
 import 'package:equatable/equatable.dart';
-import 'package:price_of_reality/data/models/group.dart';
+import 'package:price_of_reality/data/models/option_group.dart';
 
 class Option extends Equatable {
   final int id;
   final String label;
-  final Group? group;
+  final OptionGroup optionGroup;
 
-  Option({required this.id, required this.label, this.group});
+  Option({required this.id, required this.label, required this.optionGroup});
 
-  factory Option.fromTuple(Map<String, dynamic> tuple, Map<int, Group> groups) {
+  factory Option.fromTuple(
+      Map<String, dynamic> tuple, Map<int, OptionGroup> groups) {
+    print(tuple['option_group']);
+    print(groups);
+    print(groups[tuple['option_group']]);
     return Option(
         id: tuple['id'],
         label: tuple['label'],
-        group: (tuple['group'] != null) ? groups[tuple['group']] : null);
+        optionGroup: groups[tuple['option_group']]!);
   }
 
   @override

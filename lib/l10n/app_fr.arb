@@ -42,5 +42,81 @@
   "loading" : "Chargement",
   "@loading" : {
     "description": "Loading"
+  },
+  "understand" : "J'ai compris",
+  "@understand" : {
+    "description": "I understand"
+  },
+  "endGamePositiveBudget": "Félicitations! Tu t’en es bien sorti. Ton budget s’élève à {budget}€. Néanmoins, tu as pu remarquer qu’il était assez difficile de pouvoir gérer son budget car même si tu crois connaître tes dépenses, il y’a toujours des imprévus...",
+  "@endGamePositiveBudget": {
+    "description": "End game text when buget is positive",
+    "type": "text",
+    "placeholders": {
+      "budget": {}
+    }
+  },
+  "endGameNegativeBudget": "Malheureusement ton budget est en négatif! Tu as {budget}€ sur ton compte en banque. Tu as pu remarquer qu’il était assez difficile de pouvoir gérer son budget car même si tu crois connaître tes dépenses, il y’a toujours des imprévus...",
+  "@endGameNegativeBudget": {
+    "description": "End game text when buget is negative",
+    "type": "text",
+    "placeholders": {
+      "budget": {}
+    }
+  },
+  "endGameBudgetP1" : "Cette situation ne doit pas te faire peur, en Belgique il existe plusieurs institutions et outils qui sont à la disposition des citoyens dans le besoin pour leur venir en aide tels que Wakosta, Pilotbudget ou encore budgeta qui t’aideront à mieux prévoir et organiser ton budget. En ce qui concerne le service de médiation de dettes, ils proposent une boîte à outils sur leur site internet.", 
+  "@endGameBudgetP1": {
+    "description": "End game text"
+  },
+  "endGameBudgetP2" : "Nous te conseillons de jeter un œil sur leur site internet ou de les contacter si nécessaire.",
+  "@endGameBudgetP2": {
+    "description": "End game text"
+  },
+  "glossary" : "Lexique",
+  "@glossary": {
+    "description" : "Glossary"
+  },
+  "launchUrlError": "Impossible de charger l'url",
+  "@launchUrlError": {
+    "description": "Impossible de charger l'url"
+  },
+  "options" : "Options",
+  "@options": {
+    "description" : "Options"
+  },
+  "yourTurn": "A vous de jouer",
+  "@yourturn": {
+    "description": "Your turn to play"
+  },
+  "experiment": "Expérimenter",
+  "@experiment": {
+    "description": "Experiment"
+  },
+  "experimentDef": "Vivre une expérience mensuelle d’une personne vivant en situation de précarité financière",
+  "@experimentDef": {
+    "description": "Experiment definition"
+  },
+  "yourChoices": "Faire vos choix",
+  "@yourChoices": {
+    "description": "Make your choices"
+  },
+  "yourChoicesDef": "Dans ce jeu, vous êtes le seul maître de la gestion de votre budget",
+  "@yourChoicesDef": {
+    "description": "Make your choices defintion"
+  },
+  "explore": "Explorer les alternatives",
+  "@explore": {
+    "description": "Explore alternatives"
+  },
+  "exploreDef": "Le jeu \"le prix de la réalité\" propose un panel de situations différentes",
+  "@exploreDef": {
+    "description": "Explore alternatives definiton"
+  },
+  "getHelp": "S’aider et se faire accompagner",
+  "@getHelp": {
+    "description": "Get help"
+  },
+  "getHelpDef": "S’aider et se faire accompagner à l’aide de différentes applications et endroits proposés par la Belgique pour apprendre à gérer son budget",
+  "@getHelpDef": {
+    "description": "Get help defintion"
   }
 }
