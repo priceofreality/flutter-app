@@ -1,5 +1,5 @@
 --
--- File generated with SQLiteStudio v3.3.2 on ven. avr. 16 15:41:26 2021
+-- File generated with SQLiteStudio v3.2.1 on dim. avr. 18 19:10:34 2021
 --
 -- Text encoding used: System
 --
@@ -7,8 +7,6 @@ PRAGMA foreign_keys = off;
 BEGIN TRANSACTION;
 
 -- Table: additional_charges
-DROP TABLE IF EXISTS additional_charges;
-
 CREATE TABLE additional_charges (
     option                 INTEGER NOT NULL
                                    REFERENCES options (id),
@@ -34,8 +32,6 @@ INSERT INTO additional_charges (
 
 
 -- Table: choices
-DROP TABLE IF EXISTS choices;
-
 CREATE TABLE choices (
     id    INTEGER PRIMARY KEY,
     label TEXT    NOT NULL
@@ -356,10 +352,134 @@ INSERT INTO choices (
                         'S’arrêter là'
                     );
 
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        35,
+                        'Paquet de cigarettes industrielle'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        36,
+                        'Tabac à rouler'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        37,
+                        'Payer'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        38,
+                        'Acheter'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        39,
+                        'Payer les frais'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        40,
+                        'Tu prends le taxi'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        41,
+                        'Tu prends le transport en commun STIB'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        42,
+                        'Tu tentes de frauder en prenant le train SNCB sans ticket'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        43,
+                        'Payer tout de suite le ticket tarif à bord'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        44,
+                        'Ne pas payer le ticket tarif à bord'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        45,
+                        'Demande de régularisation à faire'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        46,
+                        'Ne fait pas la régularisation'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        47,
+                        'Payer l''amende  administrative de la SNCB'
+                    );
+
+INSERT INTO choices (
+                        id,
+                        label
+                    )
+                    VALUES (
+                        48,
+                        'Participer au cadeau commun'
+                    );
+
 
 -- Table: daily_situation_choices
-DROP TABLE IF EXISTS daily_situation_choices;
-
 CREATE TABLE daily_situation_choices (
     id                     INTEGER PRIMARY KEY,
     daily_situation        INTEGER REFERENCES daily_situations (id) 
@@ -1195,10 +1315,458 @@ INSERT INTO daily_situation_choices (
                                         1
                                     );
 
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        56,
+                                        30,
+                                        35,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        57,
+                                        30,
+                                        36,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        58,
+                                        31,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        59,
+                                        32,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        60,
+                                        33,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        61,
+                                        34,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        62,
+                                        35,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        63,
+                                        36,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        64,
+                                        37,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        65,
+                                        38,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        66,
+                                        39,
+                                        38,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        67,
+                                        40,
+                                        39,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        68,
+                                        41,
+                                        40,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        69,
+                                        41,
+                                        41,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        70,
+                                        41,
+                                        42,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        71,
+                                        42,
+                                        43,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        72,
+                                        42,
+                                        44,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        73,
+                                        43,
+                                        45,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        74,
+                                        43,
+                                        46,
+                                        48,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        75,
+                                        44,
+                                        35,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        76,
+                                        44,
+                                        36,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        77,
+                                        45,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        78,
+                                        46,
+                                        35,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        79,
+                                        46,
+                                        36,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        80,
+                                        47,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        81,
+                                        48,
+                                        47,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        82,
+                                        49,
+                                        35,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        83,
+                                        49,
+                                        36,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        84,
+                                        50,
+                                        37,
+                                        NULL,
+                                        0
+                                    );
+
+INSERT INTO daily_situation_choices (
+                                        id,
+                                        daily_situation,
+                                        choice,
+                                        unlock_daily_situation,
+                                        concludes
+                                    )
+                                    VALUES (
+                                        85,
+                                        51,
+                                        48,
+                                        NULL,
+                                        0
+                                    );
+
 
 -- Table: daily_situations
-DROP TABLE IF EXISTS daily_situations;
-
 CREATE TABLE daily_situations (
     id     INTEGER PRIMARY KEY,
     day    INTEGER NOT NULL,
@@ -1346,7 +1914,7 @@ INSERT INTO daily_situations (
                              )
                              VALUES (
                                  10,
-                                 31,
+                                 32,
                                  10,
                                  0
                              );
@@ -1598,10 +2166,294 @@ INSERT INTO daily_situations (
                                  1
                              );
 
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 30,
+                                 2,
+                                 24,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 31,
+                                 2,
+                                 25,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 32,
+                                 4,
+                                 26,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 33,
+                                 4,
+                                 27,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 34,
+                                 4,
+                                 28,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 35,
+                                 4,
+                                 29,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 36,
+                                 4,
+                                 30,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 37,
+                                 4,
+                                 31,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 38,
+                                 4,
+                                 32,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 39,
+                                 9,
+                                 33,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 40,
+                                 12,
+                                 34,
+                                 0
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 41,
+                                 13,
+                                 35,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 42,
+                                 13,
+                                 36,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 43,
+                                 13,
+                                 37,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 44,
+                                 16,
+                                 24,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 45,
+                                 16,
+                                 25,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 46,
+                                 23,
+                                 24,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 47,
+                                 27,
+                                 38,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 48,
+                                 28,
+                                 39,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 49,
+                                 30,
+                                 24,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 50,
+                                 30,
+                                 25,
+                                 1
+                             );
+
+INSERT INTO daily_situations (
+                                 id,
+                                 day,
+                                 event,
+                                 locked
+                             )
+                             VALUES (
+                                 51,
+                                 15,
+                                 40,
+                                 0
+                             );
+
 
 -- Table: events
-DROP TABLE IF EXISTS events;
-
 CREATE TABLE events (
     id    INTEGER PRIMARY KEY,
     label TEXT    NOT NULL
@@ -1823,10 +2675,161 @@ INSERT INTO events (
                        'Il est temps de rentrer'
                    );
 
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       24,
+                       'Achat de tabac'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       25,
+                       'Il est temps de faire le plein d''essence'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       26,
+                       'Payer l''abonnement internet-télévision-Smartphone'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       27,
+                       'Payer l''abonnement internet-télévision'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       28,
+                       'Payer l''abonnement internet - téléphone'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       29,
+                       'Payer l''abonnement télévision - smartphone'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       30,
+                       'Payer l''abonnement internet'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       31,
+                       'Payer l''abonnement télévision'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       32,
+                       'Payer l''abonnement smartphone'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       33,
+                       'Achat d''un briquet'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       34,
+                       'Accident – frais médicaux occasionnels'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       35,
+                       'Tu dois te rendre à l’autre bout de la capitale…'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       36,
+                       'Pas de chance : contrôle des titres de transport dans le train'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       37,
+                       'Si ne paye pas le ticket tarif à bord'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       38,
+                       'Assurance obligatoire RC voiture'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       39,
+                       'L''amende administrative de la sncb est arrivée par recommandé.'
+                   );
+
+INSERT INTO events (
+                       id,
+                       label
+                   )
+                   VALUES (
+                       40,
+                       'C’est l’anniversaire surprise de Mich-Mich, ton meilleur ami'
+                   );
+
 
 -- Table: financial_choice_costs
-DROP TABLE IF EXISTS financial_choice_costs;
-
 CREATE TABLE financial_choice_costs (
     financial_situation    INTEGER NOT NULL
                                    REFERENCES financial_situations (id),
@@ -3439,10 +4442,5780 @@ INSERT INTO financial_choice_costs (
                                        NULL
                                    );
 
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       1,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       1,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       1,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       1,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       1,
+-                                      700.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       1,
+-                                      1000.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       3,
+-                                      50.0,
+                                       100.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       3,
+-                                      30.0,
+                                       80.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       3,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       3,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       3,
+-                                      80.0,
+                                       130.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       56,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       57,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       58,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       4,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       4,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       4,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       4,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       4,
+-                                      700.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       4,
+-                                      1000.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       59,
+-                                      70.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       59,
+-                                      70.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       59,
+-                                      70.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       59,
+-                                      80.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       59,
+-                                      80.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       59,
+-                                      86.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       59,
+-                                      86.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       59,
+-                                      86.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       59,
+-                                      95.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       59,
+-                                      95.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       60,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       61,
+-                                      55.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       62,
+-                                      27.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       62,
+-                                      27.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       62,
+-                                      27.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       62,
+-                                      43.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       62,
+-                                      43.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       62,
+-                                      43.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       62,
+-                                      43.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       62,
+-                                      43.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       62,
+-                                      61.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       62,
+-                                      61.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       63,
+-                                      30.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       64,
+-                                      11.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       64,
+-                                      7.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       64,
+-                                      7.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       64,
+-                                      7.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       64,
+-                                      7.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       64,
+-                                      7.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       64,
+-                                      7.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       64,
+-                                      7.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       64,
+-                                      7.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       64,
+-                                      7.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       65,
+-                                      19.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       65,
+-                                      19.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       65,
+-                                      19.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       65,
+-                                      34.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       65,
+-                                      34.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       65,
+-                                      34.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       65,
+-                                      34.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       65,
+-                                      34.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       65,
+-                                      54.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       65,
+-                                      54.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       25,
+-                                      16.49,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       25,
+-                                      16.49,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       25,
+-                                      16.49,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       25,
+-                                      16.49,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       25,
+-                                      16.49,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       25,
+-                                      16.49,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       26,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       26,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       26,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       26,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       26,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       26,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       7,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       7,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       7,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       7,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       7,
+-                                      700.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       7,
+-                                      1000.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       9,
+-                                      40.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       9,
+-                                      40.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       9,
+-                                      100.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       9,
+-                                      100.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       9,
+-                                      100.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       9,
+-                                      100.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       11,
+-                                      550.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       11,
+-                                      550.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       11,
+-                                      990.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       11,
+-                                      990.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       11,
+-                                      770.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       11,
+-                                      1100.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       28,
+-                                      50.0,
+                                       100.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       28,
+-                                      30.0,
+                                       80.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       28,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       28,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       28,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       28,
+-                                      80.0,
+                                       130.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       66,
+-                                      80.0,
+                                       1.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       13,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       13,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       13,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       13,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       13,
+-                                      700.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       13,
+-                                      1000.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       29,
+-                                      427.6,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       29,
+-                                      407.2,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       67,
+-                                      20.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       68,
+-                                      35.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       69,
+-                                      10.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       71,
+-                                      12.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       73,
+-                                      75.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       32,
+-                                      50.0,
+                                       100.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       32,
+-                                      30.0,
+                                       80.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       32,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       32,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       32,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       32,
+-                                      80.0,
+                                       130.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       75,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       76,
+-                                      9.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       77,
+-                                      37.48,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       33,
+-                                      15.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       33,
+-                                      15.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       33,
+-                                      15.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       33,
+-                                      15.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       33,
+-                                      15.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       33,
+-                                      15.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       35,
+-                                      9.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       35,
+-                                      9.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       35,
+-                                      9.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       35,
+-                                      9.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       35,
+-                                      9.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       35,
+-                                      9.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       36,
+-                                      14.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       36,
+-                                      14.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       36,
+-                                      14.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       36,
+-                                      14.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       36,
+-                                      14.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       36,
+-                                      14.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       37,
+-                                      29.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       37,
+-                                      29.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       37,
+-                                      29.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       37,
+-                                      29.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       37,
+-                                      29.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       37,
+-                                      29.99,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       38,
+-                                      21.67,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       38,
+-                                      19.98,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       38,
+-                                      28.68,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       38,
+-                                      27.92,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       38,
+-                                      23.64,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       38,
+-                                      28.85,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       15,
+-                                      47.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       15,
+-                                      47.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       15,
+-                                      107.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       15,
+-                                      107.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       15,
+-                                      107.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       15,
+-                                      107.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       41,
+-                                      50.0,
+                                       100.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       41,
+-                                      30.0,
+                                       80.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       41,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       41,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       41,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       41,
+-                                      80.0,
+                                       130.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       78,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       79,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       42,
+-                                      2.2,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       42,
+-                                      2.2,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       42,
+-                                      2.2,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       42,
+-                                      2.2,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       42,
+-                                      2.2,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       42,
+-                                      2.2,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       43,
+-                                      6.9,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       43,
+-                                      6.9,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       43,
+-                                      6.9,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       43,
+-                                      6.9,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       43,
+-                                      6.9,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       43,
+-                                      6.9,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       44,
+                                       0.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       44,
+                                       0.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       44,
+                                       0.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       44,
+                                       0.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       44,
+                                       0.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       44,
+                                       0.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       45,
+-                                      4.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       45,
+-                                      4.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       45,
+-                                      4.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       45,
+-                                      4.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       45,
+-                                      4.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       45,
+-                                      4.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       80,
+-                                      24.7,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       81,
+-                                      250.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       46,
+-                                      50.0,
+                                       100.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       46,
+-                                      30.0,
+                                       80.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       46,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       46,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       46,
+-                                      70.0,
+                                       120.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       46,
+-                                      80.0,
+                                       130.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       82,
+-                                      6.5,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       83,
+-                                      9.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       84,
+-                                      34.79,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       84,
+-                                      34.79,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       84,
+-                                      34.79,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       84,
+-                                      34.79,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       84,
+-                                      34.79,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       84,
+-                                      34.79,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       84,
+-                                      34.79,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       84,
+-                                      34.79,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       84,
+-                                      34.79,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       20,
+-                                      715.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       20,
+-                                      984.68,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       20,
+-                                      1135.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       20,
+-                                      1312.9,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       20,
+-                                      980.72,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       20,
+-                                      1330.74,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       49,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       49,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       49,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       49,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       49,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       49,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       50,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       50,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       50,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       50,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       50,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       50,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       52,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       52,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       52,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       52,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       52,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       52,
+-                                      14.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       53,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       53,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       53,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       53,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       53,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       53,
+-                                      3.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       0,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       1,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       2,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       3,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       85,
+                                       0.0,
+                                       50.0
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       4,
+                                       21,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       5,
+                                       21,
+-                                      500.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       6,
+                                       21,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       7,
+                                       21,
+-                                      900.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       8,
+                                       21,
+-                                      700.0,
+                                       NULL
+                                   );
+
+INSERT INTO financial_choice_costs (
+                                       financial_situation,
+                                       daily_situation_choice,
+                                       min_cost,
+                                       max_cost
+                                   )
+                                   VALUES (
+                                       9,
+                                       21,
+-                                      1000.0,
+                                       NULL
+                                   );
+
 
 -- Table: financial_daily_situations
-DROP TABLE IF EXISTS financial_daily_situations;
-
 CREATE TABLE financial_daily_situations (
     financial_situation INTEGER REFERENCES financial_situations (id),
     daily_situation     INTEGER REFERENCES daily_situations (id),
@@ -3479,10 +10252,26 @@ INSERT INTO financial_daily_situations (
                                            22
                                        );
 
+INSERT INTO financial_daily_situations (
+                                           financial_situation,
+                                           daily_situation
+                                       )
+                                       VALUES (
+                                           6,
+                                           16
+                                       );
+
+INSERT INTO financial_daily_situations (
+                                           financial_situation,
+                                           daily_situation
+                                       )
+                                       VALUES (
+                                           9,
+                                           16
+                                       );
+
 
 -- Table: financial_situations
-DROP TABLE IF EXISTS financial_situations;
-
 CREATE TABLE financial_situations (
     id                     INTEGER PRIMARY KEY,
     label                  TEXT    NOT NULL,
@@ -3551,10 +10340,98 @@ INSERT INTO financial_situations (
                                      1
                                  );
 
+INSERT INTO financial_situations (
+                                     id,
+                                     label,
+                                     budget,
+                                     family_situation,
+                                     professional_situation
+                                 )
+                                 VALUES (
+                                     4,
+                                     '1.B (Isolé.e)',
+                                     715.0,
+                                     0,
+                                     1
+                                 );
+
+INSERT INTO financial_situations (
+                                     id,
+                                     label,
+                                     budget,
+                                     family_situation,
+                                     professional_situation
+                                 )
+                                 VALUES (
+                                     5,
+                                     '1.C (Isolé.e)',
+                                     715.0,
+                                     0,
+                                     2
+                                 );
+
+INSERT INTO financial_situations (
+                                     id,
+                                     label,
+                                     budget,
+                                     family_situation,
+                                     professional_situation
+                                 )
+                                 VALUES (
+                                     6,
+                                     '2.D (Famille Monoparentale)',
+                                     1135.0,
+                                     1,
+                                     3
+                                 );
+
+INSERT INTO financial_situations (
+                                     id,
+                                     label,
+                                     budget,
+                                     family_situation,
+                                     professional_situation
+                                 )
+                                 VALUES (
+                                     7,
+                                     '3.C (En couple)',
+                                     1312.9,
+                                     2,
+                                     2
+                                 );
+
+INSERT INTO financial_situations (
+                                     id,
+                                     label,
+                                     budget,
+                                     family_situation,
+                                     professional_situation
+                                 )
+                                 VALUES (
+                                     8,
+                                     '3.D (En couple)',
+                                     1312.9,
+                                     2,
+                                     3
+                                 );
+
+INSERT INTO financial_situations (
+                                     id,
+                                     label,
+                                     budget,
+                                     family_situation,
+                                     professional_situation
+                                 )
+                                 VALUES (
+                                     9,
+                                     '4.C (Couple avec enfants)',
+                                     1330.74,
+                                     3,
+                                     2
+                                 );
+
 
 -- Table: glossary
-DROP TABLE IF EXISTS glossary;
-
 CREATE TABLE glossary (
     id         INTEGER PRIMARY KEY,
     label      TEXT    NOT NULL,
@@ -3627,10 +10504,32 @@ INSERT INTO glossary (
                          'La mutualité est l’organisme qui gère l’assurance obligatoire permettant de bénéficier d’une assurance maladie de base. Si tu travailles ou que tu as plus de 25 ans, tu dois impérativement t’inscrire dans une mutualité pour pouvoir être remboursé des soins de santé, ou toucher des indemnités en cas de souci.Une fois que tu t’es inscrit à une mutualité en tant que titulaire, ta cotisation te couvre ainsi que les personnes à ta charge (tes enfants, les personnes domiciliées chez toi (conjoint, cohabitant, ascendant) et qui ont un revenu inférieur à un plafond déterminé).De façon générale, tu es couvert par la mutuelle de tes parents jusqu’à ce que tu travailles ou jusqu’à tes 25 ans. '
                      );
 
+INSERT INTO glossary (
+                         id,
+                         label,
+                         definition
+                     )
+                     VALUES (
+                         7,
+                         'Société de recouvrement',
+                         'Une société de recouvrement est un intermédiaire qui va aider le créancier, à la demande de ce dernier, à récupérer sa créance chez son débiteur.'
+                     );
+
+INSERT INTO glossary (
+                         id,
+                         label,
+                         definition
+                     )
+                     VALUES (
+                         8,
+                         'Etre syndiqué',
+                         'Une personne syndiquée est une personne qui choisit d''adhérer à une organisation syndicale.
+                         C’est avant tout trouver du soutien lorsque l’on en a besoin. C’est aussi aider les autres à différents degrés selon votre implication. C’est enfin l’opportunité de faire des rencontres, de participer à des échanges aussi constructifs qu’intéressants et de participer à la vie de votre entreprise.
+                         Il n’existe pas de condition particulière requise pour appartenir à un syndicat (sauf évidemment, l’obligation de payer la cotisation annuelle demandée par l’organisation elle-même).'
+                     );
+
 
 -- Table: option_daily_situations
-DROP TABLE IF EXISTS option_daily_situations;
-
 CREATE TABLE option_daily_situations (
     option          INTEGER NOT NULL
                             REFERENCES options (id),
@@ -3648,33 +10547,202 @@ INSERT INTO option_daily_situations (
                                     )
                                     VALUES (
                                         1,
-                                        0
+                                        30
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        1,
+                                        39
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        1,
+                                        44
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        1,
+                                        46
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        1,
+                                        49
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        2,
+                                        45
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        2,
+                                        47
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        2,
+                                        50
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        10,
+                                        41
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        10,
+                                        42
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        10,
+                                        43
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        3,
+                                        32
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        4,
+                                        33
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        5,
+                                        34
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        6,
+                                        35
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        7,
+                                        36
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        8,
+                                        37
+                                    );
+
+INSERT INTO option_daily_situations (
+                                        option,
+                                        daily_situation
+                                    )
+                                    VALUES (
+                                        9,
+                                        38
                                     );
 
 
 -- Table: option_groups
-DROP TABLE IF EXISTS option_groups;
-
 CREATE TABLE option_groups (
     id    INTEGER PRIMARY KEY,
     label TEXT    NOT NULL
 );
 
 INSERT INTO option_groups (
-                        id,
-                        label
-                    )
-                    VALUES (
-                        1,
-                        'Divers'
-                    );
+                              id,
+                              label
+                          )
+                          VALUES (
+                              1,
+                              'Divers'
+                          );
+
+INSERT INTO option_groups (
+                              id,
+                              label
+                          )
+                          VALUES (
+                              2,
+                              'Telecom'
+                          );
+
+INSERT INTO option_groups (
+                              id,
+                              label
+                          )
+                          VALUES (
+                              3,
+                              'Transports'
+                          );
+
 
 -- Table: options
-DROP TABLE IF EXISTS options;
-
 CREATE TABLE options (
     id           INTEGER PRIMARY KEY,
-    option_group INTEGER NOT NULL REFERENCES option_groups (id),
+    option_group INTEGER NOT NULL
+                         REFERENCES option_groups (id),
     label        TEXT    NOT NULL
 );
 
@@ -3686,7 +10754,117 @@ INSERT INTO options (
                     VALUES (
                         1,
                         1,
-                        'Smoker'
+                        'Fumeur'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        2,
+                        3,
+                        'Véhicule'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        3,
+                        2,
+                        'Ordinateur + télévision + smartphone'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        4,
+                        2,
+                        'Ordinateur + télévision'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        5,
+                        2,
+                        'Ordinateur + smartphone'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        6,
+                        2,
+                        'Télévision + smartphone'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        7,
+                        2,
+                        'Télévision'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        8,
+                        2,
+                        'Ordinateur'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        9,
+                        2,
+                        'Smartphone'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        10,
+                        3,
+                        'Sans véhicule'
+                    );
+
+INSERT INTO options (
+                        id,
+                        option_group,
+                        label
+                    )
+                    VALUES (
+                        11,
+                        2,
+                        'Sans abonnement'
                     );
 
 
