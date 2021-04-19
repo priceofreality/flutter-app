@@ -168,7 +168,7 @@ class OptionView extends StatelessWidget {
                     title: Text(e.value[index - 1].label),
                     value: e.value[index - 1],
                     groupValue: state.groupSelected[e.key] == null
-                        ? null
+                        ? e.value[e.value.length - 1]
                         : state.groupSelected[e.key]!,
                     onChanged: (value) => context
                         .read<OptionCubit>()
