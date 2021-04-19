@@ -132,7 +132,7 @@ class GameRepository {
       if (daily.day > maxDay) maxDay = daily.day;
 
       // if the dailySituation depends on the financial one
-      if (financialDailySituations[daily.id] != null &&
+      if (financialDailySituations[daily.id] != null ||
           optionDailySituations[daily.id] != null) {
         if (financialDailySituations[daily.id] != null) {
           financialDailySituations[daily.id]!.forEach((f) {
