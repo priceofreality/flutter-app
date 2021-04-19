@@ -203,6 +203,8 @@ class GameRepository {
   void unlockDailyOptionSituations(int option) {
     if (_optionDailySituation[option] == null) return;
     for (var daily in _optionDailySituation[option]!) {
+      print(daily.event);
+      print(daily.locked);
       if (daily.locked) {
         // if the dailySituation is locked
         _lockedDailySituations[daily.id] = daily;

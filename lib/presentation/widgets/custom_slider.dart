@@ -21,7 +21,7 @@ class CustomSlider extends StatefulWidget {
 }
 
 class _CustomSliderState extends State<CustomSlider> {
-  double _currentSliderValue = 0;
+  double _currentSliderValue = 0.0;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _CustomSliderState extends State<CustomSlider> {
     return Column(
       children: [
         Text(
-          '-$_currentSliderValue€',
+          '${_currentSliderValue == 0 ? 0 : (-_currentSliderValue).toStringAsFixed(2)}€',
           style: TextStyle(fontSize: 14.7),
         ),
         Slider(
@@ -47,7 +47,7 @@ class _CustomSliderState extends State<CustomSlider> {
           label: _currentSliderValue.round().toString(),
           onChanged: (double value) {
             setState(() {
-              _currentSliderValue = value;
+              // _currentSliderValue = value;
             });
           },
         ),

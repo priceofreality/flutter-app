@@ -223,11 +223,16 @@ class Choices extends StatelessWidget {
                   ));
             } else {
               context.read<ChoiceCubit>().emitSelectChoice(choice);
+              context.read<TransactionCubit>().emitCost(choice.minCost!);
+
+              double min = choice.minCost!.abs();
+              double max = choice.maxCost!.abs();
               return Column(
+                key: ValueKey<Choice>(choice),
                 children: [
                   CustomSlider(
-                    maxValue: -choice.maxCost!,
-                    minValue: -choice.minCost!,
+                    maxValue: max,
+                    minValue: min,
                     divisions: 10,
                     onChanged: (value) {
                       context.read<TransactionCubit>().emitCost(-value);

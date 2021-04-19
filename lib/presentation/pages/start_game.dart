@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:price_of_reality/data/models/option.dart';
+import 'package:price_of_reality/data/models/option_group.dart';
 import 'package:price_of_reality/data/models/situations_options.dart';
 import 'package:price_of_reality/data/models/financial_situation.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
@@ -149,14 +151,28 @@ class OptionView extends StatelessWidget {
                       ),
                     );
                   }
-                  return CheckboxListTile(
+                  if (e.key.id == 1) {
+                    return CheckboxListTile(
+                      activeColor: Theme.of(context).buttonColor,
+                      value: state.selected.contains(e.value[index - 1]),
+                      onChanged: (value) => context
+                          .read<OptionCubit>()
+                          .emitSelectOption(value!, e.value[index - 1]),
+                      title: Text(e.value[index - 1].label),
+                      controlAffinity: ListTileControlAffinity.leading,
+                    );
+                  }
+
+                  return RadioListTile<Option>(
                     activeColor: Theme.of(context).buttonColor,
-                    value: state.selected.contains(e.value[index - 1]),
+                    title: Text(e.value[index - 1].label),
+                    value: e.value[index - 1],
+                    groupValue: state.groupSelected[e.key] == null
+                        ? null
+                        : state.groupSelected[e.key]!,
                     onChanged: (value) => context
                         .read<OptionCubit>()
-                        .emitSelectOption(value!, e.value[index - 1]),
-                    title: Text(e.value[index - 1].label),
-                    controlAffinity: ListTileControlAffinity.leading,
+                        .emitSelectGroupOption(e.key, e.value[index - 1]),
                   );
                 }, childCount: e.value.length + 1),
               ),

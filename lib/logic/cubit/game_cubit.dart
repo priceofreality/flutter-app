@@ -27,8 +27,8 @@ class GameCubit extends Cubit<GameState> {
   }
 
   void emitNewGame() {
-    emit(GameInitialState());
     dailySituationCubit.emitReset();
+    emit(GameInitialState());
   }
 
   @override
