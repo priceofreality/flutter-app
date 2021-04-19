@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import "package:path/path.dart";
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
@@ -17,10 +18,10 @@ class SqfliteDb {
     var databasesPath = await getDatabasesPath();
     var path = join(databasesPath, "price_of_reality.db");
 
-    //DEBUG
-    print("Delete DB");
-    await databaseFactory.deleteDatabase(path);
-    //
+    if (kDebugMode) {
+      print("Delete DB");
+      await databaseFactory.deleteDatabase(path);
+    }
 
     var exists = await databaseExists(path);
 

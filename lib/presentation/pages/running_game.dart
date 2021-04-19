@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:price_of_reality/data/models/choice.dart';
 import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
 import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';

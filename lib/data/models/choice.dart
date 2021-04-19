@@ -29,11 +29,6 @@ class Choice extends Equatable {
         unlockDailySituation: unlocks);
   }
 
-  void addUnlock(int dailySituation) {
-    if (unlockDailySituation == null) unlockDailySituation = [];
-    this.unlockDailySituation!.add(dailySituation);
-  }
-
   @override
   List<Object> get props => [id];
 }

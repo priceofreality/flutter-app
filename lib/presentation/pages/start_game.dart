@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:price_of_reality/data/db/situations_options.dart';
+import 'package:price_of_reality/data/models/situations_options.dart';
 import 'package:price_of_reality/data/models/financial_situation.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
 import 'package:price_of_reality/logic/cubit/game_cubit.dart';
@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:price_of_reality/logic/cubit/option_cubit.dart';
 import 'package:price_of_reality/presentation/widgets/custom_radio_button.dart';
 import 'package:price_of_reality/presentation/widgets/dot_indicator.dart';
-import "package:collection/collection.dart";
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartGamePage extends StatelessWidget {

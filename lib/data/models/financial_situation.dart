@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:price_of_reality/data/db/situations_options.dart' as options;
+import 'package:price_of_reality/data/models/situations_options.dart'
+    as options;
 
 class FinancialSituation extends Equatable {
   final int id;

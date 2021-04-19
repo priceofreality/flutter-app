@@ -79,17 +79,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: TextTheme(
           button: TextStyle(
-            //letterSpacing: 0.8,
             color: Colors.black,
             fontSize: 15.0,
           ),
-          headline1: TextStyle(),
-          headline2: TextStyle(),
         ),
         fontFamily: 'Montserrat',
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        accentColor: Color(0xff87CEEB), //Color(0xff5e60ce),
+        accentColor: Color(0xff87CEEB),
         buttonColor: Color(0xffe08963),
       ),
       home: MultiBlocProvider(

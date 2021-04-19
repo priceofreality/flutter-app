@@ -6,9 +6,8 @@ class OptionGroup extends Equatable {
 
   OptionGroup({required this.id, required this.label});
 
-  factory OptionGroup.fromTuple(Map<String, dynamic> tuple) {
-    return OptionGroup(id: tuple['id'], label: tuple['label']);
-  }
+  factory OptionGroup.fromTuple(Map<String, dynamic> tuple) =>
+      OptionGroup(id: tuple['id'], label: tuple['label']);
 
   @override
   List<Object> get props => [id];

@@ -5,7 +5,7 @@ import 'package:price_of_reality/data/models/transaction.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SummaryPage extends StatefulWidget {
-  Summary summary;
+  final Summary summary;
 
   SummaryPage({required this.summary});
   @override
