@@ -49,6 +49,7 @@ class GameRepository {
     _financialChoicesCosts = {};
     _additionalChargesOfChoice = {};
     _financialDailySituations = {};
+    _optionDailySituation = {};
 
     final financialSituationsSql =
         await _dataProvider.loadFinancialSituations();
