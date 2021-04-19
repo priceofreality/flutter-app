@@ -47,7 +47,7 @@ class _CustomSliderState extends State<CustomSlider> {
           label: _currentSliderValue.round().toString(),
           onChanged: (double value) {
             setState(() {
-              // _currentSliderValue = value;
+              _currentSliderValue = value;
             });
           },
         ),
