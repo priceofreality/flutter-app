@@ -32,15 +32,22 @@ class DailySituationCubit extends Cubit<DailySituationState> {
             gameRepository.getDailySituationsOfDay(1)![0]));
 
   emitStart() {
+    //set transaction cubit
     transactionCubit
         .emitBudget(financialSituationCubit.state.selected!.initialBudget);
 
+    //set financial cubit
+    financialSituationCubit.emitNewDailySituations();
+
+    //set option cubit
+    optionCubit.emitNewDailySituations();
+
     financialSituationId = financialSituationCubit.state.selected!.id;
+    //set choice cubit
     choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
         financialSituationId,
         gameRepository.getDailySituationsOfDay(1)![0].id,
         optionCubit.state.selected));
-    financialSituationCubit.emitNewDailySituation();
   }
 
   void _resetIndexes() {
@@ -121,6 +128,10 @@ class DailySituationCubit extends Cubit<DailySituationState> {
       choiceCubit.emitReset();
 
       financialSituationCubit.emitReset();
+
+      optionCubit.emitReset();
+
+      transactionCubit.emitReset();
 
       emit(DailySituationState(gameRepository.getDailySituationsOfDay(1)!,
           gameRepository.getDailySituationsOfDay(1)![0]));

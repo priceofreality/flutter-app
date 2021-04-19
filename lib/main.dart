@@ -46,8 +46,8 @@ class MyApp extends StatelessWidget {
       transactionCubit: transactionCubit,
       optionCubit: optionCubit);
 
-  late final GameCubit gameCubit = GameCubit(
-      dailySituationCubit: dailySituationCubit, optionCubit: optionCubit);
+  late final GameCubit gameCubit =
+      GameCubit(dailySituationCubit: dailySituationCubit);
 
   late final OnboardCubit onboardCubit =
       OnboardCubit(sharedPreferences.getBool('firstLoad'));

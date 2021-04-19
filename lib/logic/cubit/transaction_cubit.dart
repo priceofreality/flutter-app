@@ -34,4 +34,6 @@ class TransactionCubit extends Cubit<TransactionState> {
     emit(TransactionState(
         budget: budget, currentCost: currentCost, transactions: transactions));
   }
+
+  void emitReset() => emit(TransactionInitialState(0));
 }

@@ -47,6 +47,10 @@
   "@understand" : {
     "description": "I understand"
   },
+  "situations": "Situations",
+  "@situations": {
+    "description": "Situations"
+  },
   "endGamePositiveBudget": "Félicitations! Tu t’en es bien sorti. Ton budget s’élève à {budget}€. Néanmoins, tu as pu remarquer qu’il était assez difficile de pouvoir gérer son budget car même si tu crois connaître tes dépenses, il y’a toujours des imprévus...",
   "@endGamePositiveBudget": {
     "description": "End game text when buget is positive",
