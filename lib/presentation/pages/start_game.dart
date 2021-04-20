@@ -163,6 +163,9 @@ class OptionView extends StatelessWidget {
                     );
                   }
 
+                  context.read<OptionCubit>().emitSelectGroupOption(
+                      e.key, e.value[e.value.length - 1]);
+
                   return RadioListTile<Option>(
                     activeColor: Theme.of(context).buttonColor,
                     title: Text(e.value[index - 1].label),
