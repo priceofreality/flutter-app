@@ -2,6 +2,10 @@ select dsc.id, dsc.daily_situation, e.label as event, c.label as choice
 FROM daily_situation_choices dsc, daily_situations ds, events e, choices c 
 WHERE dsc.daily_situation = ds.id AND ds.event = e.id AND c.id = dsc.choice
 
-select e.label as event, c.label as choice, fcs.id as financial_situation, fcs.min_cost, fcs.max_cost 
+select e.label as event, c.label as choice, fcs.financial_situation, fcs.min_cost, fcs.max_cost 
 FROM daily_situation_choices dsc, daily_situations ds, events e, choices c, financial_choice_costs fcs
 WHERE dsc.daily_situation = ds.id AND dsc.choice = c.id AND ds.event = e.id AND fcs.daily_situation_choice = dsc.id
+
+SELECT o.label as option, e.label as event, ods.daily_situation, ds.day, ds.locked
+FROM option_daily_situations ods, options o, daily_situations ds, events e
+WHERE ods.option = o.id AND ods.daily_situation = ds.id AND ds.event = e.id
