@@ -34,5 +34,7 @@ class OptionCubit extends Cubit<OptionState> {
   void emitNewDailySituations() {
     for (Option option in state.selected)
       gameRepository.unlockDailyOptionSituations(option.id);
+    for (Option option in state.groupSelected.values)
+      gameRepository.unlockDailyOptionSituations(option.id);
   }
 }

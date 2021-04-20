@@ -43,13 +43,13 @@ class RunningGamePage extends StatelessWidget {
               child: BlocBuilder<DailySituationCubit, DailySituationState>(
                   builder: (context, state) {
                 return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 350),
+                  duration: const Duration(milliseconds: 600),
                   transitionBuilder:
                       (Widget child, Animation<double> animation) {
                     return SlideTransition(
                       transformHitTests: false,
                       position: new Tween<Offset>(
-                        begin: const Offset(1.5, 0.0),
+                        begin: const Offset(1.7, 0.0),
                         end: const Offset(0.0, 0.0),
                       ).animate(animation),
                       child: child,

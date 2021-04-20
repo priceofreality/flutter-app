@@ -203,8 +203,6 @@ class GameRepository {
   void unlockDailyOptionSituations(int option) {
     if (_optionDailySituation[option] == null) return;
     for (var daily in _optionDailySituation[option]!) {
-      print(daily.event);
-      print(daily.locked);
       if (daily.locked) {
         // if the dailySituation is locked
         _lockedDailySituations[daily.id] = daily;
@@ -242,7 +240,6 @@ class GameRepository {
   Set<Choice> getChoicesOfDailySituation(
       int financialSituation, int dailysituation, List<Option> options) {
     for (var choice in _choicesOfDailySituation[dailysituation]!) {
-      print(choice.label);
       if (_financialChoicesCosts[choice.id] != null) {
         if (_financialChoicesCosts[choice.id]![financialSituation] != null) {
           double charge = 0;
