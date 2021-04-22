@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:price_of_reality/data/models/choice.dart';
+import 'package:price_of_reality/data/models/situations_options.dart';
 import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
+import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
 import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
 import 'package:price_of_reality/logic/cubit/daily_situation_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,6 +37,31 @@ class RunningGamePage extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Text(
+                  "${AppLocalizations.of(context)!.situation} : ",
+                  style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  "${context.read<FinancialSituationCubit>().state.selected!.familySituation.label}",
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).buttonColor),
+                ),
+                Text(
+                  "${context.read<FinancialSituationCubit>().state.selected!.professionalSituation.label}",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15.5,
+                      color: Theme.of(context).buttonColor),
+                ),
+              ],
+            ),
+          ),
+          SliverToBoxAdapter(
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight:
@@ -42,46 +69,33 @@ class RunningGamePage extends StatelessWidget {
               ),
               child: BlocBuilder<DailySituationCubit, DailySituationState>(
                   builder: (context, state) {
-                return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 600),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                    return SlideTransition(
-                      transformHitTests: false,
-                      position: new Tween<Offset>(
-                        begin: const Offset(1.7, 0.0),
-                        end: const Offset(0.0, 0.0),
-                      ).animate(animation),
-                      child: child,
-                    );
-                  },
-                  child: Column(
-                    key: ValueKey<int>(state.current.id),
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Event(
-                        event: state.current.event,
-                      ),
-                      SizedBox(height: 20.0),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 14.0),
-                        child: Container(
-                          child: Column(
-                            children: [
-                              SizedBox(height: 20.0),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Budget(),
-                              ),
-                              SizedBox(height: 20.0),
-                              Choices(),
-                            ],
-                          ),
+                return Column(
+                  key: ValueKey<int>(state.current.id),
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RewindButton(),
+                    Event(
+                      event: state.current.event,
+                    ),
+                    SizedBox(height: 20.0),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 14.0),
+                      child: Container(
+                        child: Column(
+                          children: [
+                            SizedBox(height: 20.0),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Budget(),
+                            ),
+                            SizedBox(height: 20.0),
+                            Choices(),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               }),
             ),
@@ -140,7 +154,8 @@ class Event extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+      padding:
+          EdgeInsets.only(bottom: 20.0, left: 30.0, right: 30.0, top: 40.0),
       child: Text(
         event,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23.0),
@@ -154,13 +169,22 @@ class Budget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TransactionCubit, TransactionState>(
         builder: (context, state) {
-      return Text(
-        AppLocalizations.of(context)!.budget +
-            ': ${state.budget.toStringAsFixed(2)}€',
-        style: TextStyle(
-          fontSize: 18.0,
-          color: Colors.black,
-          fontWeight: FontWeight.w600,
+      return RichText(
+        text: TextSpan(
+          text: '${AppLocalizations.of(context)!.budget} : ',
+          style: DefaultTextStyle.of(context).style.copyWith(
+                fontSize: 18.5,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+          children: [
+            TextSpan(
+              text: '${state.budget.toStringAsFixed(2)}€',
+              style: TextStyle(
+                color: state.budget >= 0 ? Colors.black : Colors.red[600],
+              ),
+            ),
+          ],
         ),
       );
     });
@@ -215,7 +239,7 @@ class Choices extends StatelessWidget {
                       context.read<TransactionCubit>().emitCost(
                           newValue.minCost == null ? 0 : newValue.minCost!);
 
-                      Future.delayed(Duration(milliseconds: 230)).then(
+                      Future.delayed(Duration(milliseconds: 600)).then(
                           (value) => context
                               .read<DailySituationCubit>()
                               .emitNextDailySituation());
@@ -268,13 +292,23 @@ class NextButton extends StatelessWidget {
         ),
         onPressed: disable == null
             ? null
-            : () => Future.delayed(Duration(milliseconds: 50)).then((value) =>
+            : () => Future.delayed(Duration(milliseconds: 600)).then((value) =>
                 context.read<DailySituationCubit>().emitNextDailySituation()),
         child: Text(
           AppLocalizations.of(context)!.next.toUpperCase(),
           style: TextStyle(color: Colors.white),
         ),
       ),
+    );
+  }
+}
+
+class RewindButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () => context.read<DailySituationCubit>().emitRewind(),
+      child: Icon(Icons.rotate_left),
     );
   }
 }

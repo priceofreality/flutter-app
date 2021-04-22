@@ -1,16 +1,14 @@
 part of 'choice_cubit.dart';
 
-class ChoiceState extends Equatable {
+class ChoiceState {
   final Set<Choice> choices;
 
   final Choice? selected;
+  final Choice? last;
 
-  ChoiceState(this.choices, this.selected);
-
-  @override
-  List<Object> get props => [selected ?? '', choices];
+  ChoiceState(this.choices, this.selected, this.last);
 }
 
 class ChoiceInitialState extends ChoiceState {
-  ChoiceInitialState() : super({}, null);
+  ChoiceInitialState() : super({}, null, null);
 }

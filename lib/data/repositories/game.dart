@@ -4,6 +4,7 @@ import 'package:price_of_reality/data/models/additional_charge.dart';
 import 'package:price_of_reality/data/models/definition.dart';
 import 'package:price_of_reality/data/models/option_group.dart';
 import 'package:price_of_reality/data/models/option.dart';
+import 'package:price_of_reality/data/models/situations_options.dart';
 import 'package:price_of_reality/data/providers/provider.dart';
 import 'package:price_of_reality/data/models/daily_situation.dart';
 import 'package:price_of_reality/data/models/financial_situation.dart';
@@ -13,7 +14,8 @@ import 'package:price_of_reality/data/models/financial_choice_cost.dart';
 class GameRepository {
   late List<Definition> glossary;
   late Map<OptionGroup, List<Option>> optionsPerGroup;
-  late List<FinancialSituation> financialSituations;
+  late Map<FamilySituation, Map<ProfessionalSituation, FinancialSituation>>
+      financialSituations;
 
   //key: day
   late Map<int, List<DailySituation>> _dailySituationsPerDay;
@@ -42,6 +44,7 @@ class GameRepository {
 
   Future<void> loadRepository() async {
     optionsPerGroup = {};
+    financialSituations = {};
 
     _dailySituationsPerDay = {};
     _lockedDailySituations = {};
@@ -86,8 +89,14 @@ class GameRepository {
         .map((e) => DailySituation.fromTuple(e, events))
         .toList();
 
-    financialSituations = List.from(
-        financialSituationsSql.map((e) => FinancialSituation.fromTuple(e)));
+    for (var financialSituationTuple in financialSituationsSql) {
+      FinancialSituation financialSituation =
+          FinancialSituation.fromTuple(financialSituationTuple);
+      financialSituations.putIfAbsent(
+          financialSituation.familySituation, () => {});
+      financialSituations[financialSituation.familySituation]![
+          financialSituation.professionalSituation] = financialSituation;
+    }
 
     Map<int, Option> options = {};
 

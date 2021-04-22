@@ -3,6 +3,7 @@ import "package:collection/collection.dart";
 import 'package:price_of_reality/data/models/summary.dart';
 import 'package:price_of_reality/data/models/transaction.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:price_of_reality/data/models/situations_options.dart';
 
 class SummaryPage extends StatefulWidget {
   final Summary summary;
@@ -19,17 +20,55 @@ class _SummaryPageState extends State<SummaryPage> {
           groupBy(widget.summary.transactions, (Transaction t) => t.day);
 
       List<Widget> children = [];
-      double budget = widget.summary.initialBudget;
+      double budget = widget.summary.financialSituation.initialBudget;
+
+      final situation = Column(
+        children: [
+          Text(
+            "${AppLocalizations.of(context)!.situation} : ",
+            style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w500),
+          ),
+          SizedBox(height: 10.0),
+          Text(
+            "${widget.summary.financialSituation.familySituation.label}",
+            style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).buttonColor),
+          ),
+          Text(
+            "${widget.summary.financialSituation.professionalSituation.label}",
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 15.5,
+                color: Theme.of(context).buttonColor),
+          ),
+          SizedBox(
+            height: 15.0,
+          )
+        ],
+      );
+
+      children.add(situation);
+
+      final divider = Divider(
+        color: Color(0xffe08963),
+        thickness: 1.5,
+        indent: 14.0,
+        endIndent: 14.0,
+      );
 
       final initial = Container(
         alignment: Alignment.bottomRight,
-        padding: EdgeInsets.only(right: 20.0),
+        padding: EdgeInsets.only(right: 20.0, top: 10.0),
         child: Text(
           AppLocalizations.of(context)!.startingBudget + ': $budget€',
           style: TextStyle(
             fontSize: 17.0,
             color: Colors.black,
             fontWeight: FontWeight.w600,
+            decoration: TextDecoration.underline,
+            decorationThickness: 1.7,
           ),
         ),
       );
@@ -57,19 +96,14 @@ class _SummaryPageState extends State<SummaryPage> {
           ));
         }
 
-        final divider = Divider(
-          color: Color(0xffe08963),
-          thickness: 1.5,
-          indent: 14.0,
-          endIndent: 14.0,
-        );
-
         final sum = Container(
           alignment: Alignment.bottomRight,
           padding: EdgeInsets.only(right: 20.0),
           child: Text(
             '${budget.toStringAsFixed(2)}€',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                color: budget >= 0 ? Colors.black : Colors.red[600],
+                fontWeight: FontWeight.w500),
           ),
         );
 

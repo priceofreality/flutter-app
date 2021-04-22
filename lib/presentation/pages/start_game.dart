@@ -21,109 +21,168 @@ class StartGamePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         controller: controller,
         children: [
-          FinancialSituationView(),
+          FamilySituationView(controller: controller),
+          ProfessionalSituationView(controller: controller),
           OptionView(),
         ],
       ),
       bottomNavigationBar: DotIndicator(
-        length: 2,
+        length: 3,
         controller: controller,
       ),
     );
   }
 }
 
-class FinancialSituationView extends StatelessWidget {
-  Future<List<FinancialSituation>> _sortFinancialSituations(
-      BuildContext context) async {
-    List<FinancialSituation> situations =
-        context.read<FinancialSituationCubit>().financialSituations;
-    situations.sort((a, b) => a.familySituation.label
-        .toLowerCase()
-        .compareTo(b.familySituation.label.toLowerCase()));
-    return situations;
-  }
+class ProfessionalSituationView extends StatelessWidget {
+  final PageController controller;
+
+  ProfessionalSituationView({required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _sortFinancialSituations(context),
-      builder: (BuildContext context,
-          AsyncSnapshot<List<FinancialSituation>> snapshot) {
-        if (snapshot.hasData) {
-          return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
-            builder: (context, state) {
-              return ListView(
-                  padding:
-                      EdgeInsets.only(left: 14.0, right: 14.0, bottom: 20.0),
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 25.0, bottom: 25.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        AppLocalizations.of(context)!.situations,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18.0),
+    final hasFamilySituation =
+        context.watch<FinancialSituationCubit>().state.selectedFamilySituation;
+
+    return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
+        builder: (context, state) {
+      if (hasFamilySituation == null) {
+        return Center(
+            child:
+                Text(AppLocalizations.of(context)!.selectFamilySituationFirst));
+      }
+
+      final professionalSituations = context
+          .read<FinancialSituationCubit>()
+          .professionalSituations(context
+              .read<FinancialSituationCubit>()
+              .state
+              .selectedFamilySituation!);
+
+      return Center(
+        child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(left: 14.0, right: 14.0, bottom: 20.0),
+            children: [
+              ...professionalSituations
+                  .map(
+                    (e) => Container(
+                      margin: EdgeInsets.only(
+                        bottom: 10.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: e == state.selectedProfessionalSituation
+                            ? Theme.of(context).buttonColor
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(30.0),
+                        border: Border.all(
+                          width: 2,
+                          color: Theme.of(context).buttonColor,
+                        ),
+                      ),
+                      child: CustomRadioListTile<ProfessionalSituation>(
+                        value: e,
+                        groupValue: state.selectedProfessionalSituation,
+                        title: Text(
+                          e.label,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
+                            color: e == state.selectedProfessionalSituation
+                                ? Colors.white
+                                : Colors.black,
+                          ),
+                        ),
+                        onChanged: (newValue) => context
+                            .read<FinancialSituationCubit>()
+                            .emitProfessionalSituation(newValue!),
                       ),
                     ),
-                    ...snapshot.data!
-                        .map(
-                          (financialSituation) => Container(
-                            margin: EdgeInsets.only(
-                              bottom: 10.0,
-                            ),
-                            decoration: BoxDecoration(
-                              color: financialSituation == state.selected
-                                  ? Theme.of(context).buttonColor
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(30.0),
-                              border: Border.all(
-                                width: 2,
-                                color: Theme.of(context).buttonColor,
-                              ),
-                            ),
-                            child: CustomRadioListTile<FinancialSituation>(
-                              value: financialSituation,
-                              groupValue: state.selected,
-                              title: Text(
-                                financialSituation.familySituation.label,
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: financialSituation == state.selected
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                              ),
-                              subtitle: Text(
-                                financialSituation.professionalSituation.label,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: financialSituation == state.selected
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                              ),
-                              onChanged: (newValue) => context
-                                  .read<FinancialSituationCubit>()
-                                  .emitSelectFinancialSituation(newValue!),
-                            ),
+                  )
+                  .toList(),
+              SizedBox(
+                height: 20.0,
+              ),
+              NextButton(controller: controller, to: 2),
+            ]),
+      );
+    });
+  }
+}
+
+class FamilySituationView extends StatelessWidget {
+  final PageController controller;
+
+  FamilySituationView({required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    final familySituations =
+        context.read<FinancialSituationCubit>().familySituations;
+
+    return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
+        builder: (context, state) {
+      return Center(
+        child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(left: 14.0, right: 14.0, bottom: 20.0),
+            children: [
+              ...familySituations
+                  .map(
+                    (e) => Container(
+                      margin: EdgeInsets.only(
+                        bottom: 10.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: e == state.selectedFamilySituation
+                            ? Theme.of(context).buttonColor
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(30.0),
+                        border: Border.all(
+                          width: 2,
+                          color: Theme.of(context).buttonColor,
+                        ),
+                      ),
+                      child: CustomRadioListTile<FamilySituation>(
+                        value: e,
+                        groupValue: state.selectedFamilySituation,
+                        title: Text(
+                          e.label,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
+                            color: e == state.selectedFamilySituation
+                                ? Colors.white
+                                : Colors.black,
                           ),
-                        )
-                        .toList(),
-                  ]);
-            },
-          );
-        }
-        return Center(child: Text(AppLocalizations.of(context)!.loading));
-      },
-    );
+                        ),
+                        onChanged: (newValue) => context
+                            .read<FinancialSituationCubit>()
+                            .emitFamilySituation(newValue!),
+                      ),
+                    ),
+                  )
+                  .toList(),
+              SizedBox(
+                height: 20.0,
+              ),
+              NextButton(controller: controller, to: 1),
+            ]),
+      );
+    });
   }
 }
 
 class OptionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var entries = context.read<OptionCubit>().state.options.entries;
+    for (MapEntry<OptionGroup, List<Option>> entry in entries) {
+      if (entry.key.id == 1) continue;
+      context.read<OptionCubit>().emitSelectGroupOption(
+          entry.key, entry.value[entry.value.length - 1]);
+    }
+
     return BlocBuilder<OptionCubit, OptionState>(builder: (context, state) {
       return CustomScrollView(slivers: [
         SliverToBoxAdapter(
@@ -163,16 +222,17 @@ class OptionView extends StatelessWidget {
                     );
                   }
 
-                  context.read<OptionCubit>().emitSelectGroupOption(
-                      e.key, e.value[e.value.length - 1]);
-
                   return RadioListTile<Option>(
                     activeColor: Theme.of(context).buttonColor,
-                    title: Text(e.value[index - 1].label),
+                    title: Wrap(
+                      children: [
+                        Icon(Icons.laptop),
+                        SizedBox(width: 10.0),
+                      ],
+                    ),
+                    subtitle: Text(e.value[index - 1].label),
                     value: e.value[index - 1],
-                    groupValue: state.groupSelected[e.key] == null
-                        ? e.value[e.value.length - 1]
-                        : state.groupSelected[e.key]!,
+                    groupValue: state.groupSelected[e.key],
                     onChanged: (value) => context
                         .read<OptionCubit>()
                         .emitSelectGroupOption(e.key, e.value[index - 1]),
@@ -189,6 +249,30 @@ class OptionView extends StatelessWidget {
         ),
       ]);
     });
+  }
+}
+
+class NextButton extends StatelessWidget {
+  final PageController controller;
+  final int to;
+
+  NextButton({required this.controller, required this.to});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 35.0, vertical: 20.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: 15.0),
+          shape: StadiumBorder(),
+          primary: Theme.of(context).accentColor,
+        ),
+        onPressed: () => controller.animateToPage(to,
+            duration: Duration(milliseconds: 200), curve: Curves.easeInOut),
+        child: Text(AppLocalizations.of(context)!.next.toUpperCase()),
+      ),
+    );
   }
 }
 
