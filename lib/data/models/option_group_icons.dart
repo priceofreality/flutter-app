@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum OptionGroupIcons { Tv, Smartphone, Laptop }
+enum OptionGroupIcons { Tv, Smartphone, Laptop, Vehicle }
 
 extension OptionGroupIconsModifier on OptionGroupIcons {
   Icon get icon {
@@ -11,6 +11,8 @@ extension OptionGroupIconsModifier on OptionGroupIcons {
         return Icon(Icons.smartphone);
       case OptionGroupIcons.Laptop:
         return Icon(Icons.laptop);
+      case OptionGroupIcons.Vehicle:
+        return Icon(Icons.directions_car);
     }
   }
 }

@@ -65,6 +65,12 @@ class DataProvider {
     return query;
   }
 
+  Future<List<Map<String, dynamic>>> loadOptionIcons() async {
+    List<Map<String, dynamic>> query =
+        await sqlfliteDb.db.query('option_icons');
+    return query;
+  }
+
   Future<List<Map<String, dynamic>>> loadOptionGroups() async {
     List<Map<String, dynamic>> query =
         await sqlfliteDb.db.query('option_groups');

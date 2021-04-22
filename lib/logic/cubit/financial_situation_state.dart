@@ -1,20 +1,18 @@
 part of 'financial_situation_cubit.dart';
 
 class FinancialSituationState {
-  final FinancialSituation? selected;
+  Map<FamilySituation, Map<ProfessionalSituation, FinancialSituation>>
+      financialSituations;
 
-  /*final Map<FamilySituation, Map<ProfessionalSituation, FinancialSituation>>
-      financialSituations;*/
+  final FinancialSituation? selected;
 
   final FamilySituation? selectedFamilySituation;
   final ProfessionalSituation? selectedProfessionalSituation;
 
-  FinancialSituationState(
-      this.selected, //this.financialSituations,
-      this.selectedFamilySituation,
-      this.selectedProfessionalSituation);
+  FinancialSituationState(this.financialSituations, this.selected,
+      this.selectedFamilySituation, this.selectedProfessionalSituation);
 }
 
 class FinancianSituationInitialState extends FinancialSituationState {
-  FinancianSituationInitialState() : super(null, null, null);
+  FinancianSituationInitialState() : super({}, null, null, null);
 }

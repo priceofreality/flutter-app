@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:price_of_reality/data/models/option.dart';
 import 'package:price_of_reality/data/models/option_group.dart';
 import 'package:price_of_reality/data/models/situations_options.dart';
-import 'package:price_of_reality/data/models/financial_situation.dart';
+import 'package:price_of_reality/data/models/option_group_icons.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
 import 'package:price_of_reality/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,53 +59,58 @@ class ProfessionalSituationView extends StatelessWidget {
               .state
               .selectedFamilySituation!);
 
-      return Center(
-        child: ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.only(left: 14.0, right: 14.0, bottom: 20.0),
-            children: [
-              ...professionalSituations
-                  .map(
-                    (e) => Container(
-                      margin: EdgeInsets.only(
-                        bottom: 10.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: e == state.selectedProfessionalSituation
-                            ? Theme.of(context).buttonColor
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(30.0),
-                        border: Border.all(
-                          width: 2,
-                          color: Theme.of(context).buttonColor,
-                        ),
-                      ),
-                      child: CustomRadioListTile<ProfessionalSituation>(
-                        value: e,
-                        groupValue: state.selectedProfessionalSituation,
-                        title: Text(
-                          e.label,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w500,
-                            color: e == state.selectedProfessionalSituation
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
-                        onChanged: (newValue) => context
-                            .read<FinancialSituationCubit>()
-                            .emitProfessionalSituation(newValue!),
+      return ListView(
+          padding: EdgeInsets.only(left: 14.0, right: 14.0, bottom: 20.0),
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: 25.0, bottom: 50.0),
+              alignment: Alignment.center,
+              child: Text(
+                AppLocalizations.of(context)!.professionalSituation,
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+              ),
+            ),
+            ...professionalSituations
+                .map(
+                  (e) => Container(
+                    margin: EdgeInsets.only(
+                      bottom: 10.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: e == state.selectedProfessionalSituation
+                          ? Theme.of(context).buttonColor
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(30.0),
+                      border: Border.all(
+                        width: 2,
+                        color: Theme.of(context).buttonColor,
                       ),
                     ),
-                  )
-                  .toList(),
-              SizedBox(
-                height: 20.0,
-              ),
-              NextButton(controller: controller, to: 2),
-            ]),
-      );
+                    child: CustomRadioListTile<ProfessionalSituation>(
+                      value: e,
+                      groupValue: state.selectedProfessionalSituation,
+                      title: Text(
+                        e.label,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          color: e == state.selectedProfessionalSituation
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                      onChanged: (newValue) => context
+                          .read<FinancialSituationCubit>()
+                          .emitProfessionalSituation(newValue!),
+                    ),
+                  ),
+                )
+                .toList(),
+            SizedBox(
+              height: 20.0,
+            ),
+            NextButton(controller: controller, to: 2),
+          ]);
     });
   }
 }
@@ -122,53 +127,58 @@ class FamilySituationView extends StatelessWidget {
 
     return BlocBuilder<FinancialSituationCubit, FinancialSituationState>(
         builder: (context, state) {
-      return Center(
-        child: ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.only(left: 14.0, right: 14.0, bottom: 20.0),
-            children: [
-              ...familySituations
-                  .map(
-                    (e) => Container(
-                      margin: EdgeInsets.only(
-                        bottom: 10.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: e == state.selectedFamilySituation
-                            ? Theme.of(context).buttonColor
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(30.0),
-                        border: Border.all(
-                          width: 2,
-                          color: Theme.of(context).buttonColor,
-                        ),
-                      ),
-                      child: CustomRadioListTile<FamilySituation>(
-                        value: e,
-                        groupValue: state.selectedFamilySituation,
-                        title: Text(
-                          e.label,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w500,
-                            color: e == state.selectedFamilySituation
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
-                        onChanged: (newValue) => context
-                            .read<FinancialSituationCubit>()
-                            .emitFamilySituation(newValue!),
+      return ListView(
+          padding: EdgeInsets.only(left: 14.0, right: 14.0, bottom: 20.0),
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: 25.0, bottom: 50.0),
+              alignment: Alignment.center,
+              child: Text(
+                AppLocalizations.of(context)!.familySituation,
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+              ),
+            ),
+            ...familySituations
+                .map(
+                  (e) => Container(
+                    margin: EdgeInsets.only(
+                      bottom: 10.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: e == state.selectedFamilySituation
+                          ? Theme.of(context).buttonColor
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(30.0),
+                      border: Border.all(
+                        width: 2,
+                        color: Theme.of(context).buttonColor,
                       ),
                     ),
-                  )
-                  .toList(),
-              SizedBox(
-                height: 20.0,
-              ),
-              NextButton(controller: controller, to: 1),
-            ]),
-      );
+                    child: CustomRadioListTile<FamilySituation>(
+                      value: e,
+                      groupValue: state.selectedFamilySituation,
+                      title: Text(
+                        e.label,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          color: e == state.selectedFamilySituation
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                      onChanged: (newValue) => context
+                          .read<FinancialSituationCubit>()
+                          .emitFamilySituation(newValue!),
+                    ),
+                  ),
+                )
+                .toList(),
+            SizedBox(
+              height: 20.0,
+            ),
+            NextButton(controller: controller, to: 1),
+          ]);
     });
   }
 }
@@ -222,14 +232,27 @@ class OptionView extends StatelessWidget {
                     );
                   }
 
+                  if (e.value[index - 1].optionGroupIcons != null)
+                    e.value[index - 1].optionGroupIcons!
+                        .sort((a, b) => a.index.compareTo(b.index));
+
                   return RadioListTile<Option>(
                     activeColor: Theme.of(context).buttonColor,
-                    title: Wrap(
-                      children: [
-                        Icon(Icons.laptop),
-                        SizedBox(width: 10.0),
-                      ],
-                    ),
+                    title: e.value[index - 1].optionGroupIcons == null
+                        ? Container(
+                            padding: EdgeInsets.symmetric(horizontal: 4.0),
+                            alignment: Alignment.centerLeft,
+                            child: Icon(Icons.more_horiz),
+                          )
+                        : Wrap(
+                            children: e.value[index - 1].optionGroupIcons!
+                                .map((o) => Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 4.0),
+                                      child: o.icon,
+                                    ))
+                                .toList(),
+                          ),
                     subtitle: Text(e.value[index - 1].label),
                     value: e.value[index - 1],
                     groupValue: state.groupSelected[e.key],
