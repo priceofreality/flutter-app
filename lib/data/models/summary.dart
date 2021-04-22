@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:price_of_reality/data/models/financial_situation.dart';
 import 'package:price_of_reality/data/models/transaction.dart';
 
 class Summary extends Equatable {
-  final double initialBudget;
+  final FinancialSituation financialSituation;
   final List<Transaction> transactions;
 
-  Summary({required this.initialBudget, required this.transactions});
+  Summary({required this.financialSituation, required this.transactions});
 
   @override
-  List<Object?> get props => [initialBudget, transactions];
+  List<Object?> get props => [financialSituation, transactions];
 }

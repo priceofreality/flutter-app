@@ -4,8 +4,9 @@ class DailySituationState extends Equatable {
   late final List<DailySituation> dailySituations;
 
   late final DailySituation current;
+  late final DailySituation? last;
 
-  DailySituationState(this.dailySituations, this.current);
+  DailySituationState(this.dailySituations, this.current, this.last);
 
   DailySituationState.finish();
 

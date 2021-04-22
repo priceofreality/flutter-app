@@ -90,11 +90,10 @@ class EndGamePage extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pushNamed(
                       TRANSACTIONS_PAGE,
                       arguments: Summary(
-                          initialBudget: context
+                          financialSituation: context
                               .read<FinancialSituationCubit>()
                               .state
-                              .selected!
-                              .initialBudget,
+                              .selected!,
                           transactions: context
                               .read<TransactionCubit>()
                               .state
