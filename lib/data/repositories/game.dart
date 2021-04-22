@@ -4,6 +4,7 @@ import 'package:price_of_reality/data/models/additional_charge.dart';
 import 'package:price_of_reality/data/models/definition.dart';
 import 'package:price_of_reality/data/models/option_group.dart';
 import 'package:price_of_reality/data/models/option.dart';
+import 'package:price_of_reality/data/models/option_group_icons.dart';
 import 'package:price_of_reality/data/models/situations_options.dart';
 import 'package:price_of_reality/data/providers/provider.dart';
 import 'package:price_of_reality/data/models/daily_situation.dart';
@@ -69,6 +70,7 @@ class GameRepository {
         await _dataProvider.loadFinancialDailySituations();
     final glossarySql = await _dataProvider.loadGlossary();
     final optionsSql = await _dataProvider.loadOptions();
+    final optionIconsSql = await _dataProvider.loadOptionIcons();
     final optionGroupsSql = await _dataProvider.loadOptionGroups();
     final optionDailySituationsSql =
         await _dataProvider.loadOptionDailySituations();
@@ -98,10 +100,17 @@ class GameRepository {
           financialSituation.professionalSituation] = financialSituation;
     }
 
+    Map<int, List<OptionGroupIcons>> optionGroupIcons = {};
+    for (var optionIcon in optionIconsSql) {
+      optionGroupIcons.putIfAbsent(optionIcon["option"], () => []);
+      optionGroupIcons[optionIcon["option"]]!
+          .add(OptionGroupIcons.values[optionIcon["icon"]]);
+    }
+
     Map<int, Option> options = {};
 
     for (var tuple in optionsSql) {
-      Option option = Option.fromTuple(tuple, optionGroups);
+      Option option = Option.fromTuple(tuple, optionGroups, optionGroupIcons);
 
       optionsPerGroup.putIfAbsent(option.optionGroup, () => []);
       optionsPerGroup[option.optionGroup]!.add(option);

@@ -51,9 +51,17 @@
   "@situations": {
     "description": "Situations"
   },
-  "situation": "Situation",
+  "situation": "Situation ",
   "@situation": {
     "description": "Situation"
+  },
+  "familySituation": "Situation familiale ",
+  "@familySituation": {
+    "description": "Family Situation"
+  },
+  "professionalSituation": "Situation professionnel",
+  "@professionalSituation": {
+    "description": "Family Situation"
   },
   "selectFamilySituationFirst": "Veuillez sélectionner une situation familiale",
   "@selectFamilySituationFirst": {

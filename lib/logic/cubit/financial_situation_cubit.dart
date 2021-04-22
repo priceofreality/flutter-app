@@ -8,39 +8,33 @@ part 'financial_situation_state.dart';
 class FinancialSituationCubit extends Cubit<FinancialSituationState> {
   static final GameRepository gameRepository = GameRepository();
 
-  FinancialSituationCubit() : super(FinancianSituationInitialState());
+  FinancialSituationCubit()
+      : super(FinancialSituationState(
+            gameRepository.financialSituations, null, null, null));
 
-/*  void emitFinancialSituation(FinancialSituation financialSituation) =>
-      emit(FinancialSituationState(financialSituation, {}, null, null));
-*/
-  /* void emitSelectFinancialSituation(FinancialSituation financialSituation) =>
-      emit(FinancialSituationState(
-          financialSituation, state.financialSituations));*/
-
-  Map<FamilySituation, Map<ProfessionalSituation, FinancialSituation>>
-      get financialSituations => gameRepository.financialSituations;
-
-  emitReset() => emit(FinancianSituationInitialState());
+  emitReset() => emit(FinancialSituationState(
+      gameRepository.financialSituations, null, null, null));
 
   void emitNewDailySituations() {
     gameRepository.unlockDailyFinancialSituations(state.selected!.id);
   }
 
   void emitFamilySituation(FamilySituation familySituation) =>
-      emit(FinancialSituationState(null, familySituation, null));
+      emit(FinancialSituationState(
+          state.financialSituations, null, familySituation, null));
 
   void emitProfessionalSituation(ProfessionalSituation professionalSituation) {
-    var financialSituation = financialSituations[
+    var financialSituation = state.financialSituations[
         state.selectedFamilySituation]![professionalSituation];
 
-    emit(FinancialSituationState(financialSituation,
+    emit(FinancialSituationState(state.financialSituations, financialSituation,
         state.selectedFamilySituation, professionalSituation));
   }
 
   List<FamilySituation> get familySituations =>
-      financialSituations.keys.toList();
+      state.financialSituations.keys.toList();
 
   List<ProfessionalSituation> professionalSituations(
           FamilySituation familySituation) =>
-      financialSituations[familySituation]!.keys.toList();
+      state.financialSituations[familySituation]!.keys.toList();
 }

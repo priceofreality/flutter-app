@@ -74,7 +74,7 @@ class RunningGamePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RewindButton(),
+                    //RewindButton(),
                     Event(
                       event: state.current.event,
                     ),
