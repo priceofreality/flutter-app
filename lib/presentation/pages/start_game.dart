@@ -4,9 +4,11 @@ import 'package:price_of_reality/data/models/option_group.dart';
 import 'package:price_of_reality/data/models/situations_options.dart';
 import 'package:price_of_reality/data/models/option_group_icons.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
+import 'package:price_of_reality/logic/cubit/financial_situation_state.dart';
 import 'package:price_of_reality/logic/cubit/game_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:price_of_reality/logic/cubit/option_cubit.dart';
+import 'package:price_of_reality/logic/cubit/option_state.dart';
 import 'package:price_of_reality/presentation/widgets/custom_radio_button.dart';
 import 'package:price_of_reality/presentation/widgets/dot_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -186,13 +188,6 @@ class FamilySituationView extends StatelessWidget {
 class OptionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var entries = context.read<OptionCubit>().state.options.entries;
-    for (MapEntry<OptionGroup, List<Option>> entry in entries) {
-      if (entry.key.id == 1) continue;
-      context.read<OptionCubit>().emitSelectGroupOption(
-          entry.key, entry.value[entry.value.length - 1]);
-    }
-
     return BlocBuilder<OptionCubit, OptionState>(builder: (context, state) {
       return CustomScrollView(slivers: [
         SliverToBoxAdapter(
@@ -212,7 +207,7 @@ class OptionView extends StatelessWidget {
                   if (index == 0) {
                     return ListTile(
                       title: Text(
-                        e.key.label,
+                        (e.key as OptionGroup).label,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16.5,
@@ -220,13 +215,16 @@ class OptionView extends StatelessWidget {
                       ),
                     );
                   }
-                  if (e.key.id == 1) {
+
+                  if ((e.key as OptionGroup).id == 1) {
                     return CheckboxListTile(
                       activeColor: Theme.of(context).buttonColor,
-                      value: state.selected.contains(e.value[index - 1]),
+                      value: state.miscellaneousSelected
+                          .contains(e.value[index - 1]),
                       onChanged: (value) => context
                           .read<OptionCubit>()
-                          .emitSelectOption(value!, e.value[index - 1]),
+                          .emitSelectMiscellaneousOption(
+                              value!, e.value[index - 1]),
                       title: Text(e.value[index - 1].label),
                       controlAffinity: ListTileControlAffinity.leading,
                     );
@@ -258,7 +256,8 @@ class OptionView extends StatelessWidget {
                     groupValue: state.groupSelected[e.key],
                     onChanged: (value) => context
                         .read<OptionCubit>()
-                        .emitSelectGroupOption(e.key, e.value[index - 1]),
+                        .emitSelectGroupOption(
+                            e.key as OptionGroup, e.value[index - 1]),
                   );
                 }, childCount: e.value.length + 1),
               ),

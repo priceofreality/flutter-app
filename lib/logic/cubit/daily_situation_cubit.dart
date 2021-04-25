@@ -1,15 +1,14 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:price_of_reality/data/init.dart';
 import 'package:price_of_reality/data/models/choice.dart';
 import 'package:price_of_reality/data/models/daily_situation.dart';
+import 'package:price_of_reality/data/models/option.dart';
 import 'package:price_of_reality/data/repositories/game.dart';
 import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
+import 'package:price_of_reality/logic/cubit/daily_situation_state.dart';
 import 'package:price_of_reality/logic/cubit/option_cubit.dart';
 import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
-
-part 'daily_situation_state.dart';
 
 class DailySituationCubit extends Cubit<DailySituationState> {
   static final GameRepository gameRepository = GameRepository();
@@ -20,6 +19,7 @@ class DailySituationCubit extends Cubit<DailySituationState> {
   final OptionCubit optionCubit;
 
   late int financialSituationId;
+  late List<Option> options;
 
   int _currentDay = 1;
   int _currentDailySituationOfDay = 0;
@@ -30,7 +30,7 @@ class DailySituationCubit extends Cubit<DailySituationState> {
     required this.transactionCubit,
     required this.optionCubit,
   }) : super(DailySituationState(gameRepository.getDailySituationsOfDay(1)!,
-            gameRepository.getDailySituationsOfDay(1)![0], null));
+            gameRepository.getDailySituationsOfDay(1)![0], null, null, null));
 
   emitStart() {
     //set transaction cubit
@@ -41,6 +41,8 @@ class DailySituationCubit extends Cubit<DailySituationState> {
     financialSituationCubit.emitNewDailySituations();
 
     //set option cubit
+    options = optionCubit.options;
+
     optionCubit.emitNewDailySituations();
 
     financialSituationId = financialSituationCubit.state.selected!.id;
@@ -48,7 +50,7 @@ class DailySituationCubit extends Cubit<DailySituationState> {
     choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
         financialSituationId,
         gameRepository.getDailySituationsOfDay(1)![0].id,
-        optionCubit.state.selected));
+        optionCubit.state.miscellaneousSelected));
   }
 
   void _resetIndexes() {
@@ -60,11 +62,19 @@ class DailySituationCubit extends Cubit<DailySituationState> {
     final dailySituation = state.current;
     final choice = choiceCubit.state.selected!;
 
+    transactionCubit.emitTransaction(dailySituation, choice);
+
     //if choice finishes game
     if (choice.concludes) {
       emit(DailySituationFinishedState());
       return;
     }
+
+    final lastDay = _currentDay;
+    final lastDailySituationOfDay = _currentDailySituationOfDay;
+
+    bool? rewind = state.hasRewind;
+    if (rewind == null) rewind = true;
 
     gameRepository.unlockDailySituation(choice);
 
@@ -73,19 +83,13 @@ class DailySituationCubit extends Cubit<DailySituationState> {
     //new day
     if (++_currentDailySituationOfDay >= dailySituations.length) {
       _currentDailySituationOfDay = 0;
+
       final dailySituations = _getNextDayDailySituations();
 
       if (dailySituations == null) {
-        transactionCubit.emitTransaction(dailySituation, choice);
-
         emit(DailySituationFinishedState());
         return;
       }
-
-      transactionCubit.emitTransaction(dailySituation, choice);
-
-      emit(DailySituationState(dailySituations,
-          dailySituations[_currentDailySituationOfDay], dailySituation));
 
       choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
           financialSituationId,
@@ -93,28 +97,33 @@ class DailySituationCubit extends Cubit<DailySituationState> {
               .getDailySituationsOfDay(
                   _currentDay)![_currentDailySituationOfDay]
               .id,
-          optionCubit.state.selected));
+          options));
 
-      choiceCubit.emiLastChoice(choice);
+      emit(DailySituationState(
+          dailySituations,
+          dailySituations[_currentDailySituationOfDay],
+          lastDay,
+          lastDailySituationOfDay,
+          rewind));
 
       return;
     }
 
     //same day
 
-    transactionCubit.emitTransaction(dailySituation, choice);
-
-    emit(DailySituationState(dailySituations,
-        state.dailySituations[_currentDailySituationOfDay], dailySituation));
-
     choiceCubit.emitChoices(gameRepository.getChoicesOfDailySituation(
         financialSituationId,
         gameRepository
             .getDailySituationsOfDay(_currentDay)![_currentDailySituationOfDay]
             .id,
-        optionCubit.state.selected));
+        options));
 
-    choiceCubit.emiLastChoice(choice);
+    emit(DailySituationState(
+        dailySituations,
+        dailySituations[_currentDailySituationOfDay],
+        lastDay,
+        lastDailySituationOfDay,
+        rewind));
   }
 
   List<DailySituation>? _getNextDayDailySituations() {
@@ -143,14 +152,35 @@ class DailySituationCubit extends Cubit<DailySituationState> {
 
     DataInit.reloadGameAssets().then((_) {
       emit(DailySituationState(gameRepository.getDailySituationsOfDay(1)!,
-          gameRepository.getDailySituationsOfDay(1)![0], null));
+          gameRepository.getDailySituationsOfDay(1)![0], null, null, null));
     });
   }
 
   void emitRewind() {
-    print(choiceCubit.state.last);
-    Choice choice = choiceCubit.state.last!;
+    Choice lastChoice = choiceCubit.state.lastChoiceState!.selected!;
 
-    gameRepository.delockDailySituation(choice);
+    _currentDay = state.lastDay!;
+    _currentDailySituationOfDay = state.lastDailySituationOfDay!;
+
+    gameRepository.delockDailySituation(lastChoice);
+
+    transactionCubit.emitRewind();
+
+    choiceCubit.emitRewind();
+
+    emit(DailySituationState(
+        gameRepository.getDailySituationsOfDay(_currentDay)!,
+        gameRepository
+            .getDailySituationsOfDay(_currentDay)![_currentDailySituationOfDay],
+        null,
+        null,
+        false));
   }
+
+  @override
+  DailySituationState? fromJson(Map<String, dynamic> json) =>
+      DailySituationState.fromJson(json);
+
+  @override
+  Map<String, dynamic>? toJson(DailySituationState state) => state.toJson();
 }

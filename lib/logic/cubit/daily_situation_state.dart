@@ -1,17 +1,27 @@
-part of 'daily_situation_cubit.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:price_of_reality/data/models/daily_situation.dart';
 
-class DailySituationState extends Equatable {
+part 'daily_situation_state.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class DailySituationState {
   late final List<DailySituation> dailySituations;
 
   late final DailySituation current;
-  late final DailySituation? last;
 
-  DailySituationState(this.dailySituations, this.current, this.last);
+  late final int? lastDay;
+  late final int? lastDailySituationOfDay;
+  late final bool? hasRewind;
+
+  DailySituationState(this.dailySituations, this.current, this.lastDay,
+      this.lastDailySituationOfDay, this.hasRewind);
 
   DailySituationState.finish();
 
-  @override
-  List<Object> get props => [current];
+  factory DailySituationState.fromJson(Map<String, dynamic> json) =>
+      _$DailySituationStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DailySituationStateToJson(this);
 }
 
 class DailySituationFinishedState extends DailySituationState {

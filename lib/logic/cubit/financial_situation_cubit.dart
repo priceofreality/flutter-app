@@ -1,9 +1,7 @@
-import 'package:bloc/bloc.dart';
-import 'package:price_of_reality/data/models/financial_situation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:price_of_reality/data/models/situations_options.dart';
 import 'package:price_of_reality/data/repositories/game.dart';
-
-part 'financial_situation_state.dart';
+import 'package:price_of_reality/logic/cubit/financial_situation_state.dart';
 
 class FinancialSituationCubit extends Cubit<FinancialSituationState> {
   static final GameRepository gameRepository = GameRepository();
@@ -12,7 +10,7 @@ class FinancialSituationCubit extends Cubit<FinancialSituationState> {
       : super(FinancialSituationState(
             gameRepository.financialSituations, null, null, null));
 
-  emitReset() => emit(FinancialSituationState(
+  void emitReset() => emit(FinancialSituationState(
       gameRepository.financialSituations, null, null, null));
 
   void emitNewDailySituations() {
@@ -37,4 +35,11 @@ class FinancialSituationCubit extends Cubit<FinancialSituationState> {
   List<ProfessionalSituation> professionalSituations(
           FamilySituation familySituation) =>
       state.financialSituations[familySituation]!.keys.toList();
+
+  @override
+  FinancialSituationState? fromJson(Map<String, dynamic> json) =>
+      FinancialSituationState.fromJson(json);
+
+  @override
+  Map<String, dynamic>? toJson(FinancialSituationState state) => state.toJson();
 }

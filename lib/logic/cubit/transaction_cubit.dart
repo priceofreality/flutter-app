@@ -1,28 +1,24 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:price_of_reality/data/models/choice.dart';
 import 'package:price_of_reality/data/models/daily_situation.dart';
 import 'package:price_of_reality/data/models/transaction.dart';
-
-part 'transaction_state.dart';
+import 'package:price_of_reality/logic/cubit/transaction_state.dart';
 
 class TransactionCubit extends Cubit<TransactionState> {
-  TransactionCubit() : super(TransactionInitialState(0));
+  TransactionCubit() : super(TransactionState(0, 0, [], null));
 
-  emitBudget(double budget) {
-    emit(TransactionInitialState(budget));
-  }
+  void emitBudget(double budget) => emit(
+      TransactionState(budget, state.currentCost, state.transactions, null));
 
-  emitCost(double cost) => emit(TransactionState(
-        currentCost: cost,
-        transactions: state.transactions,
-        budget: state.budget,
-      ));
+  void emitCost(double cost) => emit(TransactionState(
+      state.budget, cost, state.transactions, state.lastTransactionState));
 
   void emitTransaction(DailySituation dailySituation, Choice choice) {
     double budget = state.budget;
     List<Transaction> transactions = state.transactions;
     double currentCost = state.currentCost;
+
+    final last = TransactionRewindState(budget, currentCost, transactions);
 
     budget += currentCost;
     transactions.add(Transaction(
@@ -31,9 +27,21 @@ class TransactionCubit extends Cubit<TransactionState> {
         choice: choice.label,
         cost: currentCost));
 
-    emit(TransactionState(
-        budget: budget, currentCost: currentCost, transactions: transactions));
+    emit(TransactionState(budget, currentCost, transactions, last));
   }
 
-  void emitReset() => emit(TransactionInitialState(0));
+  void emitReset() => emit(TransactionState(0, 0, [], null));
+
+  void emitRewind() => emit(TransactionState(
+      state.lastTransactionState!.budget,
+      state.lastTransactionState!.currentCost,
+      state.lastTransactionState!.transactions,
+      null));
+
+  @override
+  TransactionState? fromJson(Map<String, dynamic> json) =>
+      TransactionState.fromJson(json);
+
+  @override
+  Map<String, dynamic>? toJson(TransactionState state) => state.toJson();
 }

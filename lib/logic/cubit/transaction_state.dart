@@ -1,21 +1,41 @@
-part of 'transaction_cubit.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:price_of_reality/data/models/transaction.dart';
 
-class TransactionState extends Equatable {
+part 'transaction_state.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class TransactionState {
+  final double budget;
+  final double currentCost;
+
+  final TransactionRewindState? lastTransactionState;
+
+  final List<Transaction> transactions;
+
+  const TransactionState(this.budget, this.currentCost, this.transactions,
+      this.lastTransactionState);
+
+  factory TransactionState.fromJson(Map<String, dynamic> json) =>
+      _$TransactionStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TransactionStateToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class TransactionRewindState {
   final double budget;
   final double currentCost;
 
   final List<Transaction> transactions;
 
-  const TransactionState(
-      {required this.budget,
-      required this.currentCost,
-      required this.transactions});
+  const TransactionRewindState(
+    this.budget,
+    this.currentCost,
+    this.transactions,
+  );
 
-  @override
-  List<Object> get props => [budget, currentCost];
-}
+  factory TransactionRewindState.fromJson(Map<String, dynamic> json) =>
+      _$TransactionRewindStateFromJson(json);
 
-class TransactionInitialState extends TransactionState {
-  TransactionInitialState(double budget)
-      : super(currentCost: 0, transactions: [], budget: budget);
+  Map<String, dynamic> toJson() => _$TransactionRewindStateToJson(this);
 }

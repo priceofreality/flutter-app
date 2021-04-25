@@ -1,20 +1,31 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:price_of_reality/data/models/choice.dart';
-
-part 'choice_state.dart';
+import 'package:price_of_reality/logic/cubit/choice_state.dart';
 
 class ChoiceCubit extends Cubit<ChoiceState> {
-  ChoiceCubit() : super(ChoiceInitialState());
+  ChoiceCubit() : super(ChoiceState({}, null, null));
 
-  void emitChoices(Set<Choice> choices) =>
-      emit(ChoiceState(choices, null, null));
+  void emitChoices(Set<Choice> choices) {
+    final last = ChoiceRewindState(state.choices, state.selected);
+
+    emit(ChoiceState(choices, null, last));
+  }
 
   void emitSelectChoice(Choice newValue) =>
-      emit(ChoiceState(state.choices, newValue, null));
+      emit(ChoiceState(state.choices, newValue, state.lastChoiceState));
 
-  void emitReset() => emit(ChoiceInitialState());
+  void emitReset() => emit(ChoiceState({}, null, null));
 
-  void emiLastChoice(Choice newValue) =>
-      emit(ChoiceState(state.choices, state.selected, newValue));
+  void emitRewind() {
+    final last = state.lastChoiceState!;
+
+    emit(ChoiceState(last.choices, null, null));
+  }
+
+  @override
+  ChoiceState? fromJson(Map<String, dynamic> json) =>
+      ChoiceState.fromJson(json);
+
+  @override
+  Map<String, dynamic>? toJson(ChoiceState state) => state.toJson();
 }

@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:price_of_reality/data/models/choice.dart';
 import 'package:price_of_reality/data/models/situations_options.dart';
 import 'package:price_of_reality/logic/cubit/choice_cubit.dart';
+import 'package:price_of_reality/logic/cubit/choice_state.dart';
+import 'package:price_of_reality/logic/cubit/daily_situation_cubit.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
 import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
-import 'package:price_of_reality/logic/cubit/daily_situation_cubit.dart';
+import 'package:price_of_reality/logic/cubit/daily_situation_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:price_of_reality/logic/cubit/transaction_state.dart';
 import 'package:price_of_reality/presentation/widgets/custom_radio_button.dart';
 import 'package:price_of_reality/presentation/widgets/custom_slider.dart';
 
@@ -69,33 +72,47 @@ class RunningGamePage extends StatelessWidget {
               ),
               child: BlocBuilder<DailySituationCubit, DailySituationState>(
                   builder: (context, state) {
-                return Column(
-                  key: ValueKey<int>(state.current.id),
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    //RewindButton(),
-                    Event(
-                      event: state.current.event,
-                    ),
-                    SizedBox(height: 20.0),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 14.0),
-                      child: Container(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 20.0),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Budget(),
-                            ),
-                            SizedBox(height: 20.0),
-                            Choices(),
-                          ],
+                return AnimatedSwitcher(
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    return FadeTransition(
+                        opacity: CurvedAnimation(
+                            curve: Curves.easeInOut, parent: animation),
+                        child: child);
+                  },
+                  duration: Duration(milliseconds: 600),
+                  reverseDuration: Duration(milliseconds: 0),
+                  child: Column(
+                    key: ValueKey<int>(state.current.id),
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Event(
+                        event: state.current.event,
+                      ),
+                      SizedBox(height: 20.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 14.0),
+                        child: Container(
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20.0),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Budget(),
+                              ),
+                              SizedBox(height: 20.0),
+                              Choices(),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              RewindButton(),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               }),
             ),
@@ -236,10 +253,11 @@ class Choices extends StatelessWidget {
                       if (state.selected != null) return;
 
                       context.read<ChoiceCubit>().emitSelectChoice(newValue!);
+
                       context.read<TransactionCubit>().emitCost(
                           newValue.minCost == null ? 0 : newValue.minCost!);
 
-                      Future.delayed(Duration(milliseconds: 600)).then(
+                      Future.delayed(Duration(milliseconds: 300)).then(
                           (value) => context
                               .read<DailySituationCubit>()
                               .emitNextDailySituation());
@@ -292,8 +310,11 @@ class NextButton extends StatelessWidget {
         ),
         onPressed: disable == null
             ? null
-            : () => Future.delayed(Duration(milliseconds: 600)).then((value) =>
-                context.read<DailySituationCubit>().emitNextDailySituation()),
+            : context.read<ChoiceCubit>().state.selected == null
+                ? null
+                : () => context
+                    .read<DailySituationCubit>()
+                    .emitNextDailySituation(),
         child: Text(
           AppLocalizations.of(context)!.next.toUpperCase(),
           style: TextStyle(color: Colors.white),
@@ -306,9 +327,23 @@ class NextButton extends StatelessWidget {
 class RewindButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final rewind = context.watch<DailySituationCubit>().state.hasRewind;
+
     return FloatingActionButton(
-      onPressed: () => context.read<DailySituationCubit>().emitRewind(),
-      child: Icon(Icons.rotate_left),
+      onPressed: rewind == null
+          ? null
+          : rewind
+              ? () => context.read<DailySituationCubit>().emitRewind()
+              : null,
+      child: Icon(
+        Icons.rotate_left,
+        color: Colors.white,
+      ),
+      backgroundColor: rewind == null
+          ? Colors.grey[400]
+          : rewind
+              ? Theme.of(context).accentColor
+              : Colors.grey[400],
     );
   }
 }

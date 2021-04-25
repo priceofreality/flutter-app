@@ -1,10 +1,13 @@
-import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-class Choice extends Equatable {
+part 'choice.g.dart';
+
+@JsonSerializable()
+class Choice {
   final int id;
   final String label;
   final bool concludes;
-  List<int>? unlockDailySituation;
+  final List<int>? unlockDailySituation;
   double? minCost;
   double? maxCost;
 
@@ -29,6 +32,7 @@ class Choice extends Equatable {
         unlockDailySituation: unlocks);
   }
 
-  @override
-  List<Object> get props => [id];
+  factory Choice.fromJson(Map<String, dynamic> json) => _$ChoiceFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChoiceToJson(this);
 }

@@ -11,7 +11,7 @@ import 'package:price_of_reality/presentation/pages/start_game.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:io';
 
-enum Action { NewGame, Glossary, ExitGame }
+enum Action { NewGame, Glossary, Onbaord, ExitGame }
 
 extension on Action {
   String label(BuildContext context) {
@@ -22,6 +22,8 @@ extension on Action {
         return AppLocalizations.of(context)!.glossary;
       case Action.ExitGame:
         return AppLocalizations.of(context)!.exit;
+      case Action.Onbaord:
+        return 'TODO'; //AppLocalizations.of(context)!.exit;
     }
   }
 }
@@ -56,6 +58,8 @@ class HomePage extends StatelessWidget {
                     return _goToGlossary(context);
                   case Action.ExitGame:
                     return _exitGame();
+                  case Action.Onbaord:
+                    return context.read<OnboardCubit>().emitFirstLoad(true);
                 }
               },
               itemBuilder: (BuildContext context) {
@@ -72,10 +76,14 @@ class HomePage extends StatelessWidget {
         body: SafeArea(
           child: BlocBuilder<GameCubit, GameState>(
             builder: (context, state) {
-              if (state is GameFinishedState) return EndGamePage();
-              if (state is GameRunningState) return RunningGamePage();
-
-              return StartGamePage();
+              switch (state) {
+                case GameState.GameStartingState:
+                  return StartGamePage();
+                case GameState.GameRunningState:
+                  return RunningGamePage();
+                case GameState.GameEndingState:
+                  return EndGamePage();
+              }
             },
           ),
         ),

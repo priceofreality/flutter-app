@@ -81,32 +81,41 @@ class View extends StatelessWidget {
         elevation: 2.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 20.0),
-              Container(
-                height: 250,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  image: DecorationImage(
-                    image: AssetImage(image),
-                    fit: BoxFit.scaleDown,
+          child: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (overscroll) {
+              overscroll.disallowGlow();
+              return true;
+            },
+            child: ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0, bottom: 35.0),
+                  child: Text(
+                    title,
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-              ),
-              SizedBox(height: 15.0),
-              Text(
-                subtitle,
-                style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),
-                textAlign: TextAlign.center,
-              ),
-            ],
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 5.0),
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    image: DecorationImage(
+                      image: AssetImage(image),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30.0),
+                Text(
+                  subtitle,
+                  style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -141,7 +150,6 @@ class StartButton extends StatelessWidget {
                   vertical: 100.0,
                 ),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
                   image: DecorationImage(
                     image: AssetImage('assets/images/priceofreality.png'),
                     fit: BoxFit.scaleDown,

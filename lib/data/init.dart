@@ -1,3 +1,5 @@
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:price_of_reality/data/db/database.dart';
 import 'package:price_of_reality/data/repositories/game.dart';
 
@@ -5,6 +7,10 @@ class DataInit {
   static Future<void> loadGameAssets() async {
     await SqfliteDb().openDb();
     await GameRepository().loadRepository();
+
+    HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory(),
+    );
     //await SqfliteDb().closeDb();
   }
 

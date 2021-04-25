@@ -1,7 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:price_of_reality/data/models/option_group.dart';
 import 'package:price_of_reality/data/models/option_group_icons.dart';
 
+part 'option.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Option extends Equatable {
   final int id;
   final String label;
@@ -23,6 +27,10 @@ class Option extends Equatable {
           label: tuple['label'],
           optionGroup: groups[tuple['option_group']]!,
           optionGroupIcons: optionIcons[tuple['id']]);
+
+  factory Option.fromJson(Map<String, dynamic> json) => _$OptionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OptionToJson(this);
 
   @override
   List<Object> get props => [id];
