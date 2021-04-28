@@ -2,7 +2,14 @@
   <a>
     <img src="./assets/images/priceofreality.png" alt="Logo" width=200 height=200>
   </a>
-
+  <div align="center">
+    <a href=https://img.shields.io/github/license/priceofreality/flutter-app"><img src="https://img.shields.io/github/license/priceofreality/flutter-app" alt="License"/>
+    </a>
+    <a href=https://img.shields.io/github/workflow/status/priceofreality/flutter-app/CD"><img src="https://img.shields.io/github/workflow/status/priceofreality/flutter-app/CD" alt="CD workflow"/>
+    </a>
+    <a href=https://img.shields.io/github/last-commit/priceofreality/flutter-app"><img src="https://img.shields.io/github/last-commit/priceofreality/flutter-app" alt="CD workflow"/>
+    </a>
+</div>
   <h2 align="center">Price of Reality</h2>
 
   <p align="center">
