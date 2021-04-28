@@ -73,8 +73,10 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.7'
+      - name : Install Flutter version
+        run : gem install fastlane-plugin-flutter_version --version "1.0.0" --source "https://rubygems.pkg.github.com/tianhaoz95"
       - name: Run Fastlane
         uses: maierj/fastlane-action@v2.0.1
         with:
-          lane: closed_beta
+          lane: internal
           subdirectory: android
