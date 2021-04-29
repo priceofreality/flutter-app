@@ -7,7 +7,7 @@ import 'package:price_of_reality/logic/cubit/daily_situation_state.dart';
 
 part 'game_state.dart';
 
-class GameCubit extends Cubit<GameState> {
+class GameCubit extends HydratedCubit<GameState> {
   static final GameRepository gameRepository = GameRepository();
 
   final DailySituationCubit dailySituationCubit;

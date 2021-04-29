@@ -4,7 +4,7 @@ import 'package:price_of_reality/data/models/daily_situation.dart';
 import 'package:price_of_reality/data/models/transaction.dart';
 import 'package:price_of_reality/logic/cubit/transaction_state.dart';
 
-class TransactionCubit extends Cubit<TransactionState> {
+class TransactionCubit extends HydratedCubit<TransactionState> {
   TransactionCubit() : super(TransactionState(0, 0, [], null));
 
   void emitBudget(double budget) => emit(

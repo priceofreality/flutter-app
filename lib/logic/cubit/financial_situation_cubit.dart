@@ -3,7 +3,7 @@ import 'package:price_of_reality/data/models/situations_options.dart';
 import 'package:price_of_reality/data/repositories/game.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_state.dart';
 
-class FinancialSituationCubit extends Cubit<FinancialSituationState> {
+class FinancialSituationCubit extends HydratedCubit<FinancialSituationState> {
   static final GameRepository gameRepository = GameRepository();
 
   FinancialSituationCubit()
