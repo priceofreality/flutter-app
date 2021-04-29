@@ -13,9 +13,9 @@ extension FamilySituationModifier on FamilySituation {
       case FamilySituation.Isolated:
         return "Personne isolée";
       case FamilySituation.CoupleWithChildren:
-        return "En couple avec enfants";
+        return "En couple avec 2 enfants";
       case FamilySituation.SingleParentFamily:
-        return "Famille monoparentale";
+        return "Famille monoparentale (2 enfants)";
     }
   }
 }
