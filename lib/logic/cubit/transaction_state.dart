@@ -26,12 +26,9 @@ class TransactionRewindState {
   final double budget;
   final double currentCost;
 
-  final List<Transaction> transactions;
-
   const TransactionRewindState(
     this.budget,
     this.currentCost,
-    this.transactions,
   );
 
   factory TransactionRewindState.fromJson(Map<String, dynamic> json) =>
