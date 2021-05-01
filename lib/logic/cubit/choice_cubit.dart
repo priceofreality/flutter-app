@@ -2,7 +2,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:price_of_reality/data/models/choice.dart';
 import 'package:price_of_reality/logic/cubit/choice_state.dart';
 
-class ChoiceCubit extends HydratedCubit<ChoiceState> {
+class ChoiceCubit extends Cubit<ChoiceState> {
   ChoiceCubit() : super(ChoiceState({}, null, null));
 
   void emitChoices(Set<Choice> choices) {

@@ -7,20 +7,24 @@ import 'package:price_of_reality/logic/cubit/daily_situation_state.dart';
 
 part 'game_state.dart';
 
-class GameCubit extends HydratedCubit<GameState> {
+class GameCubit extends Cubit<GameState> {
   static final GameRepository gameRepository = GameRepository();
 
   final DailySituationCubit dailySituationCubit;
   late StreamSubscription _dailySituationSubscription;
 
   GameCubit({required this.dailySituationCubit})
-      : super(GameState.GameStartingState) {
+      : super(GameState.GameWelcomeState) {
     _dailySituationSubscription =
         dailySituationCubit.stream.listen((dailySituationState) {
       if (dailySituationState is DailySituationFinishedState) {
         emit(GameState.GameEndingState);
       }
     });
+  }
+
+  void emitWelcomeGame() {
+    emit(GameState.GameWelcomeState);
   }
 
   void emitStartGame() {

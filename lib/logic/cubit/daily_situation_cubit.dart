@@ -10,7 +10,7 @@ import 'package:price_of_reality/logic/cubit/option_cubit.dart';
 import 'package:price_of_reality/logic/cubit/transaction_cubit.dart';
 import 'package:price_of_reality/logic/cubit/financial_situation_cubit.dart';
 
-class DailySituationCubit extends HydratedCubit<DailySituationState> {
+class DailySituationCubit extends Cubit<DailySituationState> {
   static final GameRepository gameRepository = GameRepository();
 
   final ChoiceCubit choiceCubit;
@@ -183,12 +183,4 @@ class DailySituationCubit extends HydratedCubit<DailySituationState> {
 
   @override
   Map<String, dynamic>? toJson(DailySituationState state) => state.toJson();
-
-  void clearData() {
-    choiceCubit.clear();
-    financialSituationCubit.clear();
-    transactionCubit.clear();
-    optionCubit.clear();
-    clear();
-  }
 }

@@ -4,7 +4,7 @@ import 'package:price_of_reality/data/models/option.dart';
 import 'package:price_of_reality/data/repositories/game.dart';
 import 'package:price_of_reality/logic/cubit/option_state.dart';
 
-class OptionCubit extends HydratedCubit<OptionState> {
+class OptionCubit extends Cubit<OptionState> {
   static GameRepository gameRepository = GameRepository();
 
   OptionCubit() : super(OptionState(gameRepository.optionsPerGroup, [], {})) {

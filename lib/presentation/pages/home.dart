@@ -11,6 +11,8 @@ import 'package:price_of_reality/presentation/pages/start_game.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:io';
 
+import 'package:price_of_reality/presentation/pages/welcome_page.dart';
+
 enum Action { NewGame, Glossary, Onbaord, ExitGame }
 
 extension on Action {
@@ -53,7 +55,7 @@ class HomePage extends StatelessWidget {
               onSelected: (value) {
                 switch (value) {
                   case Action.NewGame:
-                    return context.read<GameCubit>().emitNewGame();
+                    return context.read<GameCubit>().emitWelcomeGame();
                   case Action.Glossary:
                     return _goToGlossary(context);
                   case Action.ExitGame:
@@ -77,6 +79,8 @@ class HomePage extends StatelessWidget {
           child: BlocBuilder<GameCubit, GameState>(
             builder: (context, state) {
               switch (state) {
+                case GameState.GameWelcomeState:
+                  return WelcomePage();
                 case GameState.GameStartingState:
                   return StartGamePage();
                 case GameState.GameRunningState:
