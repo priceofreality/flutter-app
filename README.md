@@ -3,11 +3,11 @@
     <img src="./assets/images/priceofreality.png" alt="Logo" width=200 height=200>
   </a>
   <div align="center">
-    <a href=https://img.shields.io/github/license/priceofreality/flutter-app"><img src="https://img.shields.io/github/license/priceofreality/flutter-app" alt="License"/>
+    <a href="https://img.shields.io/github/license/priceofreality/flutter-app"><img src="https://img.shields.io/github/license/priceofreality/flutter-app" alt="License"/>
     </a>
-    <a href=https://img.shields.io/github/workflow/status/priceofreality/flutter-app/CD"><img src="https://img.shields.io/github/workflow/status/priceofreality/flutter-app/CD" alt="CD workflow"/>
+    <a href="https://img.shields.io/github/workflow/status/priceofreality/flutter-app/CD"><img src="https://img.shields.io/github/workflow/status/priceofreality/flutter-app/CD" alt="CD workflow"/>
     </a>
-    <a href=https://img.shields.io/github/last-commit/priceofreality/flutter-app"><img src="https://img.shields.io/github/last-commit/priceofreality/flutter-app" alt="CD workflow"/>
+    <a href="https://img.shields.io/github/last-commit/priceofreality/flutter-app"><img src="https://img.shields.io/github/last-commit/priceofreality/flutter-app" alt="CD workflow"/>
     </a>
 </div>
   <h2 align="center">Price of Reality</h2>
@@ -80,5 +80,7 @@ Please read through our [contributing guidelines](https://github.com/priceofreal
 - <https://github.com/mwilk1904>
 
 ## Copyright and license
+This project was made during the course LEPL-1509 teached at UCL (Université catholique de Louvain-la-Neuve) in collaboration with Vinci-Marie Haps.
 
 Code released under the [MIT License](https://github.com/priceofreality/flutter-app/master/LICENSE).
+
