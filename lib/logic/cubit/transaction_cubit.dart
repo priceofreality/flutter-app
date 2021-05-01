@@ -18,7 +18,7 @@ class TransactionCubit extends Cubit<TransactionState> {
     List<Transaction> transactions = state.transactions;
     double currentCost = state.currentCost;
 
-    final last = TransactionRewindState(budget, currentCost, transactions);
+    final last = TransactionRewindState(budget, currentCost);
 
     budget += currentCost;
     transactions.add(Transaction(
@@ -32,11 +32,13 @@ class TransactionCubit extends Cubit<TransactionState> {
 
   void emitReset() => emit(TransactionState(0, 0, [], null));
 
-  void emitRewind() => emit(TransactionState(
-      state.lastTransactionState!.budget,
-      state.lastTransactionState!.currentCost,
-      state.lastTransactionState!.transactions,
-      null));
+  void emitRewind() {
+    var transactions = state.transactions;
+    transactions.removeAt(transactions.length - 1);
+
+    emit(TransactionState(state.lastTransactionState!.budget,
+        state.lastTransactionState!.currentCost, transactions, null));
+  }
 
   @override
   TransactionState? fromJson(Map<String, dynamic> json) =>

@@ -113,7 +113,7 @@ class EndGamePage extends StatelessWidget {
                     shape: StadiumBorder(),
                     primary: Theme.of(context).accentColor,
                   ),
-                  onPressed: () => context.read<GameCubit>().emitNewGame(),
+                  onPressed: () => context.read<GameCubit>().emitWelcomeGame(),
                   child: Text(
                     AppLocalizations.of(context)!.newgame.toUpperCase(),
                     style: TextStyle(color: Colors.white),

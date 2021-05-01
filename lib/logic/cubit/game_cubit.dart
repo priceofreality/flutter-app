@@ -14,13 +14,17 @@ class GameCubit extends Cubit<GameState> {
   late StreamSubscription _dailySituationSubscription;
 
   GameCubit({required this.dailySituationCubit})
-      : super(GameState.GameStartingState) {
+      : super(GameState.GameWelcomeState) {
     _dailySituationSubscription =
         dailySituationCubit.stream.listen((dailySituationState) {
       if (dailySituationState is DailySituationFinishedState) {
         emit(GameState.GameEndingState);
       }
     });
+  }
+
+  void emitWelcomeGame() {
+    emit(GameState.GameWelcomeState);
   }
 
   void emitStartGame() {

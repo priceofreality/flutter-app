@@ -35,6 +35,10 @@
   "@exit" : {
     "description": "Exit the game"
   },
+  "welcome": "Ce jeu est un outil pédagogique qui permet d’ouvrir le débat sur la gestion de budget et des priorités.\n\n Les situations proposées sont caricaturales et possiblement redondantes. L’objectif de ce jeu est de susciter des débats constructifs autours de la pauvreté. Notez que la précarité est une réalité qui peut arriver à tout le monde",
+  "@welcome": {
+    "description": "Welcome text"
+  },
   "start" : "Commencer",
   "@start" : {
     "description": "Start the game"
@@ -46,6 +50,10 @@
   "understand" : "J'ai compris",
   "@understand" : {
     "description": "I understand"
+  },
+  "onboard" : "Accueil",
+  "@onboard" : {
+    "description": "Onboard"
   },
   "situations": "Situations",
   "@situations": {
@@ -59,9 +67,9 @@
   "@familySituation": {
     "description": "Family Situation"
   },
-  "professionalSituation": "Situation professionnel",
+  "professionalSituation": "Situation professionnelle",
   "@professionalSituation": {
-    "description": "Family Situation"
+    "description": "Professional Situation"
   },
   "selectFamilySituationFirst": "Veuillez sélectionner une situation familiale",
   "@selectFamilySituationFirst": {
