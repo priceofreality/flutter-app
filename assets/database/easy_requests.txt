@@ -1,3 +1,8 @@
+select ds.id, ds.day, e.label as event, ds.locked
+FROM  daily_situations ds, events e
+WHERE ds.event = e.id
+order by ds.day
+
 select dsc.id, dsc.daily_situation, ds.day, e.label as event, c.label as choice
 FROM daily_situation_choices dsc, daily_situations ds, events e, choices c 
 WHERE dsc.daily_situation = ds.id AND ds.event = e.id AND c.id = dsc.choice
@@ -6,6 +11,8 @@ order by ds.day
 select e.label as event, c.label as choice, fcs.financial_situation, fcs.min_cost, fcs.max_cost 
 FROM daily_situation_choices dsc, daily_situations ds, events e, choices c, financial_choice_costs fcs
 WHERE dsc.daily_situation = ds.id AND dsc.choice = c.id AND ds.event = e.id AND fcs.daily_situation_choice = dsc.id
+
+select fs.label, fcc.* from financial_choice_costs fcc, financial_situations fs WHERE fcc.daily_situation_choice = 29 and fcc.financial_situation = fs.id
 
 SELECT o.label as option, e.label as event, ods.daily_situation, ds.day, ds.locked
 FROM option_daily_situations ods, options o, daily_situations ds, events e

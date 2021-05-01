@@ -8,11 +8,11 @@ part of 'daily_situation.dart';
 
 DailySituation _$DailySituationFromJson(Map<String, dynamic> json) {
   return DailySituation(
-    id: json['id'] as int,
-    day: json['day'] as int,
-    event: json['event'] as String,
-    locked: json['locked'] as bool,
-  );
+      id: json['id'] as int,
+      day: json['day'] as int,
+      event: json['event'] as String,
+      locked: json['locked'] as bool,
+      endOfMonth: json['end_of_month'] as bool);
 }
 
 Map<String, dynamic> _$DailySituationToJson(DailySituation instance) =>
@@ -21,4 +21,5 @@ Map<String, dynamic> _$DailySituationToJson(DailySituation instance) =>
       'day': instance.day,
       'event': instance.event,
       'locked': instance.locked,
+      'endOfMonth': instance.endOfMonth
     };
