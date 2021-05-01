@@ -25,7 +25,7 @@ extension on Action {
       case Action.ExitGame:
         return AppLocalizations.of(context)!.exit;
       case Action.Onbaord:
-        return 'TODO'; //AppLocalizations.of(context)!.exit;
+        return AppLocalizations.of(context)!.onboard;
     }
   }
 }

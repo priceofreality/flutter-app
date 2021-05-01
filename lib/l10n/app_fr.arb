@@ -51,6 +51,10 @@
   "@understand" : {
     "description": "I understand"
   },
+  "onboard" : "Accueil",
+  "@onboard" : {
+    "description": "Onboard"
+  },
   "situations": "Situations",
   "@situations": {
     "description": "Situations"
