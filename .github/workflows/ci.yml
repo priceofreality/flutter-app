@@ -2,9 +2,10 @@
 name: CI
 
 on:
+  push:
+    branches: [ '*' ]
   pull_request:
-    branches:
-      - master
+    branches: [ '*' ]
 
 jobs:
   build_apk:
@@ -28,6 +29,8 @@ jobs:
         run: flutter pub get
       - name: Format files
         run: flutter format --set-exit-if-changed .
+      - name: Analyze files
+        run: flutter analyze .
       - name: Run the tests
         run: flutter test
       - name: Build the APK

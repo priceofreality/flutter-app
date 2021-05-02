@@ -69,6 +69,8 @@ Please read through our [contributing guidelines](https://github.com/priceofreal
 
 **Vincent BUCCILLI**
 
+- <https://github.com/vinztheprinze99>
+
 **Alexandre CLAES**
 
 **Yann POLLET**
@@ -76,6 +78,8 @@ Please read through our [contributing guidelines](https://github.com/priceofreal
 - <https://github.com/YannPollet>
 
 **Anthony VERRIEST**
+
+- <https://github.com/anthonyverriest>
 
 **Marcin WILK**
 
