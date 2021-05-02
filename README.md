@@ -1,6 +1,6 @@
 <p align="center">
   <a>
-    <img src="./assets/images/priceofreality.png" alt="Logo" width=200 height=200>
+    <img src="./assets/images/priceofreality_clear.png" alt="Logo" width=300 height=150>
   </a>
   <div align="center">
     <a href="https://img.shields.io/github/license/priceofreality/flutter-app"><img src="https://img.shields.io/github/license/priceofreality/flutter-app" alt="License"/>
@@ -55,7 +55,7 @@ This repo is using Firebase. We use Firebase Crashlytics to report any crashes t
 We use Github Actions to run this tasks in order:
 * Tests
 * Build for production
-* Deploy to the Play Store with Fastline
+* Deploy to the Play Store (Internal Beta) with Fastline
 
 ## Bugs and feature requests
 
@@ -73,6 +73,8 @@ Please read through our [contributing guidelines](https://github.com/priceofreal
 
 **Yann POLLET**
 
+- <https://github.com/YannPollet>
+
 **Anthony VERRIEST**
 
 **Marcin WILK**
@@ -83,4 +85,9 @@ Please read through our [contributing guidelines](https://github.com/priceofreal
 This project was made during the course LEPL-1509 teached at UCL (Université catholique de Louvain-la-Neuve) in collaboration with Vinci-Marie Haps.
 
 Code released under the [MIT License](https://github.com/priceofreality/flutter-app/master/LICENSE).
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.projet4.price_of_reality">
+    <img  src="./assets/images/google-play-badge.png" alt="Logo" width=300 height=150>
+  </a>
 
+</p>
