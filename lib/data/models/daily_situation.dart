@@ -9,12 +9,14 @@ class DailySituation extends Equatable {
   final int day;
   final String event;
   final bool locked;
+  final bool endOfMonth;
 
   const DailySituation(
       {required this.id,
       required this.day,
       required this.event,
-      required this.locked});
+      required this.locked,
+      required this.endOfMonth});
 
   factory DailySituation.fromTuple(
           Map<String, dynamic> tuple, Map<int, String> events) =>
@@ -22,7 +24,8 @@ class DailySituation extends Equatable {
           id: tuple['id'],
           day: tuple['day'],
           event: events[tuple['event']]!,
-          locked: tuple['locked'] == 1);
+          locked: tuple['locked'] == 1,
+          endOfMonth: tuple['end_of_month'] == 1);
 
   factory DailySituation.fromJson(Map<String, dynamic> json) =>
       _$DailySituationFromJson(json);

@@ -35,6 +35,10 @@
   "@exit" : {
     "description": "Exit the game"
   },
+  "welcome": "Ce jeu est un outil pédagogique qui permet d’ouvrir le débat sur la gestion de budget et des priorités.\n\n Les situations proposées sont caricaturales et possiblement redondantes. L’objectif de ce jeu est de susciter des débats constructifs autours de la pauvreté. Notez que la précarité est une réalité qui peut arriver à tout le monde",
+  "@welcome": {
+    "description": "Welcome text"
+  },
   "start" : "Commencer",
   "@start" : {
     "description": "Start the game"
@@ -46,6 +50,10 @@
   "understand" : "J'ai compris",
   "@understand" : {
     "description": "I understand"
+  },
+  "onboard" : "Accueil",
+  "@onboard" : {
+    "description": "Onboard"
   },
   "situations": "Situations",
   "@situations": {
@@ -59,9 +67,9 @@
   "@familySituation": {
     "description": "Family Situation"
   },
-  "professionalSituation": "Situation professionnel",
+  "professionalSituation": "Situation professionnelle",
   "@professionalSituation": {
-    "description": "Family Situation"
+    "description": "Professional Situation"
   },
   "selectFamilySituationFirst": "Veuillez sélectionner une situation familiale",
   "@selectFamilySituationFirst": {
@@ -75,6 +83,14 @@
       "budget": {}
     }
   },
+  "version": "Version : {versionNumber}",
+  "@version": {
+    "description": "Version number",
+    "type": "text",
+    "placeholders": {
+      "versionNumber": {}
+    }
+  },
   "endGameNegativeBudget": "Malheureusement ton budget est en négatif! Tu as {budget}€ sur ton compte en banque. Tu as pu remarquer qu’il était assez difficile de pouvoir gérer son budget car même si tu crois connaître tes dépenses, il y’a toujours des imprévus...",
   "@endGameNegativeBudget": {
     "description": "End game text when buget is negative",
@@ -83,12 +99,12 @@
       "budget": {}
     }
   },
-  "endGameBudgetP1" : "Cette situation ne doit pas te faire peur, en Belgique il existe plusieurs institutions et outils qui sont à la disposition des citoyens dans le besoin pour leur venir en aide tels que Wakosta, Pilotbudget ou encore budgeta qui t’aideront à mieux prévoir et organiser ton budget. En ce qui concerne le service de médiation de dettes, ils proposent une boîte à outils sur leur site internet.", 
-  "@endGameBudgetP1": {
+  "endGameP1" : "Avoir la charge du budget du ménage peut s’avérer compliqué. En Belgique il existe plusieurs institutions et outils qui sont à la disposition des citoyens dans le besoin pour leur venir en aide tels que Wakosta, Pilotbudget ou encore budgeta qui t’aideront à mieux prévoir et organiser ton budget. En ce qui concerne le service de médiation de dettes, ils proposent une boîte à outils sur leur site internet. Nous te conseillons de jeter un oeil sur leur site internet ou de les contacter si nécessaire.", 
+  "@endGameP1": {
     "description": "End game text"
   },
-  "endGameBudgetP2" : "Nous te conseillons de jeter un œil sur leur site internet ou de les contacter si nécessaire.",
-  "@endGameBudgetP2": {
+  "endGameP2" : "Ce jeu cherche aussi à souligner les stratégies mises en place lors des décisions. Voici déjà quelques pistes de réflexions à méditer ou à débattre ensemble : Les plaisirs VS les obligations ? La charge mentale de certains choix ? La précarité et l’exclusion ?",
+  "@endGameP2": {
     "description": "End game text"
   },
   "glossary" : "Lexique",
@@ -103,13 +119,29 @@
   "@options": {
     "description" : "Options"
   },
-  "yourTurn": "A vous de jouer",
+  "close" : "Fermer",
+  "@close": {
+    "description" : "Close"
+  },
+  "about": "À propos",
+  "@about": {
+    "description": "About us"
+  },
+  "aboutText": "Cette application a été réalisé par des étudiants pour le cours LEPL1509 enseigné à l'UCL (Université catholique de Louvain-la-Neuve) et ce en collaboration avec les étudiants de Marie-Haps. ",
+  "@aboutText": {
+    "description": "About us text"
+  },
+  "yourTurn": "À vous de jouer",
   "@yourturn": {
     "description": "Your turn to play"
   },
   "experiment": "Expérimenter",
   "@experiment": {
     "description": "Experiment"
+  },
+  "contact": "Mail de contact : marcinwilk.be@gmail.com",
+  "@contact": {
+    "description": "Contact mail"
   },
   "experimentDef": "Vivre une expérience mensuelle d’une personne vivant en situation de précarité financière",
   "@experimentDef": {

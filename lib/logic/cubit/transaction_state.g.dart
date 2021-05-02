@@ -33,9 +33,6 @@ TransactionRewindState _$TransactionRewindStateFromJson(
   return TransactionRewindState(
     (json['budget'] as num).toDouble(),
     (json['currentCost'] as num).toDouble(),
-    (json['transactions'] as List<dynamic>)
-        .map((e) => Transaction.fromJson(e as Map<String, dynamic>))
-        .toList(),
   );
 }
 
@@ -44,5 +41,4 @@ Map<String, dynamic> _$TransactionRewindStateToJson(
     <String, dynamic>{
       'budget': instance.budget,
       'currentCost': instance.currentCost,
-      'transactions': instance.transactions.map((e) => e.toJson()).toList(),
     };
