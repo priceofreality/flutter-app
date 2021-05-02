@@ -123,7 +123,7 @@
   "@close": {
     "description" : "Close"
   },
-  "about": "A propos",
+  "about": "À propos",
   "@about": {
     "description": "About us"
   },
@@ -131,7 +131,7 @@
   "@aboutText": {
     "description": "About us text"
   },
-  "yourTurn": "A vous de jouer",
+  "yourTurn": "À vous de jouer",
   "@yourturn": {
     "description": "Your turn to play"
   },

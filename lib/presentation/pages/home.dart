@@ -14,7 +14,7 @@ import 'dart:io';
 
 import 'package:price_of_reality/presentation/pages/welcome_page.dart';
 
-enum Action { NewGame, Glossary, Onbaord, ExitGame, About }
+enum Action { NewGame, Glossary, Onbaord, About, ExitGame }
 
 Future<PackageInfo> _packageInfo = getPackageInfo();
 
