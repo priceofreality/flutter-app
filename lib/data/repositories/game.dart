@@ -147,7 +147,6 @@ class GameRepository {
     }
 
     for (var daily in dailySituations) {
-      print(daily.endOfMonth);
       if (daily.day > maxDay) maxDay = daily.day;
 
       // if the dailySituation depends on the financial one

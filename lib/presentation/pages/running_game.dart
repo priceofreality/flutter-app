@@ -72,6 +72,7 @@ class RunningGamePage extends StatelessWidget {
               ),
               child: BlocBuilder<DailySituationCubit, DailySituationState>(
                   builder: (context, state) {
+                final budget = context.read<TransactionCubit>().state.budget;
                 return AnimatedSwitcher(
                   transitionBuilder:
                       (Widget child, Animation<double> animation) {
@@ -90,6 +91,22 @@ class RunningGamePage extends StatelessWidget {
                       Event(
                         event: state.current.event,
                       ),
+                      if (state.current.endOfMonth)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text(
+                            (budget > 0)
+                                ? AppLocalizations.of(context)!
+                                    .endGamePositiveBudget(
+                                    budget.toStringAsFixed(2),
+                                  )
+                                : AppLocalizations.of(context)!
+                                    .endGameNegativeBudget(
+                                    budget.toStringAsFixed(2),
+                                  ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       SizedBox(height: 20.0),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 14.0),
@@ -143,6 +160,16 @@ class MyClipper extends CustomClipper<Path> {
 }
 
 class TopBar extends StatelessWidget {
+  final days = [
+    'Vendredi',
+    'Samedi',
+    'Dimanche',
+    'Lundi',
+    'Mardi',
+    'Mercredi',
+    'Jeudi'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DailySituationCubit, DailySituationState>(
@@ -151,7 +178,7 @@ class TopBar extends StatelessWidget {
         padding: EdgeInsets.only(top: 20.0),
         alignment: Alignment.topCenter,
         child: Text(
-          AppLocalizations.of(context)!.day + ' ${state.current.day}',
+          '${days[(state.current.day - 1) % 7]}',
           style: TextStyle(
             color: Colors.white,
             fontSize: 19.0,

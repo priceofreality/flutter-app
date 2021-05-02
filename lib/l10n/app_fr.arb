@@ -91,12 +91,12 @@
       "budget": {}
     }
   },
-  "endGameBudgetP1" : "Cette situation ne doit pas te faire peur, en Belgique il existe plusieurs institutions et outils qui sont à la disposition des citoyens dans le besoin pour leur venir en aide tels que Wakosta, Pilotbudget ou encore budgeta qui t’aideront à mieux prévoir et organiser ton budget. En ce qui concerne le service de médiation de dettes, ils proposent une boîte à outils sur leur site internet.", 
-  "@endGameBudgetP1": {
+  "endGameP1" : "Avoir la charge du budget du ménage peut s’avérer compliqué. En Belgique il existe plusieurs institutions et outils qui sont à la disposition des citoyens dans le besoin pour leur venir en aide tels que Wakosta, Pilotbudget ou encore budgeta qui t’aideront à mieux prévoir et organiser ton budget. En ce qui concerne le service de médiation de dettes, ils proposent une boîte à outils sur leur site internet. Nous te conseillons de jeter un oeil sur leur site internet ou de les contacter si nécessaire.", 
+  "@endGameP1": {
     "description": "End game text"
   },
-  "endGameBudgetP2" : "Nous te conseillons de jeter un œil sur leur site internet ou de les contacter si nécessaire.",
-  "@endGameBudgetP2": {
+  "endGameP2" : "Ce jeu cherche aussi à souligner les stratégies mises en place lors des décisions. Voici déjà quelques pistes de réflexions à méditer ou à débattre ensemble : Les plaisirs VS les obligations ? La charge mentale de certains choix ? La précarité et l’exclusion ?",
+  "@endGameP2": {
     "description": "End game text"
   },
   "glossary" : "Lexique",

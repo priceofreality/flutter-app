@@ -34,19 +34,8 @@ class EndGamePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                 child: RichText(
                   text: TextSpan(
-                    text: (budget > 0)
-                        ? AppLocalizations.of(context)!.endGamePositiveBudget(
-                              budget.toStringAsFixed(2),
-                            ) +
-                            "\n\n"
-                        : AppLocalizations.of(context)!.endGameNegativeBudget(
-                              budget.toStringAsFixed(2),
-                            ) +
-                            "\n\n",
+                    text: AppLocalizations.of(context)!.endGameP1 + "\n",
                     children: [
-                      TextSpan(
-                          text: AppLocalizations.of(context)!.endGameBudgetP1 +
-                              "\n"),
                       WidgetSpan(
                         alignment: PlaceholderAlignment.middle,
                         baseline: TextBaseline.alphabetic,
@@ -68,8 +57,7 @@ class EndGamePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      TextSpan(
-                          text: AppLocalizations.of(context)!.endGameBudgetP2),
+                      TextSpan(text: AppLocalizations.of(context)!.endGameP2),
                     ],
                     style: TextStyle(
                         fontSize: 15.0,
