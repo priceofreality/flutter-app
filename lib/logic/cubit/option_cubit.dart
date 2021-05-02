@@ -79,11 +79,4 @@ class OptionCubit extends Cubit<OptionState> {
 
     return options;
   }
-
-  @override
-  OptionState? fromJson(Map<String, dynamic> json) =>
-      OptionState.fromJson(json);
-
-  @override
-  Map<String, dynamic>? toJson(OptionState state) => state.toJson();
 }

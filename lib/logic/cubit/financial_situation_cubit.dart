@@ -35,11 +35,4 @@ class FinancialSituationCubit extends Cubit<FinancialSituationState> {
   List<ProfessionalSituation> professionalSituations(
           FamilySituation familySituation) =>
       state.financialSituations[familySituation]!.keys.toList();
-
-  @override
-  FinancialSituationState? fromJson(Map<String, dynamic> json) =>
-      FinancialSituationState.fromJson(json);
-
-  @override
-  Map<String, dynamic>? toJson(FinancialSituationState state) => state.toJson();
 }

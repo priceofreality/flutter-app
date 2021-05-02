@@ -21,11 +21,4 @@ class ChoiceCubit extends Cubit<ChoiceState> {
 
     emit(ChoiceState(last.choices, null, null));
   }
-
-  @override
-  ChoiceState? fromJson(Map<String, dynamic> json) =>
-      ChoiceState.fromJson(json);
-
-  @override
-  Map<String, dynamic>? toJson(ChoiceState state) => state.toJson();
 }

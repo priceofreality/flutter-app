@@ -42,11 +42,4 @@ class GameCubit extends Cubit<GameState> {
     _dailySituationSubscription.cancel();
     return super.close();
   }
-
-  @override
-  GameState? fromJson(Map<String, dynamic> json) =>
-      GameState.values[json['gamestate']];
-
-  @override
-  Map<String, dynamic>? toJson(GameState state) => {'gamestate': state.index};
 }

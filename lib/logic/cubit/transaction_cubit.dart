@@ -39,11 +39,4 @@ class TransactionCubit extends Cubit<TransactionState> {
     emit(TransactionState(state.lastTransactionState!.budget,
         state.lastTransactionState!.currentCost, transactions, null));
   }
-
-  @override
-  TransactionState? fromJson(Map<String, dynamic> json) =>
-      TransactionState.fromJson(json);
-
-  @override
-  Map<String, dynamic>? toJson(TransactionState state) => state.toJson();
 }
