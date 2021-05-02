@@ -83,6 +83,14 @@
       "budget": {}
     }
   },
+  "version": "Version : {versionNumber}",
+  "@version": {
+    "description": "Version number",
+    "type": "text",
+    "placeholders": {
+      "versionNumber": {}
+    }
+  },
   "endGameNegativeBudget": "Malheureusement ton budget est en négatif! Tu as {budget}€ sur ton compte en banque. Tu as pu remarquer qu’il était assez difficile de pouvoir gérer son budget car même si tu crois connaître tes dépenses, il y’a toujours des imprévus...",
   "@endGameNegativeBudget": {
     "description": "End game text when buget is negative",
@@ -111,13 +119,29 @@
   "@options": {
     "description" : "Options"
   },
-  "yourTurn": "A vous de jouer",
+  "close" : "Fermer",
+  "@close": {
+    "description" : "Close"
+  },
+  "about": "À propos",
+  "@about": {
+    "description": "About us"
+  },
+  "aboutText": "Cette application a été réalisé par des étudiants pour le cours LEPL1509 enseigné à l'UCL (Université catholique de Louvain-la-Neuve) et ce en collaboration avec les étudiants de Marie-Haps. ",
+  "@aboutText": {
+    "description": "About us text"
+  },
+  "yourTurn": "À vous de jouer",
   "@yourturn": {
     "description": "Your turn to play"
   },
   "experiment": "Expérimenter",
   "@experiment": {
     "description": "Experiment"
+  },
+  "contact": "Mail de contact : marcinwilk.be@gmail.com",
+  "@contact": {
+    "description": "Contact mail"
   },
   "experimentDef": "Vivre une expérience mensuelle d’une personne vivant en situation de précarité financière",
   "@experimentDef": {

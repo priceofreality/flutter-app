@@ -58,23 +58,6 @@ class _SummaryPageState extends State<SummaryPage> {
         endIndent: 14.0,
       );
 
-      final initial = Container(
-        alignment: Alignment.bottomRight,
-        padding: EdgeInsets.only(right: 20.0, top: 10.0),
-        child: Text(
-          AppLocalizations.of(context)!.startingBudget + ': $budget€',
-          style: TextStyle(
-            fontSize: 17.0,
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-            decoration: TextDecoration.underline,
-            decorationThickness: 1.7,
-          ),
-        ),
-      );
-
-      children.add(initial);
-
       for (MapEntry<int, List<Transaction>> entry in transactions.entries) {
         final day = Container(
           padding: EdgeInsets.only(left: 14.0, top: 13.0, bottom: 7.0),
