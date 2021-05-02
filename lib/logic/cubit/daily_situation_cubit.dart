@@ -176,11 +176,4 @@ class DailySituationCubit extends Cubit<DailySituationState> {
         null,
         false));
   }
-
-  @override
-  DailySituationState? fromJson(Map<String, dynamic> json) =>
-      DailySituationState.fromJson(json);
-
-  @override
-  Map<String, dynamic>? toJson(DailySituationState state) => state.toJson();
 }
