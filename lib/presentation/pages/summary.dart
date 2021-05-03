@@ -14,6 +14,16 @@ class SummaryPage extends StatefulWidget {
 }
 
 class _SummaryPageState extends State<SummaryPage> {
+  final days = [
+    'Vendredi',
+    'Samedi',
+    'Dimanche',
+    'Lundi',
+    'Mardi',
+    'Mercredi',
+    'Jeudi'
+  ];
+
   Future<List<Widget>> sortTransactions(BuildContext context) {
     return Future(() {
       Map<int, List<Transaction>> transactions =
@@ -62,7 +72,7 @@ class _SummaryPageState extends State<SummaryPage> {
         final day = Container(
           padding: EdgeInsets.only(left: 14.0, top: 13.0, bottom: 7.0),
           child: Text(
-            AppLocalizations.of(context)!.day + ' ${entry.key}',
+            '${days[(entry.key - 1) % 7]} ${entry.key >= 31 ? ((entry.key + 1) % 31) : (entry.key % 31)}',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
         );
