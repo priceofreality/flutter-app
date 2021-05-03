@@ -20,8 +20,6 @@ class EndGamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final budget = context.read<TransactionCubit>().state.budget;
-
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
