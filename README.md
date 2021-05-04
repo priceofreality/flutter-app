@@ -90,7 +90,7 @@ Please read through our [contributing guidelines](https://github.com/priceofreal
 ## Copyright and license
 This project was made during the course LEPL-1509 teached at UCL (Université catholique de Louvain-la-Neuve) in collaboration with Vinci-Marie Haps.
 
-Code released under the [MIT License](https://github.com/priceofreality/flutter-app/master/LICENSE).
+Code released under the [MIT License](https://github.com/priceofreality/flutter-app/blob/master/LICENSE).
 <p align="center">
   <a href="https://play.google.com/store/apps/details?id=com.projet4.price_of_reality">
     <img  src="./assets/images/google-play-badge.png" alt="Logo" width=300 height=150>
