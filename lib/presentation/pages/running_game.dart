@@ -178,7 +178,7 @@ class TopBar extends StatelessWidget {
         padding: EdgeInsets.only(top: 20.0),
         alignment: Alignment.topCenter,
         child: Text(
-          '${days[(state.current.day - 1) % 7]}',
+          '${days[(state.current.day - 1) % 7]} ${state.current.day >= 31 ? ((state.current.day + 1) % 31) : (state.current.day % 31)}',
           style: TextStyle(
             color: Colors.white,
             fontSize: 19.0,
