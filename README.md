@@ -68,27 +68,29 @@ Have a bug or a feature request? Please first read the [issue guidelines](https:
 Please read through our [contributing guidelines](https://github.com/priceofreality/flutter-app/master/CONTRIBUTING.md).
 
 ## Creators
+### UCL Team
+ - **Vincent BUCCILLI** <https://github.com/vinztheprinze99>
 
-**Vincent BUCCILLI**
+ - **Alexandre CLAES**
 
-- <https://github.com/vinztheprinze99>
+ - **Yann POLLET** <https://github.com/YannPollet>
 
-**Alexandre CLAES**
+ - **Anthony VERRIEST** <https://github.com/anthonyverriest>
 
-**Yann POLLET**
+ - **Marcin WILK** <https://github.com/mwilk1904>
 
-- <https://github.com/YannPollet>
+### Marie Haps Team
+  - **Emel ALAGOZ**
 
-**Anthony VERRIEST**
+  - **Caroline DE BROUWER**
 
-- <https://github.com/anthonyverriest>
+  - **Dorian PLAPP**
 
-**Marcin WILK**
+  - **Florine ROUSSELEAU**
 
-- <https://github.com/mwilk1904>
-
+  - **Vincent VEKEMAN**
 ## Copyright and license
-This project was made during the course LEPL-1509 teached at UCL (Université catholique de Louvain-la-Neuve) in collaboration with Vinci-Marie Haps.
+This project was made during the course LEPL-1509 teached at UCL (Université catholique de Louvain-la-Neuve) in collaboration with Marie Haps.
 
 Code released under the [MIT License](https://github.com/priceofreality/flutter-app/blob/master/LICENSE).
 <p align="center">
