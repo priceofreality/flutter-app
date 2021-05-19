@@ -50,6 +50,9 @@ Widget _buildPopupDialog(BuildContext context) {
         SizedBox(height: 20),
         Text(AppLocalizations.of(context)!.contact),
         SizedBox(height: 20),
+        Text(
+            "Contributeurs initiaux: Vincent BUCCILLI, Alexandre CLAES, Yann POLLET, Anthony VERRIEST, Marcin WILK, Emel ALAGOZ, Caroline DE BROUWER, Dorian PLAPP, Florine ROUSSELEAU, Vincent VEKEMAN"),
+        SizedBox(height: 20),
         FutureBuilder<dynamic>(
           future: _packageInfo,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {

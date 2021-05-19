@@ -35,7 +35,7 @@
   "@exit" : {
     "description": "Exit the game"
   },
-  "welcome": "Ce jeu est un outil pédagogique qui permet d’ouvrir le débat sur la gestion de budget et des priorités.\n\n Les situations proposées sont caricaturales et possiblement redondantes. L’objectif de ce jeu est de susciter des débats constructifs autours de la pauvreté. Notez que la précarité est une réalité qui peut arriver à tout le monde",
+  "welcome": "Ce jeu est un outil pédagogique qui permet d’ouvrir le débat sur la gestion de budget et des priorités.\n\n Les situations proposées sont caricaturales et possiblement redondantes. L’objectif de ce jeu est de susciter des débats constructifs autours de la précarité. Notez que la précarité est une réalité qui peut arriver à tout le monde",
   "@welcome": {
     "description": "Welcome text"
   },
@@ -127,7 +127,7 @@
   "@about": {
     "description": "About us"
   },
-  "aboutText": "Cette application a été réalisé par des étudiants pour le cours LEPL1509 enseigné à l'UCL (Université catholique de Louvain-la-Neuve) et ce en collaboration avec les étudiants de Marie-Haps. ",
+  "aboutText": "Cette application a été réalisée par des étudiants pour le cours LEPL1509 enseigné à l'UCL (Université catholique de Louvain-la-Neuve) et ce en collaboration avec les étudiants de Marie-Haps.",
   "@aboutText": {
     "description": "About us text"
   },
